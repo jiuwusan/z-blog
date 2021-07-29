@@ -1,0 +1,32 @@
+.ckcditor {
+    width: 100%;
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    flex-grow: 1;
+    background-color: #eee;
+    // max-height: 700px;
+    min-height: 500px;
+    min-width: 850px;
+    max-width: 1200px;
+    .toolbar {
+        width: 100%;
+    }
+
+    .ckContentBox {
+        display: flex;
+        flex-grow: 1;
+        padding: 50px 0;
+        overflow-y: auto;
+        .ckContent{
+            width: calc(21cm + 2px);
+            min-height: calc(29.7cm + 2px);
+            margin: 0 auto;
+            padding: 1cm 1.2cm;
+            border: 1px #d3d3d3 solid;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+            border-radius: 2px;
+        }
+    }
+}

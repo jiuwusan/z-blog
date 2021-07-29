@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "root",
+    "password": "ZkD707396",
+    "port": 63038,
+    "database": "zy-blog",
+    "host": "sh-cdb-3m69fdoo.sql.tencentcdb.com",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "root",
+    "password": "ZkD707396",
+    "port": 63038,
+    "database": "zy-blog",
+    "host": "sh-cdb-3m69fdoo.sql.tencentcdb.com",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": "ZkD707396",
+    "port": 63038,
+    "database": "zy-blog",
+    "host": "sh-cdb-3m69fdoo.sql.tencentcdb.com",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}

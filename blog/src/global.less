@@ -1,0 +1,51 @@
+//字体
+@font-face {
+    font-family: "barbarahand";
+    src: url("./assets/font/barbarahand-webfont.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+//常量
+@defaultWidth: 1280px;
+
+//函数
+.ellipsis(@line) {
+    display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @line;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+//通用类
+.pointer {
+    cursor: pointer;
+}
+
+.active:active {
+    opacity: 0.65;
+}
+
+.hover:hover {
+    opacity: 0.85;
+}
+
+.flex {
+    display: -moz-box;
+    /* Firefox */
+    display: -ms-flexbox;
+    /* IE10 */
+    display: -webkit-box;
+    /* Safari */
+    display: -webkit-flex;
+    /* Chrome, WebKit */
+    /* display: box; */
+    display: flexbox;
+    display: flex;
+}
