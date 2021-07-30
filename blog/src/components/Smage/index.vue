@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { filePrefix } from "@config";
 export default {
   props: {
     src: {
@@ -10,13 +11,22 @@ export default {
       default: "",
     },
     prefix: {
-      type: String,
-      default: "",
+      type: [String, Boolean],
+      default: true,
     },
   },
   computed: {
     fttSrc() {
-      return require("../../assets/image/" + this.src);
+      let prefix = this.prefix;
+      switch (Object.prototype.toString.call(prefix)) {
+        case "[object String]":
+          return (prefix || filePrefix) + this.src;
+        case "[object Boolean]":
+          if (prefix === true) {
+            return require("../../assets/image/" + this.src);
+          }
+      }
+      return this.src;
     },
   },
 };

@@ -1,40 +1,49 @@
 <template>
-  <div class="footer flex">
-    <div class="footer-item flex">
-      <div class="title">ZY个人博客</div>
-      <div class="definite flex">
-        <Icon class="icon" name="go"></Icon>
-        <div class="txt">不放弃！绝不放弃！永不放弃！</div>
-      </div>
-    </div>
-    <div class="footer-item flex">
-      <div class="title">相关链接</div>
-      <div class="definite flex">
-        <Icon class="icon" name="gitee"></Icon>
-        <div class="txt">https://gitee.com/jiuwusan</div>
-      </div>
-    </div>
-    <div class="footer-item flex">
-      <div class="title">联系我</div>
-      <div class="definite flex">
-        <Icon class="icon" name="mail"></Icon>
-        <div class="txt">ZhouKaiDong953@qq.com</div>
-      </div>
-      <div class="definite flex">
-        <Icon class="icon" name="qq"></Icon>
-        <div class="txt">953343906</div>
-      </div>
-      <div class="definite flex">
-        <Icon class="icon" name="wechat"></Icon>
-        <div class="txt">ZkDHzR</div>
+  <div class="footer flex" v-if="data">
+    <div
+      class="footer-item flex"
+      v-for="item in (data?.profile?.list || [])"
+      :key="item.title"
+    >
+      <div class="title">{{ item.title }}</div>
+      <div
+        class="definite flex"
+        v-for="link in (item?.content || [])"
+        :key="link.icon"
+      >
+        <Smage prefix class="icon" :src="link.icon"></Smage>
+        <div class="txt">{{ link.text }}</div>
       </div>
     </div>
   </div>
-  <div class="copyright">Copyright © 2020-2021 Zy-Blog</div>
+  <div class="copyright">
+    {{ data?.profile?.signature || "Copyright © JiuWuSan" }}
+  </div>
 </template>
 
 <script>
-export default {};
+import { configApi } from "@/api";
+export default {
+  name: "Footer",
+  components: {},
+  data() {
+    return {
+      data: null,
+    };
+  },
+  mounted() {
+    this.getConfig();
+  },
+  methods: {
+    async getConfig() {
+      let result = await configApi.findById({
+        uid: "fb57a600-eace-11eb-96b5-e73f4408ddb6",
+      });
+      result.profile && (result.profile = JSON.parse(result.profile));
+      this.data = result;
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -61,7 +70,8 @@ export default {};
       padding-left: 10px;
       align-items: center;
       .icon {
-        font-size: 16px;
+        width: 16px;
+        height: 16px;
       }
       .txt {
         padding-left: 5px;

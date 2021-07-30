@@ -1,13 +1,15 @@
 <template>
   <div class="home flex">
-    <div class="section flex">
-      <Smage class="banner" src="banner.jpg"></Smage>
+    <div class="section flex" v-if="screen">
+      <Smage prefix class="banner" :src="screen.profile.cover"></Smage>
       <div class="motto flex">
-        <div class="title zoomIn">ZY-Blog</div>
+        <div class="title zoomIn">{{ screen.profile.title }}</div>
         <div class="intro zoomIn">
-          故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身
+          {{ screen.profile.motto }}
         </div>
-        <div class="btn hover fadeInUpBig" @click="goArticle">Enter Blog</div>
+        <div class="btn hover fadeInUpBig" @click="goArticle">
+          {{ screen.profile.button }}
+        </div>
       </div>
     </div>
     <Menu></Menu>
@@ -15,10 +17,26 @@
 </template>
 
 <script>
+import { configApi } from "@/api";
 export default {
   name: "Home",
   components: {},
+  data() {
+    return {
+      screen: null,
+    };
+  },
+  mounted() {
+    this.getScreen();
+  },
   methods: {
+    async getScreen() {
+      let result = await configApi.findById({
+        uid: "fb57a600-eace-11eb-96b5-e73f4408ddb5",
+      });
+      result.profile && (result.profile = JSON.parse(result.profile));
+      this.screen = result;
+    },
     goArticle() {
       this.$router.push("article");
     },
@@ -100,5 +118,4 @@ export default {
   animation-name: fadeInUpBig;
   animation-duration: 800ms;
 }
-
 </style>

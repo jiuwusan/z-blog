@@ -1,4 +1,4 @@
 module.exports = {
-    apiPrefix: 'proxy https://test.api.chejia.net.cn',
-    staticPrefix: 'proxy https://test.api.chejia.net.cn'
+    apiPrefix: 'proxy http://10.43.31.188:9532',
+    filePrefix: 'proxy http://10.43.31.188:9532'
 };

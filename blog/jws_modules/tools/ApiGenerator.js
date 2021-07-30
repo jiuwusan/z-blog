@@ -86,6 +86,8 @@ function gen(request, serverUrl, requestOptions, apiConfig) {
     if (Object.prototype.toString.call(requestOptions) === '[object String]') {
         //拆分
         const optionsArray = requestOptions.split(' ');
+        options.method = "GET";
+        options.url = optionsArray[0];
         if (optionsArray.length === 2) {
             options.method = optionsArray[0];
             options.url = optionsArray[1];
@@ -117,7 +119,7 @@ function gen(request, serverUrl, requestOptions, apiConfig) {
         //如果参数中存在函数，执行一次函数，并重新赋值
         data = formatData(data);
         options.headers = formatData(options.headers);
-
+        
         let refactorData = refactorUrl(options.url, data);
         options.data = refactorData.data;
         options.url = refactorData.url;
