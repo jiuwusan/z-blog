@@ -2,6 +2,7 @@
 
 const sequelize = require('./config/sequelize');
 const redis = require('./config/redis');
+const path = require('path');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -34,8 +35,13 @@ module.exports = appInfo => {
 
   //数据大小配置
   config.multipart = {
+    mode: 'file',
+    tmpdir: path.join(appInfo.baseDir, 'tempDir/egg-multipart-tmp'),
     fields: 500,//表单上传字段限制的个数
-    fileSize: '200mb',//文件上传的大小限制
+    fileSize: '4000mb',//文件上传的大小限制
+    cleanSchedule: {
+      cron: '0 30 3 * * *',//清空临时文件夹
+    }
   }
 
   //数据库连接配置
@@ -81,13 +87,13 @@ module.exports = appInfo => {
   }
 
   config.oauth2Server = {
-    grants: [ 'password' ],
+    grants: ['password'],
     errorHandler: (ctx, error, response) => {
-      console.log('errorHandler==',error);
+      console.log('errorHandler==', error);
       ctx.status = 500;
     }
   };
-  
+
   return {
     ...config,
     ...userConfig,

@@ -9,36 +9,32 @@ const Controller = require('egg').Controller;
 class UploadController extends Controller {
 
     /**
-     * 上传图片
+     * 上传文件，不修改文件名，同名文件会被覆盖
      */
     async save() {
         const { ctx, app } = this;
+        console.log("ctx.request.body==",ctx.request.body);
         //将传入参数的 '_' 转换为 '/'
         let folder = (ctx.params.folder || "").replace(/\_/g, "/");
         let imageDir = await ctx.service.tools.getUploadDir(folder);
-        const parts = ctx.multipart({ autoFields: true });
+        const files = ctx.request.files;
         let retPath = [];
-        let part;
-        //parts() 返回 promise 对象
-        while ((part = await parts()) != null) {
-            if (part.length) {
-                continue;
-            } else {
-                if (!part.filename) continue;
-                // 处理文件流
-                let file = {};
-                file.name = part.filename;
-                file.type = part.mimeType;
-                let saveFileName = (await app.utils.uuid.v5()) + part.filename.substring(part.filename.lastIndexOf("."));
-                let filePath = path.join(imageDir.fullDir, saveFileName); // 保存路径
-                let relFilePath = imageDir.lastDir + saveFileName; // 相对路径
-                let writable = fs.createWriteStream(filePath);// 创建写入流
-                await part.pipe(writable) // 开始写入
+        let saveFileName;
+        for (const file of files) {
+            try {
+                let fileStream = fs.readFileSync(file.filepath) //files[0]表示获取第一个文件，若前端上传多个文件则可以遍历这个数组对象
+                // 将文件存到指定位置
+                saveFileName = (await app.utils.uuid.v5()) + file.filename.substring(file.filename.lastIndexOf("."));
+                let filePath = path.join(imageDir.fullDir, saveFileName);
+                let relFilePath = imageDir.lastDir + saveFileName;
+                fs.writeFileSync(filePath, fileStream);
                 retPath.push(relFilePath);
-                console.log("imageDir==", { filePath, relFilePath });
+            } finally {
+                // remove tmp files and don't block the request's response
+                // cleanupRequestFiles won't throw error even remove file io error happen
+                ctx.cleanupRequestFiles([file]);
             }
         }
-
         //文件响应，返回路径
         ctx.body = {
             code: 200,
