@@ -1,3 +1,5 @@
+@import "~@/global.less";
+
 .syseditBox {
     padding: 15px;
 
@@ -5,8 +7,39 @@
         width: 300px;
         margin-right: 10px;
     }
+
+    .footerConfig {
+        width: 300px;
+        margin-right: 10px;
+    }
 }
+
 
 .editFooter {
     text-align: right;
+}
+
+.LinkTabBox {
+
+    .conLabel {
+        margin: 0 0 10px 0;
+    }
+
+    .linkListBox {
+        width: 100%;
+
+        .linkList {
+            width: 100%;
+            .flex();
+            flex-direction: column;
+
+            .linkListItem {
+                .flex();
+
+                .del {
+                    margin: 6px 0px 0px 10px;
+                }
+            }
+        }
+    }
 }

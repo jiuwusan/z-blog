@@ -1,6 +1,5 @@
 import config from '@config';
 import ApiGenerator from '@jws/api/ApiGenerator';
-import useGlobalState from '@jws/hooks/useGlobalState';
 //缓存数据
 let apiState = {};
 export const updateApiState = (newState = {}) => {
@@ -14,6 +13,7 @@ export const updateApiState = (newState = {}) => {
 
 const genApi = new ApiGenerator(config.apiPrefix, {
     format: (res) => {
+        console.log("format==", res);
         if (res.code) {
             if (res.code == 200) {
                 return res.data;
@@ -30,8 +30,10 @@ const genApi = new ApiGenerator(config.apiPrefix, {
         if (!options.outAuth) {
             token && (options.headers.Authorization = `${token.token_type} ${token.access_token}`);
         }
-        console.log("options==", options);
         return options;
+    },
+    onError: (error) => {
+        console.log("请求错误==", error);
     }
 }).genApi;
 
@@ -62,5 +64,6 @@ export const fileApi = genApi({
 });
 
 export const configApi = genApi({
-    profile: "POST /admin/config/profile"
+    profile: "POST /admin/config/profile",
+    findById: "/admin/config/findById"
 });

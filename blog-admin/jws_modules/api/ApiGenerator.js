@@ -70,7 +70,6 @@ function gen(request, serverUrl, requestOptions, apiConfig) {
     }
 
     const apiFun = (data = {}, headers = {}) => {
-        console.log("request==", data);
         //重构参数
         options.url = refactorUrl(options.url, data);
         options.headers = { ...options.headers, ...headers };

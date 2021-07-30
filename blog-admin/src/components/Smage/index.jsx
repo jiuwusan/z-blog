@@ -11,7 +11,7 @@ export default (props) => {
         setFinalSrc((prefix || filePrefix) + src);
     }, [src]);
 
-    return (<img src={finalSrc} {...rest}></img>);
+    return (<img src={finalSrc} className={styles.smage} {...rest}></img>);
 };
 
 

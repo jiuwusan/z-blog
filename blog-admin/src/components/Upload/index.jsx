@@ -7,7 +7,7 @@ import {
 import { fileApi } from '@/api';
 
 export default (props) => {
-    const { value = null, folder, maxCount = 99, onChange, ...rest } = props || {};
+    const { value = null, folder, maxCount = 99, onChange, itemClass, preview = true, ...rest } = props || {};
     const [valueList, setValueList] = useState(null);
     const [loading, setLoading] = useState(false);
     const [flag, setFlag] = useState(false);
@@ -36,7 +36,7 @@ export default (props) => {
      */
     useEffect(() => {
         if (flag) {
-            onChange(valueList);
+            onChange && onChange(valueList?.length > 0 ? valueList : null);
         }
         setFlag(true);
     }, [valueList]);
@@ -77,6 +77,7 @@ export default (props) => {
             formData.append('files[]', files[i]);
         }
         formData.append('folder', folder);
+        formData.append('exchange', "改变");
         uploadRequest(formData);
     }
 
@@ -90,16 +91,16 @@ export default (props) => {
     }
 
     return (<div className={styles.uploadBox} {...rest}>
-        <input onChange={fileChange} ref={InputRef} type="file" multiple className={styles.fileInput} accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"></input>
+        <input onChange={fileChange} ref={InputRef} type="file" multiple className={styles.fileInput} accept="image/gif,image/jpeg,image/jpg,image/png,image/svg,image/svg+xml"></input>
         <div className={styles.imageBox}>
-            {(valueList || []).map((item, index) => <div key={item} className={styles.imageItem}>
+            {(valueList || []).map((item, index) => <div key={item} className={styles.imageItem + " " + itemClass}>
                 <Smage src={item} className={styles.image}></Smage>
                 <div className={styles.option}>
-                    <EyeOutlined className={styles.btn} />
+                    {preview && <EyeOutlined className={styles.btn} />}
                     <DeleteOutlined className={styles.btn} onClick={() => onRemove(index)} />
                 </div>
             </div>)}
-            {((valueList || []).length < maxCount) && <div onClick={chooseFile} className={styles.imageItem + " " + styles.pointer}>{loading ? (<LoadingOutlined className={styles.loading} />) : (props.children ? props.children : (<PlusOutlined className={styles.loading} />))}</div>}
+            {((valueList || []).length < maxCount) && <div onClick={chooseFile} className={styles.imageItem + " " + styles.pointer + " " + itemClass}>{loading ? (<LoadingOutlined className={styles.loading} />) : (props.children ? props.children : (<PlusOutlined className={styles.loading} />))}</div>}
         </div>
     </div>)
 }

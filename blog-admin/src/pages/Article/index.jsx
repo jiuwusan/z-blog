@@ -56,7 +56,7 @@ export default () => {
                     <Input placeholder="标题" />
                 </FormItem>
             </>}
-                toolBar={<Button size="small" type="primary" onClick={() => setEditVisible(true)}>新增</Button>}
+                toolBar={<Button size="small" type="primary" onClick={() => setEditVisible(true)}>开始创作</Button>}
                 columns={columns} dataSource={tableData}></KdTable>
         </div>
         <Create visible={editVisible} onClose={() => setEditVisible(false)}></Create>

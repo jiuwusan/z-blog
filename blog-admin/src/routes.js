@@ -8,7 +8,7 @@ export default [
         routes: [
             {
                 path: '/',
-                component: '@/pages/Main',
+                component: '@/pages/Sysedit',
             },
             {
                 path: '/sysedit',
