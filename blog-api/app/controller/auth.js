@@ -34,6 +34,30 @@ class AuthController extends BaseController {
         });
 
     }
+
+    /**
+     * 获取token
+     */
+    async token() {
+        const { ctx, app } = this;
+        let params = this.validate({
+            grant: "授权方式为必填项"
+        });
+        let token;
+        switch (params.grant) {
+            case "password":
+                token = await ctx.service.auth.password(params);
+                break;
+        }
+        this.result(token);
+    }
+
+    /**
+     * 刷新token
+     */
+    async refreshToken() {
+
+    }
 }
 
 module.exports = AuthController;
