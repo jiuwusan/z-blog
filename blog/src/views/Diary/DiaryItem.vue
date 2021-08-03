@@ -11,7 +11,7 @@
       </div>
       <div class="right fadeInRight">
         <div>{{ fttData.overview }}</div>
-        <div class="imageBox">
+        <div class="imageBox" v-if="fttData.imageArray.length > 0">
           <block v-for="item in fttData.imageArray" :key="item">
             <Smage prefix :src="item" class="imageItem" />
           </block>
