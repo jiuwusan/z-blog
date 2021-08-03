@@ -1,5 +1,7 @@
 import config from '@config';
 import ApiGenerator from '@jws/api/ApiGenerator';
+import { notification } from 'antd';
+import { history } from 'umi';
 //缓存数据
 let apiState = {};
 export const updateApiState = (newState = {}) => {
@@ -14,25 +16,34 @@ export const updateApiState = (newState = {}) => {
 const genApi = new ApiGenerator(config.apiPrefix, {
     format: (res) => {
         console.log("format==", res);
-        if (res.code) {
-            if (res.code == 200) {
+        switch (res.code) {
+            case 200:
                 return res.data;
-            } else {
-                throw res.msg;
-            }
-        } else {
-            return res;
+            case 7401:
+                history.replace("/login");
+                break;
+            case 7402:
+                history.replace("/login");
+                break;
+            case 7403:
+                history.replace("/login");
+                break;
         }
+        throw res.msg;
     },
     //拦截器
     interceptors: (options) => {
         let { token } = apiState;
         if (!options.outAuth) {
-            token && (options.headers.Authorization = `${token.token_type} ${token.access_token}`);
+            token && (options.headers.Authorization = token.access_token);
         }
         return options;
     },
     onError: (error) => {
+        notification.error({
+            message: "系统提示",
+            description: error
+        });
         console.log("请求错误==", error);
     }
 }).genApi;
@@ -66,4 +77,11 @@ export const fileApi = genApi({
 export const configApi = genApi({
     profile: "POST /admin/config/profile",
     findById: "/admin/config/findById"
+});
+
+export const diaryApi = genApi({
+    save: "POST /admin/diary/save",
+    findById: "/admin/diary/findById",
+    pageQuery: "POST /admin/diary/pageQuery",
+    delById: "POST /admin/diary/delById",
 });

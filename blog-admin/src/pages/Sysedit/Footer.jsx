@@ -32,7 +32,7 @@ const LinkTabBox = (props) => {
             <div className={styles.linkList}>
                 {linkList.map((item, index) => <div key={index} className={styles.linkListItem}>
                     <FormItem initialValue={item} rules={[{ required: true }]} name={`${prefix}_link_${index}`} >
-                        <LinkItem />
+                        <LinkItem folder="image_footer" />
                     </FormItem>
                     <div>
                         <Button ghost danger size="small" className={styles.del}>移除</Button>

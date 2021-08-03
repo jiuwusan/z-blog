@@ -7,11 +7,11 @@ import useAuth from '@/hooks/useAuth';
 export default (props) => {
     const [loginForm] = Form.useForm();
     const { login } = useAuth();
-    
+
     const formSubmit = async () => {
         const values = await loginForm.validateFields();
         console.log("提交的值==", values);
-        await login({ ...values, grant_type: "password" });
+        await login({ ...values, grant: "password" });
     }
 
     return (<div className={styles.loginBox}>

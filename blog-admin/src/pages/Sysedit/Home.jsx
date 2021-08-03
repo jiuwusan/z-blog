@@ -1,7 +1,7 @@
 import styles from './style.less';
 import { useState, useEffect } from 'react';
 import { Drawer, Button, Input, Card, Form } from 'antd';
-import Upload from '@/components/Upload';
+import UploadImage from '@/components/UploadImage';
 import Smage from '@/components/Smage';
 import { configApi } from '@/api'
 const FormItem = Form.Item;
@@ -68,7 +68,7 @@ export default (props) => {
                     <Input.TextArea />
                 </FormItem>
                 <FormItem rules={[{ required: true }]} required={true} name='cover' label="图片">
-                    <Upload maxCount="1" folder="image_index" />
+                    <UploadImage maxCount="1" folder="image_index" />
                 </FormItem>
                 <FormItem rules={[{ required: true }]} name='button' label="按钮">
                     <Input />
