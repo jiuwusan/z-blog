@@ -1,9 +1,11 @@
 import styles from './style.less';
 import { useRef, useEffect, useState } from 'react';
-import { Form, Button, Row } from 'antd';
+import { Form, Button, Row, } from 'antd';
 import {
-    DownOutlined, UpOutlined,SearchOutlined,ReloadOutlined
+    DownOutlined, UpOutlined, SearchOutlined, ReloadOutlined
 } from '@ant-design/icons';
+
+import util from '@jws/tools/util';
 
 const FormItem = (props) => {
     const { children, ...rest } = props || {};
@@ -17,8 +19,13 @@ export default (props) => {
     const submitForm = () => {
         searchForm.validateFields()
             .then(values => {
-                console.log("onSubmit==", values);
-                onSubmit && onSubmit(JSON.parse(JSON.stringify(values || {})));
+                let fttValues = {};
+                for (const key in values) {
+                    if (!util.isEmpty(values[key])) {
+                        fttValues[key] = values[key];
+                    }
+                }
+                onSubmit && onSubmit(fttValues);
             })
     }
 

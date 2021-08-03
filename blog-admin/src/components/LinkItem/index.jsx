@@ -1,7 +1,7 @@
 import styles from './style.less';
 import { useState, useEffect } from 'react';
 import { Input } from 'antd';
-import Upload from '@/components/Upload';
+import UploadImage from '@/components/UploadImage';
 import { debounce } from '@jws/tools/util';
 export default (props) => {
     const { value = null, onChange, folder } = props || {};
@@ -31,7 +31,7 @@ export default (props) => {
     }, [icon, text]);
 
     return <div className={styles.linkItem}>
-        <Upload value={value?.icon || ''} onChange={onUpload} preview={false} itemClass={styles.linkicon} maxCount="1" folder={folder} />
+        <UploadImage value={value?.icon || ''} onChange={onUpload} preview={false} itemClass={styles.linkicon} maxCount="1" folder={folder} />
         <Input defaultValue={value?.text || ''} onChange={onInput} placeholder="请上传图标、输入内容" className={styles.linkInput} size="middle" />
     </div>
 }

@@ -69,19 +69,15 @@ const formatTime = (datetime, fmt) => {
 /** 
  * 节流函数
 */
-function throttle(fn, gapTime) {
-    if (gapTime == null || gapTime == undefined) {
-        gapTime = 1000
-    }
-    let _lastTime = null
-    // return fn.apply(this, arguments)   //将this和参数传给原函数
-    // 返回新的函数
-    return function () {
-        let _nowTime = + new Date()
-        if (_nowTime - _lastTime > gapTime || !_lastTime) {
-            var context = this
-            fn.apply(context, arguments)   //将this和参数传给原函数
-            _lastTime = _nowTime
+function throttle(fn, wait) {
+    // 上一次执行时间
+    let previous = 0;
+    return function (...args) {
+        // 当前时间
+        let now = +new Date();
+        if (now - previous > wait) {
+            previous = now;
+            fn.apply(this, args);
         }
     }
 }
@@ -92,25 +88,20 @@ function throttle(fn, gapTime) {
    * @param wait 延迟执行毫秒数
    * @param immediate true - 立即执行， false - 延迟执行
    */
-function debounce(func, wait = 200, immediate) {
-    let timeout;
-    return function () {
-        let context = this;
-        let args = arguments;
+function debounce(fn, wait = 200, immediate) {
+    let timer = null;
+    return function (...args) {
+        // 立即执行的功能（timer为空表示首次触发）
+        if (immediate && !timer) {
+            fn.apply(this, args);
+        }
 
-        if (timeout) clearTimeout(timeout);
-        if (immediate) {
-            var callNow = !timeout;
-            timeout = setTimeout(() => {
-                timeout = null;
-            }, wait)
-            if (callNow) func.apply(context, args)
-        }
-        else {
-            timeout = setTimeout(function () {
-                func.apply(context, args)
-            }, wait);
-        }
+        // 有新的触发，则把定时器清空
+        timer && clearTimeout(timer);
+        // 重新计时
+        timer = setTimeout(() => {
+            fn.apply(this, args);
+        }, wait);
     }
 }
 

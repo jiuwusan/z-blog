@@ -22,7 +22,8 @@ export default (props) => {
      * @param {*} val 
      */
     const onInput = (e) => {
-        onChange && onChange(`${code.key}_${e.target.value}`);
+        let value = e.target.value ? `${code.key}_${e.target.value}` : null;
+        onChange && onChange(value);
     }
 
     return (<div className={styles.imgCode}>
