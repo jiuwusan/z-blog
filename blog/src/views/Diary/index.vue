@@ -1,5 +1,5 @@
 <template>
-  <div class="diary-box">
+  <div class="diary-box" v-if="diarys">
     <div class="diary-content flex" v-if="diarys">
       <div class="timeline timelineIn"></div>
       <div class="label flex fadeInDown">
@@ -21,6 +21,7 @@
 
 <script>
 import DiaryItem from "./DiaryItem.vue";
+import { diaryApi } from "@/api";
 export default {
   data() {
     return {
@@ -28,25 +29,19 @@ export default {
     };
   },
   mounted() {
-    setTimeout(() => {
-      this.diarys = [
-        {
-          datetime: "2020-08-01",
-          content: "扬帆起航。",
-        },
-        {
-          datetime: "2019-08-01",
-          content: "江湖路远，有缘再见。",
-        },
-        {
-          datetime: "2019-07-01",
-          content: "博客正式上线，这也是我第一个网站。",
-        },
-      ];
-    }, 200);
+    this.allQuery();
   },
   components: {
     DiaryItem,
+  },
+  methods: {
+    /**
+     * 查询
+     */
+    async allQuery() {
+      let result = await diaryApi.allQuery();
+      this.diarys = result;
+    }
   },
 };
 </script>
@@ -127,5 +122,4 @@ export default {
   animation-name: fadeInDown;
   animation-duration: 800ms;
 }
-
 </style>

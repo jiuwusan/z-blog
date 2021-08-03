@@ -9,7 +9,14 @@
       <div class="timestamp flex">
         <div class="icon zoomIn"></div>
       </div>
-      <div class="right fadeInRight">{{ fttData.content }}</div>
+      <div class="right fadeInRight">
+        <div>{{ fttData.overview }}</div>
+        <div class="imageBox">
+          <block v-for="item in fttData.imageArray" :key="item">
+            <Smage prefix :src="item" class="imageItem" />
+          </block>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +33,7 @@ export default {
   data() {
     return {
       fttData: null,
-      yearVisibile: false
+      yearVisibile: false,
     };
   },
   watch: {
@@ -46,6 +53,8 @@ export default {
       data && (data = JSON.parse(JSON.stringify(data)));
       data.year = util.formatTime(data.datetime, "yyyy年");
       data.month = util.formatTime(data.datetime, "MM月dd日");
+      data.imageArray = [];
+      data.image && (data.imageArray = data.image.split(","));
       this.fttData = data;
       //设置年份是否显示
       let yearTimeout = setTimeout(() => {
@@ -128,6 +137,7 @@ export default {
       }
     }
     .right {
+      border-radius: 3px;
       max-width: 68%;
       padding: 10px;
       margin-left: 10px;
@@ -153,10 +163,19 @@ export default {
         border-bottom: 6px solid rgba(255, 255, 255, 0);
         border-right-color: #009688;
       }
+
+      .imageBox {
+        margin: 10px 0 0 -8px;
+        .imageItem {
+          width: 60px;
+          height: 60px;
+          margin: 0 0 0 8px;
+          border-radius: 5px;
+        }
+      }
     }
   }
 }
-
 
 .fadeInRight {
   animation-name: fadeInRight;

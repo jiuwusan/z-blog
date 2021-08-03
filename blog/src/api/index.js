@@ -21,3 +21,7 @@ const apiv1 = new ApiGenerator(config.apiPrefix, { //异常处理
 export const configApi = apiv1.genApi({
     findById: "/custom/config/findById"
 });
+
+export const diaryApi = apiv1.genApi({
+    allQuery: "post /custom/diary/allQuery"
+});
