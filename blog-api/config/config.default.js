@@ -41,7 +41,8 @@ module.exports = appInfo => {
     fileSize: '4000mb',//文件上传的大小限制
     cleanSchedule: {
       cron: '0 30 3 * * *',//清空临时文件夹
-    }
+    },
+    fileExtensions: ['.docx','.pdf','.xlsx','.rar']
   }
 
   //数据库连接配置
@@ -85,14 +86,6 @@ module.exports = appInfo => {
     appId: "wx3da7ad15540aa97d",
     appSecret: "e608e8e40f5b1034f905cc05fa5ec7b4"
   }
-
-  config.oauth2Server = {
-    grants: ['password'],
-    errorHandler: (ctx, error, response) => {
-      console.log('errorHandler==', error);
-      ctx.status = 500;
-    }
-  };
 
   return {
     ...config,

@@ -4,6 +4,7 @@ const path = require('path');
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
+
   //挂载utils
   app.loader.loadToApp(        //将utils模块 挂载到 app 上
     path.join(app.baseDir, "app/utils"),    // 规范化生成的路径
@@ -19,28 +20,10 @@ module.exports = app => {
     await app.model.sync({ alter: true });
   });
 
-  const { router, controller } = app;
-  //Auth相关
-  app.all('/auth/token', app.oAuth2Server.token());
+  require('./router/diary')(app);
+  require('./router/auth')(app);
+  require('./router/file')(app);
+  require('./router/config')(app);
+  require('./router/classify')(app);
 
-  router.get('/auth/imageCode', controller.auth.imageCode);
-  //文件
-  router.post('/upload/:folder', controller.upload.save);
-  /**********管理端***************************************************************************************************/
-  router.get('/', controller.home.index);
-  //系统配置
-  router.post('/admin/config/create', app.oAuth2Server.authenticate(), controller.admin.config.create);
-  router.post('/admin/config/profile', app.oAuth2Server.authenticate(), controller.admin.config.profile);
-  router.get('/admin/config/findById', app.oAuth2Server.authenticate(), controller.admin.config.findById);
-
-  //分类相关
-  router.post('/admin/classify/create', app.oAuth2Server.authenticate(), controller.admin.classify.create);
-  /**********管理端***************************************************************************************************/
-
-
-  /**********客户端***************************************************************************************************/
-  //配置
-  router.get('/custom/config/findById', controller.custom.config.findById);
-
-  /**********客户端***************************************************************************************************/
 };

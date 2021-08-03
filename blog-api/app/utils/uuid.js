@@ -1,5 +1,5 @@
 const node_uuid = require('uuid');
-const crypto = require('crypto');
+const CryptoJS = require('crypto-js');
 const uuid = {
     //验证必填项
     async v1(num = 1) {
@@ -27,7 +27,7 @@ const uuid = {
         let uuid;
         for (var i = 0; i < num; i++) {
             uuid = (await node_uuid.v4()).replace(/\-/g, "") + Date.now();
-            uuid = crypto.createHash('md5').update(uuid).digest("hex");
+            uuid = CryptoJS.MD5(uuid).toString();
             uids.push(uuid);
         }
         return uids.length > 1 ? uids : uids.join("");

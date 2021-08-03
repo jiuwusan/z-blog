@@ -30,6 +30,32 @@ const validator = {
         }
 
         return false;
+    },
+    /**
+     * 验证数据
+     * @param {*} rules 
+     * @param {*} formData 
+     * @returns 
+     */
+    validate(rules = {}, formData = {}) {
+        //开始验证
+        for (const key in rules) {
+            let rule = rules[key];
+            if (Object.prototype.toString.call(rule) === "[object String]") {
+                //只验证必填
+                if (validator.isEmpty(formData[key])) {
+                    throw rules[key];
+                }
+            } else if (typeof rule === "function") {
+                //通过方法回调
+                let message = rule(formData[key]);
+                if (message) {
+                    throw message;
+                }
+            }
+        }
+
+        return formData;
     }
 }
 

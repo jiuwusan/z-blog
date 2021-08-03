@@ -44,22 +44,7 @@ class BaseController extends Controller {
         };
         console.log("验证数据=", formData);
         //开始验证
-        for (const key in rules) {
-            let rule = rules[key];
-            if (Object.prototype.toString.call(rule) === "[object String]") {
-                //只验证必填
-                if (app.utils.validator.isEmpty(formData[key])) {
-                    this.error(rules[key]);
-                }
-            } else if (typeof rule === "function") {
-                //通过方法回调
-                let message = rule(formData[key]);
-                if (message) {
-                    this.error(message);
-                }
-            }
-        }
-
+        app.utils.validator.validate(rules, formData);
         return formData;
     }
 
