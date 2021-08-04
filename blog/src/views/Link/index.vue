@@ -1,77 +1,74 @@
 <template>
-  <div class="link-box flex">
-    <Smage src="saodi.png" class="saodi"></Smage>
+  <div class="link-box flex" v-if="config">
+    <Smage
+      v-if="config.profile.left"
+      prefix
+      :src="config.profile.left"
+      class="saodi"
+    ></Smage>
     <div class="content-box">
       <div class="content">
-        <div class="title">链接申请说明</div>
+        <div class="title">{{ config.profile.title }}</div>
         <div class="askfor flex">
-          <div class="item flex">
-            <Icon name="cuo" class="icon"></Icon>
-            <div class="txt">经常宕机</div>
-          </div>
-          <div class="item flex">
-            <Icon name="cuo" class="icon"></Icon>
-            <div class="txt">不合法规</div>
-          </div>
-          <div class="item flex">
-            <Icon name="cuo" class="icon"></Icon>
-            <div class="txt">插边球站</div>
-          </div>
-          <div class="item flex">
-            <Icon name="cuo" class="icon"></Icon>
-            <div class="txt">红标报毒</div>
-          </div>
-          <div class="item flex">
-            <Icon name="dui" class="icon"></Icon>
-            <div class="txt">原创优先</div>
-          </div>
-          <div class="item flex">
-            <Icon name="dui" class="icon"></Icon>
-            <div class="txt">技术优先</div>
-          </div>
+          <block v-for="item in config.profile.rules" :key="item.icon">
+            <div class="item flex">
+              <Smage prefix :src="item.icon" class="icon"></Smage>
+              <div class="txt">{{ item.text }}</div>
+            </div>
+          </block>
         </div>
         <div class="askcont">
-          <div class="row">如需交换友链，可以在留言区留言</div>
-          <div class="row">名称：ZY个人博客</div>
-          <div class="row">网址：http://jiuwusan.cn/</div>
-          <div class="row">图标：http://jiuwusan.cn/logo.png</div>
-          <div class="row">
-            描述：故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身
-          </div>
+          {{ config.profile.declare }}
         </div>
         <div class="warning">
-          申请提交后若无其它原因将在24小时内审核,如超过时间还未通过,请私信我.(各种额外因素)
+          {{ config.profile.warning }}
         </div>
       </div>
-      <div class="link-list flex">
-        <div class="link-item flex">
-          <div class="row flex">
-            <Smage src="cover01.jpeg" class="logo"></Smage>
-            <div class="name">ZY个人博客</div>
-          </div>
-          <div class="row">故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身。</div>
-        </div>
-        <div class="link-item flex">
-          <div class="row flex">
-            <Smage src="cover01.jpeg" class="logo"></Smage>
-            <div class="name">ZY个人博客</div>
-          </div>
-          <div class="row">故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身。</div>
-        </div>
-        <div class="link-item flex">
-          <div class="row flex">
-            <Smage src="cover01.jpeg" class="logo"></Smage>
-            <div class="name">ZY个人博客</div>
-          </div>
-          <div class="row">故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身。</div>
-        </div>
+      <div class="link-list flex" v-if="links">
+        <block v-for="item in links" :key="item.uid">
+          <a class="link-item flex" :href="item.link" target="_blank">
+            <div class="row flex">
+              <Smage prefix :src="item.logo" class="logo"></Smage>
+              <div class="name">{{ item.name }}</div>
+            </div>
+            <div class="row">
+              {{ item.desc }}
+            </div>
+          </a>
+        </block>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { configApi, linkApi } from "@/api";
+export default {
+  data() {
+    return {
+      config: null,
+      links: null,
+    };
+  },
+  mounted() {
+    this.getConfig();
+    this.getLinks();
+  },
+  methods: {
+    async getConfig() {
+      let result = await configApi.findById({
+        uid: "fb57a600-eace-11eb-96b5-e73f4408ddb7",
+      });
+      result.profile && (result.profile = JSON.parse(result.profile));
+      this.config = result;
+    },
+    async getLinks() {
+      let result = await linkApi.allQuery();
+      this.links = result;
+    },
+    toLink() {},
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -83,11 +80,11 @@ export default {};
   position: relative;
   margin: 25px auto 15px auto;
   .saodi {
-    width: 200px;
-    height: 375px;
+    width: 185px;
   }
   .content-box {
     flex-grow: 1;
+    margin-left: 15px;
     .content {
       width: 100%;
       background: #fff;
@@ -110,7 +107,8 @@ export default {};
           align-items: center;
           font-size: 16px;
           .icon {
-            font-size: 11px;
+            width: 14px;
+            height: 14px;
           }
           .txt {
             margin-left: 4px;
@@ -118,9 +116,11 @@ export default {};
         }
       }
       .askcont {
+        white-space: pre-line;
         padding-left: 16px;
         color: #515250;
         font-size: 14px;
+        line-height: 22px;
         margin: 20px 0;
         .row {
           margin-top: 4px;
@@ -128,8 +128,9 @@ export default {};
       }
       .warning {
         padding-left: 16px;
-        color: #515250;
+        color: red;
         font-size: 14px;
+        opacity: 0.7;
       }
     }
 
@@ -137,13 +138,14 @@ export default {};
       margin-top: 20px;
       flex-wrap: wrap;
       .link-item {
+        text-decoration : none;
         width: 258px;
         padding: 15px;
         margin: 15px 15px 0 0px;
         flex-direction: column;
         background: #fff;
         cursor: pointer;
-        &:nth-child(4n){
+        &:nth-child(4n) {
           margin: 15px 0px 0 0px;
         }
         .row {

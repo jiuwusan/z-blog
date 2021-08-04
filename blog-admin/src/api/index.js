@@ -40,9 +40,13 @@ const genApi = new ApiGenerator(config.apiPrefix, {
         return options;
     },
     onError: (error) => {
+        let description = "系统错误，请稍后重试！";
+        if (Object.prototype.toString.call(error) === "[Object String]") {
+            description = error;
+        }
         notification.error({
             message: "系统提示",
-            description: error
+            description
         });
         console.log("请求错误==", error);
     }
@@ -84,4 +88,11 @@ export const diaryApi = genApi({
     findById: "/admin/diary/findById",
     pageQuery: "POST /admin/diary/pageQuery",
     delById: "POST /admin/diary/delById",
+});
+
+export const linkApi = genApi({
+    save: "POST /admin/link/save",
+    findById: "/admin/link/findById",
+    pageQuery: "POST /admin/link/pageQuery",
+    delById: "POST /admin/link/delById",
 });

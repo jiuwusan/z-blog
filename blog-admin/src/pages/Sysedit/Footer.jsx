@@ -21,6 +21,12 @@ const LinkTabBox = (props) => {
         setLinkList(linkListTemp);
     }
 
+    const remove = (index) => {
+        let linkListTemp = cloneData(linkList);
+        linkListTemp.splice(index, 1);
+        setLinkList(linkListTemp);
+    }
+
     return <div className={styles.LinkTabBox}>
         <FormItem initialValue={value?.title} rules={[{ required: true }]} name={`${prefix}_title`} label="标题" >
             <Input />
@@ -31,11 +37,11 @@ const LinkTabBox = (props) => {
         <div className={styles.linkListBox}>
             <div className={styles.linkList}>
                 {linkList.map((item, index) => <div key={index} className={styles.linkListItem}>
-                    <FormItem initialValue={item} rules={[{ required: true }]} name={`${prefix}_link_${index}`} >
+                    <FormItem className={styles.linkInput} initialValue={item} rules={[{ required: true }]} name={`${prefix}_link_${index}`} >
                         <LinkItem folder="image_footer" />
                     </FormItem>
                     <div>
-                        <Button ghost danger size="small" className={styles.del}>移除</Button>
+                        <Button ghost danger size="small" className={styles.del} onClick={() => remove(index)}>移除</Button>
                     </div>
                 </div>)}
             </div>

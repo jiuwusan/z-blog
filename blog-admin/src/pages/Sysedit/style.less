@@ -36,10 +36,46 @@
             .linkListItem {
                 .flex();
 
+                .linkInput {
+                    flex-grow: 1;
+                }
+
                 .del {
                     margin: 6px 0px 0px 10px;
                 }
             }
         }
     }
+}
+
+.linkForm {
+
+    .termLabel {
+        .flex();
+        margin: 10px 0px;
+
+        .addBtn {
+            margin-left: 10px
+        }
+    }
+
+    .termList {
+        .flex();
+        flex-direction: column;
+
+        .termItem {
+            width: 100%;
+            .flex();
+
+            .remove {
+                margin: 5px 0 0 10px;
+            }
+
+            .termInput {
+                flex-grow: 1;
+            }
+        }
+    }
+
+
 }

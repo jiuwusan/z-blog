@@ -21,6 +21,10 @@ export default [
             {
                 path: '/diary',
                 component: '@/pages/Diary',
+            },
+            {
+                path: '/link',
+                component: '@/pages/Link',
             }
         ],
     },

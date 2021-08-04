@@ -2,7 +2,7 @@
 
 const BaseController = require('../../core/base');
 
-class DiaryController extends BaseController {
+class LinkController extends BaseController {
 
     /**
      * 创建
@@ -10,16 +10,18 @@ class DiaryController extends BaseController {
     async save() {
         const { ctx, app } = this;
         let params = this.validate({
-            content: "内容不能为空",
-            overview: "概述不能为空"
+            link: "缺少参数 link",
+            logo: "缺少参数 logo",
+            name: "缺少参数 name",
+            desc: "缺少参数 desc"
         });
-        let saveData = this.genParams(params, ["overview", "content", "image", "adjunct"]);
+        let saveData = this.genParams(params, ["link", "logo", "name", "desc", "remark"]);
         let { uid } = params;
         let res;
         if (uid) {
-            res = await ctx.model.Diary.update(saveData, { where: { uid } });
+            res = await ctx.model.Link.update(saveData, { where: { uid } });
         } else {
-            res = await ctx.model.Diary.create(saveData);
+            res = await ctx.model.Link.create(saveData);
         }
         this.result(res);
     }
@@ -30,7 +32,7 @@ class DiaryController extends BaseController {
     async findById() {
         const { ctx } = this;
         let params = this.validate({ uid: "uid不能为空" });
-        let result = await ctx.model.Diary.findOne({ where: { uid: params.uid } });
+        let result = await ctx.model.Link.findOne({ where: { uid: params.uid } });
         if (!result) {
             this.error("数据不存在");
         }
@@ -46,19 +48,9 @@ class DiaryController extends BaseController {
             page: "page 为必要参数",
             pageSize: "pageSize 为必要参数"
         });
-        let querySql = `select d.*,DATE_FORMAT(d.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from diary d where d.deleted='00'`;
-        let orderBy = `order by d.created_at desc`
+        let querySql = `select t.* from link t where t.deleted='00'`;
+        let orderBy = ``;
         let replacements = {};
-        if (startTime && endTime) {
-            querySql = `${querySql} and (d.created_at>=:startTime and d.created_at<=:endTime)`;
-            replacements = { startTime, endTime };
-        } else if (startTime) {
-            querySql = `${querySql} and d.created_at>=:startTime`;
-            replacements = { startTime };
-        } else if (endTime) {
-            querySql = `${querySql} and d.created_at<=:endTime`;
-            replacements = { endTime };
-        }
         //拼接动态参数
         let result = await service.model.pageQuery(querySql, replacements, page, pageSize, orderBy);
         this.result(result);
@@ -70,10 +62,10 @@ class DiaryController extends BaseController {
     async delById() {
         const { ctx } = this;
         let { uid } = this.validate({ uid: "uid不能为空" });
-        let result = await ctx.model.Diary.update({ deleted: "01" }, { where: { uid } });
+        let result = await ctx.model.Link.update({ deleted: "01" }, { where: { uid } });
         this.result(result);
     }
 
 }
 
-module.exports = DiaryController;
+module.exports = LinkController;

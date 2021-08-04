@@ -3,7 +3,8 @@ import KdTable from "@/components/KdTable"
 import { Button, Space, DatePicker, Modal } from 'antd';
 import Editor from './Editor';
 import { useState } from 'react';
-import { diaryApi } from '@/api'
+import { linkApi } from '@/api';
+import Smage from '@/components/Smage';
 export default (props) => {
     const [editVisible, setEditVisible] = useState(false);
     const [editData, setEditData] = useState(null);
@@ -14,7 +15,7 @@ export default (props) => {
      * @param {*} reset 
      */
     const saveData = async (values, reset) => {
-        await diaryApi.save(values);
+        await linkApi.save(values);
         reset();
         setEditVisible(false);
         setReloadKey(Date.now());
@@ -34,30 +35,32 @@ export default (props) => {
             title: "系统提示",
             content: "删除后不可恢复，请谨慎操作，删除？",
             onOk: async () => {
-                await diaryApi.delById({ uid });
+                await linkApi.delById({ uid });
                 setReloadKey(Date.now());
             }
         })
     }
 
     const loadData = async (formData) => {
-        console.log("数据加载==", formData);
-        formData.createAt && (formData.startTime = formData.createAt[0].format('YYYY-MM-DD'));
-        formData.createAt && (formData.endTime = formData.createAt[1].format('YYYY-MM-DD'));
-        delete formData.createAt;
-        return await diaryApi.pageQuery(formData);
+        return await linkApi.pageQuery(formData);
     }
 
     const columns = [
         {
-            title: '日期-时间',
-            dataIndex: 'created_at_ftt',
-            key: 'created_at_ftt',
+            title: 'logo',
+            dataIndex: 'logo',
+            key: 'logo',
+            render: (text) => <Smage className={styles.linkLogo} src={text}></Smage>
         },
         {
-            title: '概述',
-            dataIndex: 'overview',
-            key: 'overview',
+            title: '名称',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: '链接',
+            dataIndex: 'link',
+            key: 'link',
         },
         {
             title: '操作',
@@ -75,15 +78,10 @@ export default (props) => {
         <div>
             <KdTable rowKey="uid"
                 reloadKey={reloadKey}
-                searchBar={({ FormItem }) => <>
-                    <FormItem name='createAt' label="日期">
-                        <DatePicker.RangePicker />
-                    </FormItem>
-                </>}
                 toolBar={<Button size="small" type="primary" onClick={() => {
                     setEditData(null);
                     setEditVisible(true);
-                }}>写日记</Button>}
+                }}>添加友链</Button>}
                 columns={columns} loadData={loadData}></KdTable>
         </div>
         <Editor value={editData} visible={editVisible} onSubmit={saveData} onClose={() => setEditVisible(false)}></Editor>

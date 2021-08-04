@@ -25,5 +25,5 @@ module.exports = app => {
   require('./router/file')(app);
   require('./router/config')(app);
   require('./router/classify')(app);
-
+  require('./router/link')(app);
 };
