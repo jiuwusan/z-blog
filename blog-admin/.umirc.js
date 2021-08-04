@@ -4,12 +4,13 @@ import path from 'path';
 import config from './config';
 //路径
 let pathConfig = {
-  base: '/',
-  publicPath: '/',
-  outputPath: './dist/blog'
+  base: '/blog-admin/',
+  publicPath: '/blog-admin/',
+  outputPath: './dist/blog-admin'
 };
 export default defineConfig({
   ...pathConfig,
+  hash:true,
   headScripts: [{ src: `${pathConfig.publicPath}ckeditor.js` }, { src: `${pathConfig.publicPath}ck-zh-cn.js` }],
   nodeModulesTransform: {
     type: 'none',
@@ -17,7 +18,6 @@ export default defineConfig({
   routes,
   fastRefresh: {},
   chainWebpack: (_config) => {
-
     return _config;
   },
   //服务器代理

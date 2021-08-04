@@ -1,3 +1,4 @@
-module.exports =  {
-    apiPrefix: 'https://api.chejia.net.cn'
+module.exports = {
+    apiPrefix: '/blog-api',
+    filePrefix: '/blog-api'
 };
