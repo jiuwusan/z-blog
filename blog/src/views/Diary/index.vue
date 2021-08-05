@@ -1,6 +1,6 @@
 <template>
   <div class="diary-box" v-if="diarys">
-    <div class="diary-content flex" v-if="diarys">
+    <div class="diary-content flex">
       <div class="timeline timelineIn"></div>
       <div class="label flex fadeInDown">
         <Icon name="time" class="icon"></Icon>
@@ -8,7 +8,7 @@
       </div>
       <DiaryItem
         v-for="item in diarys"
-        :key="item.datetime"
+        :key="item.uid"
         :data="item"
       ></DiaryItem>
       <div class="label mgt40 flex fadeInUp">
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import DiaryItem from "./DiaryItem.vue";
+import DiaryItem from "./DiaryItem";
 import { diaryApi } from "@/api";
 export default {
   data() {

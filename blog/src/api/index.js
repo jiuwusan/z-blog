@@ -29,3 +29,8 @@ export const diaryApi = apiv1.genApi({
 export const linkApi = apiv1.genApi({
     allQuery: "post /custom/link/allQuery"
 });
+
+export const messageApi = apiv1.genApi({
+    pageQuery: "post /custom/message/pageQuery",
+    save: "post /custom/message/save"
+});

@@ -18,15 +18,26 @@
 <script>
 import Guest from "./Guest.vue";
 import Board from "./Board.vue";
+import { messageApi } from "@/api";
 export default {
   data() {
     return {
-      scrollshow: "bounceInUp"
-    }
+      scrollshow: "bounceInUp",
+      boards: [],
+    };
   },
   components: {
     Guest,
     Board,
+  },
+  mounted() {
+    this.pageQuery();
+  },
+  methods: {
+    async pageQuery() {
+      let result = await messageApi.pageQuery({ page: 1, pageSize: 10 });
+      Array.prototype.push.apply(this.boards, result?.datalist || []);
+    },
   },
 };
 </script>

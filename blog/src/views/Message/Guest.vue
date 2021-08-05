@@ -2,18 +2,37 @@
   <div class="guest-box fadeInDownBig flex">
     <div class="title">留言板</div>
     <div class="warning">沟通交流，拉近你我！</div>
-    <RichEditor class="editor"></RichEditor>
+    <RichEditor class="editor" v-model="formData.content"></RichEditor>
     <div class="submit-box">
-      <div class="submit">提交留言</div>
+      <div class="submit" @click="formSubmit">提交留言</div>
     </div>
   </div>
 </template>
-
+ 
 <script>
-import { RichEditor } from "@jws/components";
+import RichEditor from "@jws/components/RichEditor";
 export default {
+  data() {
+    return {
+      formData: {
+        imageCode: "",
+        content: "123456",
+        contact: "",
+        nickname: "",
+      },
+      content: "123456",
+    };
+  },
   components: {
     RichEditor,
+  },
+  methods: {
+    formSubmit() {
+      console.log("formSubmit==", this.content);
+    },
+    editorChange(e) {
+      console.log("editorChange==", e);
+    },
   },
 };
 </script>
@@ -66,5 +85,4 @@ export default {
   animation-name: fadeInDownBig;
   animation-duration: 800ms;
 }
-
 </style>

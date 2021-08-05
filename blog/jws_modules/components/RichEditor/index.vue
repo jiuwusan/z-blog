@@ -2,9 +2,10 @@
   <div class="ck-editor-box">
     <ckeditor
       :editor="editor"
-      v-model="editorData"
+      :model-value="value"
       :config="editorConfig"
       :disabled="disabled"
+      @input="editorInput"
     ></ckeditor>
   </div>
 </template>
@@ -24,11 +25,16 @@ import "./zh-cn.js";
 // hljs.highlightAll();
 export default {
   name: "RichEditor",
+  model: {
+    prop: "value",
+    event: "change",
+  },
   props: {
     disabled: {
       type: Boolean,
       default: false,
     },
+    value: String,
   },
   data() {
     return {
@@ -64,8 +70,29 @@ export default {
   components: {
     ckeditor: CKEditor.component,
   },
-  mounted() {},
-  methods: {},
+  watch: {
+    // editorData(newValue) {
+    //   if (newValue !== this.value) {
+    //     this.$emit("change", newValue);
+    //   }
+    // },
+    // value(newValue) {
+    //   console.log("newValue==", newValue);
+    //   if (newValue !== this.editorData) {
+    //     this.editorData = newValue;
+    //   }
+    // },
+  },
+  mounted() {
+    setTimeout(() => {
+      console.log("this.value==", this.value);
+    }, 2000);
+  },
+  methods: {
+    editorInput(value) {
+      this.$emit("change", value);
+    },
+  },
 };
 </script>
 

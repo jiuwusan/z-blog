@@ -26,4 +26,5 @@ module.exports = app => {
   require('./router/config')(app);
   require('./router/classify')(app);
   require('./router/link')(app);
+  require('./router/message')(app);
 };
