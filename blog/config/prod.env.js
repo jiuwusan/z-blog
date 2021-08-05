@@ -1,4 +1,4 @@
-module.exports =  {
-    apiPrefix: '/blog-api',
-    filePrefix: '/blog-api'
+module.exports = {
+    apiPrefix: '/fetchfile',
+    filePrefix: '/fetchfile'
 };
