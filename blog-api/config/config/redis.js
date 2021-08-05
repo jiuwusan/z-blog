@@ -4,7 +4,7 @@ const redis = {
         port: 6379, // Redis port
         host: '127.0.0.1', // Redis host
         password: 'ZkD707396',
-        db: 0,
+        db: 1,
       }
 };
 module.exports = redis;

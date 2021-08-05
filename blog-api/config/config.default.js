@@ -1,6 +1,5 @@
 'use strict';
 
-const sequelize = require('./config/sequelize');
 const redis = require('./config/redis');
 const path = require('path');
 /**
@@ -42,11 +41,8 @@ module.exports = appInfo => {
     cleanSchedule: {
       cron: '0 30 3 * * *',//清空临时文件夹
     },
-    fileExtensions: ['.docx','.pdf','.xlsx','.rar']
+    fileExtensions: ['.docx', '.pdf', '.xlsx', '.rar']
   }
-
-  //数据库连接配置
-  config.sequelize = sequelize;
 
   //redis连接配置
   config.redis = redis;
