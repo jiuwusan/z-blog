@@ -7,7 +7,7 @@ class ToolsService extends Service {
     async getUploadDir(dirName) {
         const { config, app } = this;
         let dateStr = app.utils.tools.formatTime("yyyyMMdd");
-        const uploadPrefix = "/public/upload";
+        const uploadPrefix = "/upload";
         if (!app.utils.validator.isEmpty(dirName)) {
             dirName = dirName + '/';
         } else {
