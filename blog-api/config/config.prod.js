@@ -9,7 +9,7 @@ module.exports = appInfo => {
      **/
     const config = exports = {};
 
-    config.uploadDir = "/usr/local/workspace/upload-dir";
+    config.uploadDir = "/usr/local/workspace/resource/upload";
 
     //数据库连接配置
     config.sequelize = {
