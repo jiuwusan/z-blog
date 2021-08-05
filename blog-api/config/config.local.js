@@ -2,14 +2,15 @@
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
+
 module.exports = appInfo => {
     /**
      * built-in config
      * @type {Egg.EggAppConfig}
      **/
     const config = exports = {};
-
-    config.uploadDir = appInfo.baseDir + "/app/public/upload";
+    const resourceDir = "I:/code/z-blog/resource";
+    config.uploadDir = `${resourceDir}/upload`;
 
     //数据库连接配置
     config.sequelize = {
@@ -23,6 +24,12 @@ module.exports = appInfo => {
         // 是否自动进行下划线转换（这里是因为DB默认的命名规则是下划线方式，而我们使用的大多数是驼峰方式）
         underscored: true
     };
+
+    config.static = {
+        dir: [
+            { prefix: '/fetchfile/', dir: resourceDir }
+        ]
+    }
 
     return config;
 };

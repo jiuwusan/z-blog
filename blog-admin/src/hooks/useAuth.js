@@ -16,13 +16,9 @@ export default () => {
     const login = async (params) => {
         console.log("开始登录=", params);
         let result = await authApi.login(params);
-        if (!result.error) {
-            updateApiState({ token: result });
-            setToken(result);
-            history.replace("/");
-        } else {
-            //error_description.message
-        }
+        updateApiState({ token: result });
+        setToken(result);
+        history.replace("/");
     }
 
     const logout = async (user) => {

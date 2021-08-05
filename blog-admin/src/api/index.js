@@ -29,7 +29,11 @@ const genApi = new ApiGenerator(config.apiPrefix, {
                 history.replace("/login");
                 break;
         }
-        throw res.msg;
+        notification.error({
+            message: "系统提示",
+            description: res.msg
+        });
+        throw res;
     },
     //拦截器
     interceptors: (options) => {
@@ -40,14 +44,6 @@ const genApi = new ApiGenerator(config.apiPrefix, {
         return options;
     },
     onError: (error) => {
-        let description = "系统错误，请稍后重试！";
-        if (Object.prototype.toString.call(error) === "[Object String]") {
-            description = error;
-        }
-        notification.error({
-            message: "系统提示",
-            description
-        });
         console.log("请求错误==", error);
     }
 }).genApi;
