@@ -1,5 +1,5 @@
 <template>
-  <div class="ck-editor-box">
+  <div class="ck-editor-box" v-highlight>
     <ckeditor
       :editor="editor"
       :model-value="value"
@@ -20,15 +20,9 @@ import ParagraphPlugin from "@ckeditor/ckeditor5-paragraph/src/paragraph";
 import CodeBlock from "@ckeditor/ckeditor5-code-block/src/codeblock";
 import CKEditor from "@ckeditor/ckeditor5-vue";
 import "./zh-cn.js";
-// import hljs from "highlight.js";
-// import "highlight.js/styles/github.css";
-// hljs.highlightAll();
 export default {
   name: "RichEditor",
-  model: {
-    prop: "value",
-    event: "change",
-  },
+  emits: ["update:value"],
   props: {
     disabled: {
       type: Boolean,
@@ -70,27 +64,10 @@ export default {
   components: {
     ckeditor: CKEditor.component,
   },
-  watch: {
-    // editorData(newValue) {
-    //   if (newValue !== this.value) {
-    //     this.$emit("change", newValue);
-    //   }
-    // },
-    // value(newValue) {
-    //   console.log("newValue==", newValue);
-    //   if (newValue !== this.editorData) {
-    //     this.editorData = newValue;
-    //   }
-    // },
-  },
-  mounted() {
-    setTimeout(() => {
-      console.log("this.value==", this.value);
-    }, 2000);
-  },
+  mounted() {},
   methods: {
     editorInput(value) {
-      this.$emit("change", value);
+      this.$emit("update:value", value);
     },
   },
 };

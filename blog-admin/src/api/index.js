@@ -92,3 +92,11 @@ export const linkApi = genApi({
     pageQuery: "POST /admin/link/pageQuery",
     delById: "POST /admin/link/delById",
 });
+
+export const messageApi = genApi({
+    audit: "POST /admin/message/audit",
+    reject: "POST /admin/message/reject",
+    pageQuery: "POST /admin/message/pageQuery",
+    delById: "POST /admin/message/delById",
+    findById: "/admin/message/findById",
+});

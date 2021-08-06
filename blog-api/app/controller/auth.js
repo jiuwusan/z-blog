@@ -10,6 +10,10 @@ class AuthController extends BaseController {
     async imageCode() {
         const svgCaptcha = require('svg-captcha');
         const { ctx, app, config } = this;
+        let { lastkey } = this.validate({});
+        if (lastkey) {
+            await ctx.service.redis.del(lastkey);
+        }
         var captcha = svgCaptcha.create({
             // 翻转颜色 
             inverse: false,

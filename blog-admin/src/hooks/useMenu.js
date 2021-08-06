@@ -23,6 +23,9 @@ const menusDefault = [{
 }, {
     name: "友链管理",
     route: "/link"
+}, {
+    name: "留言管理",
+    route: "/message"
 }];
 
 export default () => {

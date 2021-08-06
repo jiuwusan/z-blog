@@ -1,9 +1,11 @@
+import hljs from "highlight.js";
+import "highlight.js/styles/github.css";
 /**
  * 进入可是区域，执行动画
  */
 const scrollshow = {
     mounted: function (el, binding) {
-        // 聚焦元素
+        // 聚焦元素 
         binding.addClass = () => {
             const { top } = el.getBoundingClientRect()
             const h = document.documentElement.clientHeight || document.body.clientHeight
@@ -27,10 +29,24 @@ const scrollshow = {
     }
 }
 
+
+/**
+ * 代码高亮
+ * @param {*} el 
+ */
+const highlight = (el) => {
+    let blocks = el.querySelectorAll('pre code');
+    blocks.forEach((block) => {
+        hljs.highlightBlock(block)
+    })
+}
+
 export {
-    scrollshow
+    scrollshow,
+    highlight
 }
 
 export default {
-    scrollshow
+    scrollshow,
+    highlight
 }

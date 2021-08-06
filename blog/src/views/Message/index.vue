@@ -1,6 +1,6 @@
 <template>
   <div class="message-box">
-    <Guest></Guest>
+    <Guest @submit="formSubmit"></Guest>
     <div class="board-box fadeInUpBig flex">
       <Board v-scrollshow="scrollshow"></Board>
       <Board v-scrollshow="scrollshow"></Board>
@@ -34,9 +34,14 @@ export default {
     this.pageQuery();
   },
   methods: {
-    async pageQuery() {
-      let result = await messageApi.pageQuery({ page: 1, pageSize: 10 });
+    async pageQuery(page) {
+      page = page || this.page || 1;
+      let result = await messageApi.pageQuery({ page, pageSize: 10 });
       Array.prototype.push.apply(this.boards, result?.datalist || []);
+    },
+    async formSubmit(formData) {
+      await messageApi.save(formData);
+      this.pageQuery();
     },
   },
 };

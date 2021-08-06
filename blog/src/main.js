@@ -7,7 +7,7 @@ import Icon from "@/components/Icon";
 import Logo from "@/components/Logo";
 import Menu from "@/components/Menu";
 import { directive } from "@jws";
-const { scrollshow } = directive;
+const { scrollshow, highlight } = directive;
 const app = createApp(App);
 //全局挂载组件
 app.component('Smage', Smage);
@@ -16,6 +16,7 @@ app.component('Logo', Logo);
 app.component('Menu', Menu);
 //自定义指令
 app.directive('scrollshow', scrollshow);
+app.directive('highlight', highlight);
 //路由
 router.beforeEach((to, from, next) => {
     // chrome

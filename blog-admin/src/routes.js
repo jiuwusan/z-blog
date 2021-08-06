@@ -25,6 +25,10 @@ export default [
             {
                 path: '/link',
                 component: '@/pages/Link',
+            },
+            {
+                path: '/message',
+                component: '@/pages/Message',
             }
         ],
     },

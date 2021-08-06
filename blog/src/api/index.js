@@ -34,3 +34,7 @@ export const messageApi = apiv1.genApi({
     pageQuery: "post /custom/message/pageQuery",
     save: "post /custom/message/save"
 });
+
+export const authApi = apiv1.genApi({
+    imageCode: "GET /auth/imageCode"
+});

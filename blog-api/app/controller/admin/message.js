@@ -50,7 +50,7 @@ class MessageController extends BaseController {
             page: "page 为必要参数",
             pageSize: "pageSize 为必要参数"
         });
-        let querySql = `select t.* from message t where t.deleted='00'`;
+        let querySql = `select t.*,DATE_FORMAT(t.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from message t where t.deleted='00'`;
         let orderBy = `order by t.created_at desc`;
         let replacements = {};
         //拼接动态参数

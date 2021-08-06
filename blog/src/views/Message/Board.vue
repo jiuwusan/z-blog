@@ -1,5 +1,5 @@
 <template>
-  <div class="board-item  flex">
+  <div class="board-item flex">
     <BoardChild></BoardChild>
     <div class="repeat-box">
       <BoardChild></BoardChild>
