@@ -23,11 +23,11 @@ export const configApi = apiv1.genApi({
 });
 
 export const diaryApi = apiv1.genApi({
-    allQuery: "post /custom/diary/allQuery"
+    query: "post /custom/diary/query"
 });
 
 export const linkApi = apiv1.genApi({
-    allQuery: "post /custom/link/allQuery"
+    query: "post /custom/link/query"
 });
 
 export const messageApi = apiv1.genApi({

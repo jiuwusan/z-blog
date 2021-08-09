@@ -16,9 +16,9 @@ class ClassifyController extends BaseController {
         let { uid } = params;
         let res;
         if (uid) {
-            res = await ctx.model.Classify.update(saveData, { where: { uid } });
+            res = await ctx.model.Label.update(saveData, { where: { uid } });
         } else {
-            res = await ctx.model.Classify.create(saveData);
+            res = await ctx.model.Label.create(saveData);
         }
         this.result(res);
     }
@@ -28,7 +28,7 @@ class ClassifyController extends BaseController {
      */
     async query() {
         const { service } = this;
-        let querySql = `select c.* as datetime from classify c where c.deleted='00'`;
+        let querySql = `select t.* as datetime from label t where t.deleted='00'`;
         let replacements = {};
         //拼接动态参数
         let result = await service.model.query(querySql, replacements);

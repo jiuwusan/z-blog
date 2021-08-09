@@ -2,9 +2,22 @@ const Service = require('egg').Service;
 class ModelService extends Service {
 
     /**
+     * 查询一个
+     */
+    async queryOne(querySql, replacements, options = {}) {
+        const { ctx, app } = this;
+        let datalist = await ctx.model.query(querySql,
+            { replacements, raw: true, type: app.Sequelize.QueryTypes.SELECT, ...options });
+        if (datalist.length > 0) {
+            return datalist[0];
+        }
+        return null;
+    }
+
+    /**
      * 查询全部
      */
-    async allQuery(querySql, replacements, options) {
+    async query(querySql, replacements, options = {}) {
         const { ctx, app } = this;
         let datalist = await ctx.model.query(querySql,
             { replacements, raw: true, type: app.Sequelize.QueryTypes.SELECT, ...options });

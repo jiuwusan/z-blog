@@ -7,7 +7,7 @@
         v-for="item in articles"
         :key="item.id"
         :data="item"
-        >{{ item.id }}</ArticleItem
+        ></ArticleItem
       >
       <!-- </transition-group> -->
     </div>

@@ -1,16 +1,12 @@
 <template>
   <div class="message-box">
     <Guest @submit="formSubmit"></Guest>
-    <div class="board-box fadeInUpBig flex">
-      <Board v-scrollshow="scrollshow"></Board>
-      <Board v-scrollshow="scrollshow"></Board>
-      <Board v-scrollshow="scrollshow"></Board>
-      <Board v-scrollshow="scrollshow"></Board>
-      <Board v-scrollshow="scrollshow"></Board>
-      <Board v-scrollshow="scrollshow"></Board>
-      <Board v-scrollshow="scrollshow"></Board>
-      <Board v-scrollshow="scrollshow"></Board>
-      <Board v-scrollshow="scrollshow"></Board>
+    <div class="board-box fadeInUpBig flex" v-if="boards.length > 0">
+      <Board
+        v-for="item in boards"
+        :key="item.uid"
+        :data="item"
+      ></Board>
     </div>
   </div>
 </template>
@@ -19,11 +15,15 @@
 import Guest from "./Guest.vue";
 import Board from "./Board.vue";
 import { messageApi } from "@/api";
+import { util } from "@jws";
 export default {
   data() {
     return {
       scrollshow: "bounceInUp",
       boards: [],
+      page: 1,
+      pageSize: 10,
+      totalSize: 0,
     };
   },
   components: {
@@ -31,18 +31,43 @@ export default {
     Board,
   },
   mounted() {
-    this.pageQuery();
+    window.addEventListener("scroll", this.onScroll);
+    this.loadData();
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.onScroll);
   },
   methods: {
     async pageQuery(page) {
       page = page || this.page || 1;
+      if (this.totalSize > 0 && this.totalSize <= this.boards.length) {
+        //数据已经全部加载
+        return;
+      }
+
       let result = await messageApi.pageQuery({ page, pageSize: 10 });
       Array.prototype.push.apply(this.boards, result?.datalist || []);
+      this.totalSize = result?.totalSize;
+      this.page = result?.page + 1;
     },
     async formSubmit(formData) {
       await messageApi.save(formData);
-      this.pageQuery();
+      //提交成功
     },
+    onScroll() {
+      let innerHeight = document.querySelector("#app").clientHeight;
+      let outerHeight = document.documentElement.clientHeight;
+      let scrollTop = document.body.scrollTop
+        ? document.body.scrollTop
+        : document.documentElement.scrollTop;
+      // 页面高度 = 屏幕高度 + 滑动高度
+      if (innerHeight < outerHeight + scrollTop + 300) {
+        this.loadData();
+      }
+    },
+    loadData: util.debounce(function () {
+      this.pageQuery();
+    }, 500),
   },
 };
 </script>

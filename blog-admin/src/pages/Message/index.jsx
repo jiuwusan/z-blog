@@ -8,45 +8,15 @@ import Detail from './Detail';
 export default (props) => {
     const [detailVisible, setDetailVisible] = useState(false);
     const [reloadKey, setReloadKey] = useState(null);
-    const [detailData, setDetailData] = useState({});
+    const [detailUid, setDetailUid] = useState();
 
     /**
      * 查看详情
      * @param {*} rowData 
      */
-    const showDetail = (rowData) => {
-        setDetailData(rowData);
+    const showDetail = (uid) => {
+        setDetailUid(uid);
         setDetailVisible(true);
-    }
-
-    /**
-     * 审核通过
-     * @param {*} uid 
-     */
-    const audit = (uid) => {
-        Modal.confirm({
-            title: "系统提示",
-            content: "请确保内容符合规范？",
-            onOk: async () => {
-                await messageApi.audit({ uid });
-                setReloadKey(Date.now());
-            }
-        })
-    }
-
-    /**
-     * 驳回
-     * @param {*} uid 
-     */
-    const reject = (uid) => {
-        Modal.confirm({
-            title: "系统提示",
-            content: "驳回后后不可撤销，请谨慎操作，确定？",
-            onOk: async () => {
-                await messageApi.reject({ uid });
-                setReloadKey(Date.now());
-            }
-        })
     }
 
     /**
@@ -93,9 +63,10 @@ export default (props) => {
             dataIndex: 'status',
             key: 'status',
             render: (text) => <>
-                {text === "20" && <Tag color="cyan">待审核</Tag>}
-                {text === "30" && <Tag color="red">已驳回</Tag>}
-                {text === "10" && <Tag color="blue">通过</Tag>}
+                {text === "88" && <Tag color="cyan">待审核</Tag>}
+                {text === "20" && <Tag color="cyan">待回复</Tag>}
+                {text === "99" && <Tag color="red">已驳回</Tag>}
+                {text === "10" && <Tag color="blue">已回复</Tag>}
             </>
         },
         {
@@ -103,9 +74,7 @@ export default (props) => {
             key: 'action',
             render: (text, record) => (
                 <Space size="small">
-                    <Button type="primary" size="small" ghost onClick={() => showDetail(record)}>查看</Button>
-                    {record.status === "20" && <Button type="primary" size="small" ghost onClick={() => audit(record.uid)}>通过</Button>}
-                    {record.status === "20" && <Button type="primary" size="small" danger ghost onClick={() => reject(record.uid)}>驳回</Button>}
+                    <Button type="primary" size="small" ghost onClick={() => showDetail(record.uid)}>查看</Button>
                     <Button type="primary" size="small" danger ghost onClick={() => delOne(record.uid)}>删除</Button>
                 </Space>
             ),
@@ -126,6 +95,6 @@ export default (props) => {
                 </>}
                 columns={columns} loadData={loadData}></KdTable>
         </div>
-        <Detail visible={detailVisible} data={detailData} onClose={() => setDetailVisible(false)}></Detail>
+        <Detail onChange={() => setReloadKey(Date.now())} visible={detailVisible} uid={detailUid} onClose={() => setDetailVisible(false)}></Detail>
     </div>
 }

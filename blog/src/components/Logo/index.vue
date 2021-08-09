@@ -1,9 +1,15 @@
 <template>
-  <div class="logo">Zhou.Yuan</div>
+  <div @click="goIndex" class="logo">Zhou.Yuan</div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goIndex() {
+      this.$router.push("/");
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -14,5 +20,6 @@ export default {};
   text-decoration: none;
   font-size: 50px;
   white-space: nowrap;
+  cursor: pointer;
 }
 </style>

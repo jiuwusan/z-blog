@@ -7,5 +7,5 @@ module.exports = app => {
     router.post('/admin/diary/pageQuery', authenticate(), controller.admin.diary.pageQuery);
     router.post('/admin/diary/delById', authenticate(), controller.admin.diary.delById);
     // C端
-    router.post('/custom/diary/allQuery', controller.custom.diary.allQuery);
+    router.post('/custom/diary/query', controller.custom.diary.query);
 };

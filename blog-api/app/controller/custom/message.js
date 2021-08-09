@@ -26,16 +26,23 @@ class MessageController extends BaseController {
      * 查询列表
      */
     async pageQuery() {
-        const { ctx, service } = this;
+        const { service } = this;
         let { page, pageSize } = this.validate({
             page: "page 为必要参数",
             pageSize: "pageSize 为必要参数"
         });
-        let querySql = `select t.*,DATE_FORMAT(t.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from message t where t.deleted='00' and t.status='10'`;
+        let querySql = `select t.*,DATE_FORMAT(t.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from message t where t.deleted='00' and t.status<88 and t.reid is null and t.pid is null`;
         let orderBy = `order by t.created_at desc`;
         let replacements = {};
         //拼接动态参数
         let result = await service.model.pageQuery(querySql, replacements, page, pageSize, orderBy);
+        let datalist = result.datalist;
+        let replys = [];
+        for (let i = 0; i < datalist.length; i++) {
+            replys = await service.model.query(`select t.*,DATE_FORMAT(t.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from message t where t.deleted='00' and t.pid=:pid`, { pid: datalist[i].uid });
+            datalist[i].replys = replys;
+        }
+        result.datalist = datalist;
         this.result(result);
     }
 

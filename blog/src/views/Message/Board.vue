@@ -1,9 +1,12 @@
 <template>
   <div class="board-item flex">
-    <BoardChild></BoardChild>
-    <div class="repeat-box">
-      <BoardChild></BoardChild>
-      <BoardChild></BoardChild>
+    <BoardChild :data="data"></BoardChild>
+    <div class="repeat-box" v-if="data.replys.length > 0">
+      <BoardChild
+        v-for="item in data.replys"
+        :key="item.uid"
+        :data="item"
+      ></BoardChild>
     </div>
   </div>
 </template>
@@ -11,6 +14,12 @@
 <script>
 import BoardChild from "./BoardChild.vue";
 export default {
+  props: {
+    data: {
+      type: Object,
+      default: {},
+    },
+  },
   components: {
     BoardChild,
   },

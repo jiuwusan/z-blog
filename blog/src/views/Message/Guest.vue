@@ -18,7 +18,7 @@
         <input
           type="text"
           class="my-input"
-          placeholder="请输入联系方式"
+          placeholder="请输入邮箱、手机号码等"
           v-model="formData.contact"
         />
       </div>
@@ -39,7 +39,6 @@
 <script>
 import RichEditor from "@jws/components/RichEditor";
 import ImageCode from "@/components/ImageCode";
-import { messageApi } from "@/api";
 export default {
   data() {
     return {

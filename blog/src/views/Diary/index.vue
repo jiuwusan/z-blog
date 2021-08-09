@@ -29,7 +29,7 @@ export default {
     };
   },
   mounted() {
-    this.allQuery();
+    this.query();
   },
   components: {
     DiaryItem,
@@ -38,8 +38,8 @@ export default {
     /**
      * 查询
      */
-    async allQuery() {
-      let result = await diaryApi.allQuery();
+    async query() {
+      let result = await diaryApi.query();
       this.diarys = result;
     }
   },

@@ -99,4 +99,5 @@ export const messageApi = genApi({
     pageQuery: "POST /admin/message/pageQuery",
     delById: "POST /admin/message/delById",
     findById: "/admin/message/findById",
+    reply: "POST /admin/message/reply"
 });

@@ -63,7 +63,7 @@ export default {
       this.config = result;
     },
     async getLinks() {
-      let result = await linkApi.allQuery();
+      let result = await linkApi.query();
       this.links = result;
     },
     toLink() {},

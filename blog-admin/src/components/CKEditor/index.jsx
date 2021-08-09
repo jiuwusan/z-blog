@@ -1,9 +1,10 @@
 import styles from './style.less';
 import { useRef, useEffect } from 'react';
 export default (props) => {
-    const { value = "", className, ...rest } = props || {};
+    const { value = "", className, onChange, ...rest } = props || {};
     const ckeditorRef = useRef(null);
     const toolbarRef = useRef(null);
+    const mounting = useRef(true);
     let DecoupledEditor = window.DecoupledEditor;
     let ckEditor = null;
 
@@ -16,7 +17,14 @@ export default (props) => {
     }
 
     useEffect(() => {
-        ckEditor && ckEditor.setData(value);
+        if (mounting.current) {
+            mounting.current = false;
+        } else {
+            if (ckEditor && (ckEditor.getData() !== value)) {
+                console.log("##更新CkEditor##");
+                ckEditor && ckEditor.setData(value);
+            }
+        }
     }, [value]);
 
     useEffect(() => {
@@ -33,8 +41,8 @@ export default (props) => {
                     return new MyUploadAdapter(loader);
                 };
                 //监听内容变化
-                ckEditor.model.document.on('change:data', () => {
-                    console.log('The data has changed!');
+                ckEditor.model.document.on('change:data', (content) => {
+                    onChange && onChange(ckEditor.getData());
                 });
                 //写入默认值
                 ckEditor.setData(value);

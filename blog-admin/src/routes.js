@@ -29,7 +29,11 @@ export default [
             {
                 path: '/message',
                 component: '@/pages/Message',
-            }
+            },
+            {
+                path: '/editor',
+                component: '@/pages/Main',
+            },
         ],
     },
 ];

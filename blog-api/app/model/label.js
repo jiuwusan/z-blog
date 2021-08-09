@@ -4,7 +4,7 @@
 module.exports = app => {
     const { STRING, UUID, UUIDV1 } = app.Sequelize;
 
-    const Classify = app.model.define('classify', {
+    const Label = app.model.define('label', {
         uid: { type: UUID, primaryKey: true, comment: "唯一标识", defaultValue: UUIDV1 },
         name: { type: STRING(255), comment: "名称" },
         remark: { type: STRING(255), comment: "描述" },
@@ -17,5 +17,5 @@ module.exports = app => {
         timestamps: true
     });
 
-    return Classify;
+    return Label;
 };

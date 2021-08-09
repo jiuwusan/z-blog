@@ -3,5 +3,5 @@ module.exports = app => {
     const { authenticate } = middleware;
     //管理端
     router.post('/admin/classify/create', authenticate(), controller.admin.classify.create);
-    router.post('/admin/classify/allQuery', authenticate(), controller.admin.classify.allQuery);
+    router.post('/admin/classify/query', authenticate(), controller.admin.classify.query);
 };

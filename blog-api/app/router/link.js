@@ -7,5 +7,5 @@ module.exports = app => {
     router.post('/admin/link/pageQuery', authenticate(), controller.admin.link.pageQuery);
     router.post('/admin/link/delById', authenticate(), controller.admin.link.delById);
     // C端
-    router.post('/custom/link/allQuery', controller.custom.link.allQuery);
+    router.post('/custom/link/query', controller.custom.link.query);
 };

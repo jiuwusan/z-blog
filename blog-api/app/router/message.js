@@ -7,6 +7,7 @@ module.exports = app => {
     router.post('/admin/message/pageQuery', authenticate(), controller.admin.message.pageQuery);
     router.post('/admin/message/delById', authenticate(), controller.admin.message.delById);
     router.get('/admin/message/findById', authenticate(), controller.admin.message.findById);
+    router.post('/admin/message/reply', authenticate(), controller.admin.message.reply);
     // C端
     router.post('/custom/message/pageQuery', controller.custom.message.pageQuery);
     router.post('/custom/message/save', controller.custom.message.save);
