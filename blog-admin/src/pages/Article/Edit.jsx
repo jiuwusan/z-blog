@@ -1,25 +1,56 @@
 import styles from "./style.less";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Drawer, Button, Form } from 'antd';
-import CKEditor from '@/components/CKEditor';
+import CKEditor from '@/components/CKEditor'; cloneData
+import Modal from './Modal';
+import { cloneData } from '@jws/tools/util';
 
 export default (props) => {
-    const { visible, data, onClose, onSubmit } = props || {};
+    const { visible, value, onClose, onSubmit } = props || {};
     const [fttData, setFttData] = useState({});
     const [editForm] = Form.useForm();
+    const [modalVisible, setModalVisible] = useState(false);
+    const mounting = useRef(true);
+    const setValueTimer = useRef(null);
 
     const formSubmit = async () => {
         let values = await editForm.validateFields();
-        onSubmit && onSubmit(values, editForm.resetFields);
+        let dataTemp = cloneData(fttData || {});
+        dataTemp.content = values.content;
+        setFttData(dataTemp);
+        // onSubmit && onSubmit(values, editForm.resetFields);
+        setModalVisible(true);
+    }
+
+    /**
+     * 提交数据
+     * @param {*} values 
+     * @param {*} reset 
+     */
+    const modalSubmit = (values, reset) => {
+        values.content = fttData.content;
+        console.log("modalSubmit=", values);
+        onSubmit && onSubmit(values, () => {
+            reset();
+            editForm.resetFields();
+            setModalVisible(false);
+        })
+
     }
 
     //监听uid的变化
     useEffect(() => {
-        setFttData(data);
-    }, [data]);
+        console.log("变化了--",value);
+        if (mounting.current) {
+            mounting.current = false;
+        } else {
+            value && editForm.setFieldsValue(value || {});
+            (!value) && editForm.resetFields();
+        }
+    }, [value]);
 
     return <Drawer
-        title="留言详情"
+        title="写文章"
         onClose={onClose}
         visible={visible}
         width={1100}
@@ -35,5 +66,6 @@ export default (props) => {
                 <CKEditor></CKEditor>
             </Form.Item>
         </Form>
+        <Modal value={value} visible={modalVisible} onSubmit={modalSubmit} onCancel={() => setModalVisible(false)}></Modal>
     </Drawer>
 }

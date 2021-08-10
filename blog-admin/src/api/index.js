@@ -101,3 +101,22 @@ export const messageApi = genApi({
     findById: "/admin/message/findById",
     reply: "POST /admin/message/reply"
 });
+
+export const classifyApi = genApi({
+    save: "POST /admin/classify/save",
+    query: "POST /admin/classify/query"
+});
+
+export const labelApi = genApi({
+    save: "POST /admin/label/save",
+    query: "POST /admin/label/query"
+});
+
+export const articleApi = genApi({
+    save: "POST /admin/article/save",
+    findById: "/admin/article/findById",
+    pageQuery: "POST /admin/article/pageQuery",
+    delById: "POST /admin/article/delById",
+    publish: "POST /admin/article/publish",
+    revocat: "POST /admin/article/revocat",
+});

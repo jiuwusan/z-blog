@@ -1,28 +1,30 @@
 import styles from './style.less';
 import { useRef, useEffect } from 'react';
+import config from '@config';
 export default (props) => {
     const { value = "", className, onChange, ...rest } = props || {};
     const ckeditorRef = useRef(null);
     const toolbarRef = useRef(null);
     const mounting = useRef(true);
+    const ckEditor = useRef(null);
     let DecoupledEditor = window.DecoupledEditor;
-    let ckEditor = null;
 
     const willUnmount = () => {
         console.log("销毁组件");
         //销毁组件
-        ckEditor.destroy().catch(error => {
-            console.log(error);
+        ckEditor?.current && ckEditor.current.destroy().catch(error => {
+            // ckEditor = null;
         });
     }
 
     useEffect(() => {
+
         if (mounting.current) {
             mounting.current = false;
         } else {
-            if (ckEditor && (ckEditor.getData() !== value)) {
+            if (ckEditor?.current && (ckEditor.current.getData() !== value)) {
                 console.log("##更新CkEditor##");
-                ckEditor && ckEditor.setData(value);
+                ckEditor.current.setData(value);
             }
         }
     }, [value]);
@@ -33,25 +35,30 @@ export default (props) => {
                 // extraPlugins: [MyCustomUploadAdapterPlugin]
             })
             .then(editor => {
-                ckEditor = editor;
+                // if (toolbarRef?.current) {
+                ckEditor.current = editor;
                 //添加工具栏
-                toolbarRef.current.appendChild(ckEditor.ui.view.toolbar.element);
+                toolbarRef.current.appendChild(ckEditor.current.ui.view.toolbar.element);
                 //挂载图片上传钩子
-                ckEditor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                ckEditor.current.plugins.get('FileRepository').createUploadAdapter = (loader) => {
                     return new MyUploadAdapter(loader);
                 };
                 //监听内容变化
-                ckEditor.model.document.on('change:data', (content) => {
-                    onChange && onChange(ckEditor.getData());
+                ckEditor.current.model.document.on('change:data', (content) => {
+                    onChange && onChange(ckEditor.current.getData());
                 });
                 //写入默认值
-                ckEditor.setData(value);
+                ckEditor.current.setData(value);
+                // }
             })
             .catch(error => {
                 console.error(error);
             });
+    }, [])
+
+    useEffect(() => {
         return willUnmount;
-    }, []);
+    }, [])
 
     return <div className={styles.ckcditor + " " + className} {...rest}>
         <div className={styles.toolbar} ref={toolbarRef}></div>
@@ -90,7 +97,7 @@ class MyUploadAdapter {
     // 初始化请求参数
     _initRequest() {
         const xhr = this.xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://127.0.0.1:9532/upload/ckeitor', true);
+        xhr.open('POST', `${config.apiPrefix}/upload/ckeitor`, true);
         xhr.responseType = 'json';
     }
 
@@ -111,7 +118,7 @@ class MyUploadAdapter {
             //返回图片路径
             console.log("response==", response);
             resolve({
-                default: response.data.path[0]
+                default: `${config.filePrefix}${response.data.path[0]}`
             });
         });
         if (xhr.upload) {

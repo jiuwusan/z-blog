@@ -27,4 +27,6 @@ module.exports = app => {
   require('./router/classify')(app);
   require('./router/link')(app);
   require('./router/message')(app);
+  require('./router/label')(app);
+  require('./router/article')(app);
 };
