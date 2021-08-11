@@ -8,6 +8,10 @@ module.exports = app => {
     router.post('/admin/article/delById', authenticate(), controller.admin.article.delById);
     router.post('/admin/article/publish', authenticate(), controller.admin.article.publish);
     router.post('/admin/article/revocat', authenticate(), controller.admin.article.revocat);
+    router.post('/admin/article/top', authenticate(), controller.admin.article.top);
+    router.post('/admin/article/canceltop', authenticate(), controller.admin.article.canceltop);
     // C端
-    // router.post('/custom/article/query', controller.custom.article.query);
+    router.post('/custom/article/pageQuery', controller.custom.article.pageQuery);
+    router.post('/custom/article/findById', controller.custom.article.findById);
+    router.post('/custom/article/topQuery', controller.custom.article.topQuery);
 };

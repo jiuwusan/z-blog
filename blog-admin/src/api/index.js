@@ -104,12 +104,16 @@ export const messageApi = genApi({
 
 export const classifyApi = genApi({
     save: "POST /admin/classify/save",
-    query: "POST /admin/classify/query"
+    query: "POST /admin/classify/query",
+    delById: "POST /admin/classify/delById",
+    pageQuery: "POST /admin/classify/pageQuery"
 });
 
 export const labelApi = genApi({
     save: "POST /admin/label/save",
-    query: "POST /admin/label/query"
+    query: "POST /admin/label/query",
+    delById: "POST /admin/label/delById",
+    pageQuery: "POST /admin/label/pageQuery"
 });
 
 export const articleApi = genApi({
@@ -119,4 +123,6 @@ export const articleApi = genApi({
     delById: "POST /admin/article/delById",
     publish: "POST /admin/article/publish",
     revocat: "POST /admin/article/revocat",
+    canceltop: "POST /admin/article/canceltop",
+    top: "POST /admin/article/top",
 });

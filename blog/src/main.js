@@ -7,6 +7,8 @@ import Icon from "@/components/Icon";
 import Logo from "@/components/Logo";
 import Menu from "@/components/Menu";
 import { directive } from "@jws";
+import { Notification } from "@jws/components";
+
 const { scrollshow, highlight } = directive;
 const app = createApp(App);
 //全局挂载组件
@@ -27,5 +29,6 @@ router.beforeEach((to, from, next) => {
     window.pageYOffset = 0;
     next();
 });
+app.use(Notification);
 //挂载路由
 app.use(store).use(router).mount('#app');

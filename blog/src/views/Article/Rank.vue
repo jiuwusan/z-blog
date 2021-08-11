@@ -2,14 +2,32 @@
   <div class="rank-box slideInRight">
     <div class="title">热门文章</div>
     <div class="rank-list flex">
-      <div class="rank-item">SpringBoot 入门爬虫项目实战教程</div>
-      <div class="rank-item">SpringBoot 入门爬虫项目实战</div>
+      <div class="rank-item" v-for="item in list" :key="item.uid">
+        {{ item.title }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { articleApi } from "@/api";
+export default {
+  data() {
+    return {
+      list: [],
+    };
+  },
+  mounted() {
+    this.query();
+  },
+  methods: {
+    //获取数据
+    async query() {
+      let result = (await articleApi.topQuery()) || [];
+      this.list = result;
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>

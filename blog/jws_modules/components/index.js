@@ -1,17 +1,17 @@
-// import extendComponent from "./extendComponent";
+import extendComponent from "./extendComponent";
 import Popup from "./Popup";
-// import NotificationOriginal from "./Notification";
+import NotificationOriginal from "./Notification";
 import RichEditor from "./RichEditor";
-// const Notification = extendComponent(NotificationOriginal, "notification");
+const Notification = extendComponent(NotificationOriginal, "notification");
 
 export {
     Popup,
-    // Notification,
+    Notification,
     RichEditor
 }
 
 export default {
     Popup,
-    // Notification,
+    Notification,
     RichEditor
 }

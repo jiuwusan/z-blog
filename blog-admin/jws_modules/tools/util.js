@@ -140,6 +140,7 @@ function cloneData(jsondata, defaultdata) {
     return JSON.parse(JSON.stringify(jsondata));
 }
 
+
 export {
     isEmpty,
     formatTime,

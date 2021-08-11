@@ -32,7 +32,7 @@ export default (props) => {
 
     return (<>
         {props.source && <Row className={visible ? '' : styles.hidden}>
-            <Form size="small" form={searchForm} layout="inline">
+            <Form form={searchForm} layout="inline">
                 <a className={styles.visible} onClick={() => setVisible(!visible)}>
                     {visible ? <UpOutlined /> : <DownOutlined />} {visible ? "收起" : "展开"}
                 </a>

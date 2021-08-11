@@ -50,21 +50,25 @@ export default (props) => {
             title: 'logo',
             dataIndex: 'logo',
             key: 'logo',
+            align: 'center',
             render: (text) => <Smage className={styles.linkLogo} src={text}></Smage>
         },
         {
             title: '名称',
             dataIndex: 'name',
             key: 'name',
+            align: 'center',
         },
         {
             title: '链接',
             dataIndex: 'link',
             key: 'link',
+            align: 'center',
         },
         {
             title: '操作',
             key: 'action',
+            align: 'center',
             render: (text, record) => (
                 <Space size="small">
                     <Button type="primary" size="small" ghost onClick={() => editOne(record)}>编辑</Button>
@@ -78,7 +82,7 @@ export default (props) => {
         <div>
             <KdTable rowKey="uid"
                 reloadKey={reloadKey}
-                toolBar={<Button size="small" type="primary" onClick={() => {
+                toolBar={<Button type="primary" onClick={() => {
                     setEditData(null);
                     setEditVisible(true);
                 }}>添加友链</Button>}

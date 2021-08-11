@@ -52,16 +52,19 @@ export default (props) => {
             title: '联系方式',
             dataIndex: 'contact',
             key: 'contact',
+            align: 'center',
         },
         {
             title: '日期-时间',
             dataIndex: 'created_at_ftt',
             key: 'created_at_ftt',
+            align: 'center',
         },
         {
             title: '状态',
             dataIndex: 'status',
             key: 'status',
+            align: 'center',
             render: (text) => <>
                 {text === "88" && <Tag color="cyan">待审核</Tag>}
                 {text === "20" && <Tag color="cyan">待回复</Tag>}
@@ -72,6 +75,7 @@ export default (props) => {
         {
             title: '操作',
             key: 'action',
+            align: 'center',
             render: (text, record) => (
                 <Space size="small">
                     <Button type="primary" size="small" ghost onClick={() => showDetail(record.uid)}>查看</Button>

@@ -10,17 +10,18 @@
     </div>
     <div class="class-list">
       <div class="class-ul">
-        <div class="class-li active">
-          <div class="txt">全部文章</div>
-        </div>
-        <div class="class-li">
-          <div class="class-txt">前端</div>
-        </div>
-        <div class="class-li">
-          <div class="class-txt">Java</div>
-        </div>
-        <div class="class-li">
-          <div class="class-txt">JavaScript</div>
+        <div
+          :class="['class-li', active === item.uid ? 'active' : '']"
+          v-for="item in list"
+          :key="item.uid"
+        >
+          <Smage
+            v-if="item.cover"
+            prefix
+            class="cover"
+            :src="item.cover"
+          ></Smage>
+          <div class="class-txt">{{ item.name }}</div>
         </div>
       </div>
     </div>
@@ -28,7 +29,31 @@
 </template>
 
 <script>
-export default {};
+import { classifyApi } from "@/api";
+export default {
+  data() {
+    return {
+      list: [],
+      active: "",
+    };
+  },
+  mounted() {
+    this.query();
+  },
+  methods: {
+    //获取数据
+    async query() {
+      let result = (await classifyApi.query()) || [];
+      result.unshift({
+        uid: "99",
+        name: "全部文章",
+        cover: "",
+      });
+      this.list = result;
+      this.active = "99";
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -104,12 +129,21 @@ export default {};
         height: 40px;
         cursor: pointer;
         position: relative;
+        .flex();
+        align-items: center;
         &:hover {
           .checked();
         }
+
+        .cover {
+          width: 30px;
+          height: 30px;
+        }
+
         .class-txt {
           width: 100%;
           border-bottom: 1px solid #f8f9f7;
+          margin-left: 8px;
         }
       }
     }

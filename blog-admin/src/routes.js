@@ -19,6 +19,14 @@ export default [
                 component: '@/pages/Article',
             },
             {
+                path: '/classify',
+                component: '@/pages/ArticleClassify',
+            },
+            {
+                path: '/label',
+                component: '@/pages/ArticleLabel',
+            },
+            {
                 path: '/diary',
                 component: '@/pages/Diary',
             },

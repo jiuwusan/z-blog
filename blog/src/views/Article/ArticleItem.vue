@@ -3,26 +3,20 @@
     <div class="flag">置顶</div>
     <div class="header flex">
       <div class="title flex">
-        <div class="tag">【原创】</div>
-        <div class="txt">Java学习路线推荐</div>
+        <div class="tag">【{{ fttData.type_ftt }}】</div>
+        <div class="txt">{{ fttData.title }}</div>
       </div>
       <div class="datetime flex">
-        <div class="top">02</div>
+        <div class="top">{{ fttData.day }}</div>
         <div class="flex bottom">
-          <div class="item">7月</div>
-          <div class="item">2021</div>
+          <div class="item">{{ fttData.month }}月</div>
+          <div class="item">{{ fttData.year }}</div>
         </div>
       </div>
     </div>
     <div class="intro flex">
-      <Smage class="cover" src="cover01.jpeg"></Smage>
-      <div class="content">
-        这篇文章是为了介绍自己自学用过的Java视频资料。本套整合教程总共180+G，共450+小时。考虑到绝大部分视频至少要看两遍，而且视频总时长并不代表学习时长，所以零基础初学者总学习时间大约为：600小时视频时长
-        + 100小时理解 +
-        100小时练习，至少需要800小时。你可能觉得自己能一天学习8小时，实际上平均下来每天能学4小时都算厉害了。总会有各种原因，比如当天内容太难，公司聚会，要出差等等。如果周末你也是坚持学习，那么最理想状况下，6个半月就可以学完，达到工作后能被人带的水平。但我知道那其实基本不可能。
-        这篇文章是为了介绍自己自学用过的Java视频资料。本套整合教程总共180+G，共450+小时。考虑到绝大部分视频至少要看两遍，而且视频总时长并不代表学习时长，所以零基础初学者总学习时间大约为：600小时视频时长
-        + 100小时理解 +
-      </div>
+      <Smage prefix class="cover" :src="fttData.cover"></Smage>
+      <div class="content">{{ fttData.simpleText }}</div>
     </div>
     <div class="read flex">
       <div class="more" title="点击阅读全文内容">阅读全文</div>
@@ -32,7 +26,15 @@
       <div class="tags-box flex">
         <div class="tag-item flex">
           <Icon name="classify" class="icon"></Icon>
-          <div class="cube">Java路线</div>
+          <div class="cube" v-for="item in fttData.classArray" :key="item.uid">
+            {{ item.name }}
+          </div>
+        </div>
+        <div class="tag-item flex">
+          <Icon name="label" class="icon"></Icon>
+          <div class="cube" v-for="item in fttData.labelArray" :key="item.uid">
+            {{ item.name }}
+          </div>
         </div>
       </div>
       <div class="tags-box flex">
@@ -46,12 +48,56 @@
         </div>
       </div>
     </div>
-        <slot></slot>
+    <slot></slot>
   </div>
 </template>
   
 <script>
-export default {};
+const typeMap = {
+  10: "原创",
+  20: "转载",
+};
+
+export default {
+  props: {
+    data: {
+      type: Object,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      fttData: {
+        classArray: [],
+        labelArray: [],
+      },
+    };
+  },
+  watch: {
+    data: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue) {
+          newValue.classArray = JSON.parse(newValue.classStr);
+          newValue.labelArray = JSON.parse(newValue.labelStr);
+          newValue.year = newValue.created_at_ftt.substring(0, 4);
+          newValue.month = newValue.created_at_ftt.substring(5, 7);
+          newValue.day = newValue.created_at_ftt.substring(8, 10);
+          newValue.type_ftt = typeMap[newValue.type];
+          newValue.simpleText = this.getSimpleText(newValue.content);
+        }
+        this.fttData = newValue;
+      },
+    },
+  },
+  methods: {
+    getSimpleText(html) {
+      var re1 = new RegExp("<.+?>", "g"); //匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
+      var msg = html.replace(re1, ""); //执行替换成空字符
+      return msg;
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -138,6 +184,7 @@ export default {};
       font-size: 14px;
       line-height: 26px;
       text-align: justify;
+      // white-space: pre-line;
       .ellipsis(7);
     }
   }

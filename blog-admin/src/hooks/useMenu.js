@@ -18,6 +18,10 @@ const menusDefault = [{
         {
             name: "文章分类",
             route: "/classify",
+        },
+        {
+            name: "文章标签",
+            route: "/label",
         }
     ]
 }, {

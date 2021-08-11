@@ -38,3 +38,17 @@ export const messageApi = apiv1.genApi({
 export const authApi = apiv1.genApi({
     imageCode: "GET /auth/imageCode"
 });
+
+export const articleApi = apiv1.genApi({
+    pageQuery: "post /custom/article/pageQuery",
+    findById: "post /custom/article/findById",
+    topQuery: "post /custom/article/topQuery"
+});
+
+export const classifyApi = apiv1.genApi({
+    query: "post /custom/classify/query"
+});
+
+export const labelApi = apiv1.genApi({
+    query: "post /custom/label/query"
+});

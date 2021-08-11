@@ -35,6 +35,34 @@ class ClassifyController extends BaseController {
         let result = await service.model.query(querySql, replacements);
         this.result(result);
     }
+
+    /**
+     * 查询列表
+     */
+    async pageQuery() {
+        const { service } = this;
+        let querySql = `select t.* from label t where t.deleted='00'`;
+        let replacements = {};
+        //拼接动态参数
+        let result = await service.model.pageQuery(querySql, replacements);
+        this.result(result);
+    }
+
+    /**
+      * 删除
+      */
+    async delById() {
+        const { ctx, service } = this;
+        let { uid } = this.validate({ uid: "uid不能为空" });
+        let stat = await service.model.queryOne(`select count(*) as total from article_to_label t where t.label_id=:uid`, { uid });
+        if (stat.total > 0) {
+            this.error("当前标签已关联文章，不能删除！！！");
+        }
+
+        let result = await ctx.model.Label.update({ deleted: "01" }, { where: { uid } });
+        this.result(result);
+    }
+
 }
 
 module.exports = ClassifyController;
