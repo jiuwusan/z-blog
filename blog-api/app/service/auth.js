@@ -68,7 +68,7 @@ class AuthService extends Service {
             };
         }
         //删除key
-        await ctx.service.redis.get(codes[0])
+        await ctx.service.redis.del(codes[0])
     }
 
     /**

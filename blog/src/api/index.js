@@ -1,6 +1,6 @@
 import { ApiGenerator } from '@jws';
 import config from '@config';
-
+import { Notification } from "@jws/components";
 const apiv1 = new ApiGenerator(config.apiPrefix, { //异常处理
     onError: (error) => {
         console.log("请求错误==", error);
@@ -10,9 +10,11 @@ const apiv1 = new ApiGenerator(config.apiPrefix, { //异常处理
             if (res.data.code === 200) {
                 return res.data.data;
             } else {
+                Notification.error(res.data.msg);
                 throw new Error(res);
             }
         } else {
+            Notification.error(res.data.msg);
             throw new Error(res)
         }
     }

@@ -19,7 +19,7 @@
       <div class="content">{{ fttData.simpleText }}</div>
     </div>
     <div class="read flex">
-      <div class="more" title="点击阅读全文内容">阅读全文</div>
+      <div class="more" title="点击阅读全文内容" @click="goDetail">阅读全文</div>
       <div class="line"></div>
     </div>
     <div class="brief flex">
@@ -95,6 +95,9 @@ export default {
       var re1 = new RegExp("<.+?>", "g"); //匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
       var msg = html.replace(re1, ""); //执行替换成空字符
       return msg;
+    },
+    goDetail() {
+      this.$router.push(`/article/detail/${this.fttData.uid}`);
     },
   },
 };

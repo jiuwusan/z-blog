@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home'
 import About from '@/views/About'
 import Article from '@/views/Article'
+import ArticleDetail from '@/views/Article/Detail'
 import Message from '@/views/Message'
 import Diary from '@/views/Diary'
 import Link from '@/views/Link'
@@ -21,6 +22,11 @@ const routes = [
     path: '/article',
     name: 'Article',
     component: Article
+  },
+  {
+    path: '/article/detail/:uid',
+    name: 'ArticleDetail',
+    component: ArticleDetail
   },
   {
     path: '/message',

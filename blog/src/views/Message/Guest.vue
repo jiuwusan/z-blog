@@ -56,7 +56,14 @@ export default {
   },
   methods: {
     async formSubmit() {
-      this.$emit("submit", this.formData);
+      this.$emit("submit", this.formData, () => {
+        this.formData = {
+          imageCode: "",
+          content: "",
+          contact: "",
+          nickname: "",
+        };
+      });
     },
   },
 };

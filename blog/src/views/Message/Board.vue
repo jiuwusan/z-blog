@@ -33,7 +33,7 @@ export default {
   padding: 15px;
   border-bottom: 1px dotted #515250;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
   &:last-child {
     border-bottom: 0px dotted #515250;
   }

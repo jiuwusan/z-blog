@@ -2,11 +2,7 @@
   <div class="message-box">
     <Guest @submit="formSubmit"></Guest>
     <div class="board-box fadeInUpBig flex" v-if="boards.length > 0">
-      <Board
-        v-for="item in boards"
-        :key="item.uid"
-        :data="item"
-      ></Board>
+      <Board v-for="item in boards" :key="item.uid" :data="item"></Board>
     </div>
   </div>
 </template>
@@ -50,8 +46,10 @@ export default {
       this.totalSize = result?.totalSize;
       this.page = result?.page + 1;
     },
-    async formSubmit(formData) {
+    async formSubmit(formData, reset) {
       await messageApi.save(formData);
+      reset();
+      this.$notification.success("提交成功，等待博主审核！！！");
       //提交成功
     },
     onScroll() {

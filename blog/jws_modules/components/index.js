@@ -1,17 +1,20 @@
 import extendComponent from "./extendComponent";
 import Popup from "./Popup";
-import NotificationOriginal from "./Notification";
+import Notification from "./Notification/index";
 import RichEditor from "./RichEditor";
-const Notification = extendComponent(NotificationOriginal, "notification");
-
+import RichText from "./RichText";
 export {
     Popup,
     Notification,
-    RichEditor
+    RichEditor,
+    extendComponent,
+    RichText
 }
 
 export default {
     Popup,
     Notification,
-    RichEditor
+    RichEditor,
+    extendComponent,
+    RichText
 }

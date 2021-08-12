@@ -5,7 +5,7 @@
       class="input"
       placeholder="请输入图形验证码"
       @input="inputCode"
-      :value:="code"
+      :value="code"
     />
     <div class="exchange" @click="exchange">
       <img class="code" :src="codeData.base64" alt="" />
@@ -34,6 +34,8 @@ export default {
       let valueArray = newValue.split("_");
       if (valueArray.length === 2 && valueArray[1] != this.code) {
         this.code = valueArray[1];
+      } else if (!newValue) {
+        this.code = "";
       }
     },
   },

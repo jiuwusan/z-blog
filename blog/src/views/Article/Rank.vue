@@ -2,7 +2,12 @@
   <div class="rank-box slideInRight">
     <div class="title">热门文章</div>
     <div class="rank-list flex">
-      <div class="rank-item" v-for="item in list" :key="item.uid">
+      <div
+        class="rank-item"
+        v-for="item in list"
+        :key="item.uid"
+        @click="goDetail(item.uid)"
+      >
         {{ item.title }}
       </div>
     </div>
@@ -25,6 +30,13 @@ export default {
     async query() {
       let result = (await articleApi.topQuery()) || [];
       this.list = result;
+    },
+    goDetail(uid) {
+      if ((this.$route?.path || "").indexOf("/article/detail") > -1) {
+        this.$router.replace(`/article/detail/${uid}`);
+      } else {
+        this.$router.push(`/article/detail/${uid}`);
+      }
     },
   },
 };

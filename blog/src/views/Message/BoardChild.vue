@@ -1,16 +1,18 @@
 <template>
   <div class="boardchild-box flex">
-    <Smage prefix class="avtor"  :src="data.avatar" alt="" />
+    <Smage prefix class="avtor" :src="data?.avatar" alt="" />
     <div class="matter flex">
       <div class="nickname">
         {{ data?.nickname }}
         <span class="repeat" v-show="data?.pid">回复</span>
         <!-- 游客666666666 -->
       </div>
-      <div class="content" v-html="data?.content"></div>
+      <div class="content">
+        <RichText :content="data?.content"></RichText>
+      </div>
       <div class="datetime flex">
         <Icon name="time02" class="icon"></Icon>
-        <div class="time">{{ data.created_at_ftt }}</div>
+        <div class="time">{{ data?.created_at_ftt }}</div>
         <!-- <div class="repeat">回复</div> -->
       </div>
     </div>
@@ -18,12 +20,21 @@
 </template>
 
 <script>
+import { RichText } from "@jws/components";
 export default {
   props: {
     data: {
       type: Object,
-      default: {},
+      default: null,
     },
+  },
+  data() {
+    return {
+      fttData: {},
+    };
+  },
+  components: {
+    RichText,
   },
 };
 </script>

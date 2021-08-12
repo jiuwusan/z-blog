@@ -29,6 +29,6 @@ router.beforeEach((to, from, next) => {
     window.pageYOffset = 0;
     next();
 });
-app.use(Notification);
+app.config.globalProperties.$notification = Notification
 //挂载路由
 app.use(store).use(router).mount('#app');
