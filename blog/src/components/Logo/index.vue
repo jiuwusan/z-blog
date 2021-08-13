@@ -1,9 +1,21 @@
 <template>
-  <div @click="goIndex" class="logo">Zhou.Yuan</div>
+  <div @click="goIndex" class="logo">{{ name }}</div>
 </template>
 
 <script>
 export default {
+  name: "Logo",
+  components: {},
+  data() {
+    return {
+      profile: {},
+    };
+  },
+  computed: {
+    name() {
+      return this.$store.state.profile.general.name;
+    },
+  },
   methods: {
     goIndex() {
       this.$router.push("/");

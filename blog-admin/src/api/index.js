@@ -15,7 +15,6 @@ export const updateApiState = (newState = {}) => {
 
 const genApi = new ApiGenerator(config.apiPrefix, {
     format: (res) => {
-        console.log("format==", res);
         switch (res.code) {
             case 200:
                 return res.data;
@@ -63,6 +62,7 @@ export const authApi = genApi({
         }
     },
     logout: 'GET /auth/logout',
+    changePassword: 'POST /auth/changePassword',
     imageCode: 'GET /auth/imageCode'
 });
 

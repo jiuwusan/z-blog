@@ -21,11 +21,20 @@ export default () => {
         history.replace("/");
     }
 
-    const logout = async (user) => {
+    const logout = async (flag) => {
+        if (flag) {
+            //调用退出接口
+        }
         setToken(null);
         setUserInfo(null);
         history.replace('/login');
     };
 
-    return { token, userInfo, init, login, logout };
+    const password = async (params,callback) => {
+        await authApi.changePassword(params);
+        callback&&callback();
+        logout();
+    }
+
+    return { token, userInfo, init, login, password, logout };
 };

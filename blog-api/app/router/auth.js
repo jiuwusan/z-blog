@@ -6,4 +6,5 @@ module.exports = app => {
     router.post('/auth/token', controller.auth.token);
     router.post('/auth/refreshToken', controller.auth.refreshToken);
     router.get('/auth/imageCode', controller.auth.imageCode);
+    router.post('/auth/changePassword', authenticate(), controller.auth.changePassword);
 };

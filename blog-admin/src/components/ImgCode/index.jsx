@@ -5,7 +5,7 @@ import { authApi } from '@/api';
 export default (props) => {
 
     //排除value，不需要通过外部传入value
-    const { onChange, value, ...rest } = props || {};
+    const { onChange, value, placeholder = "请输入图形验证码", ...rest } = props || {};
     const [code, setCode] = useState("");
 
     const genImageCode = async () => {
@@ -27,7 +27,7 @@ export default (props) => {
     }
 
     return (<div className={styles.imgCode}>
-        <Input {...rest} onChange={onInput} />
+        <Input {...rest} placeholder={placeholder} onChange={onInput} />
         <div className={styles.code} onClick={genImageCode}>
             <img src={code.base64} className={styles.image} />
             <div className={styles.change}>换一张？</div>

@@ -1,11 +1,10 @@
 const Service = require('egg').Service;
-const CryptoJS = require('crypto-js');
 class AuthService extends Service {
 
     /**
      * 获取唯一标识
      */
-    async getUid() {
+    async getUserUid() {
         const { ctx, app } = this;
         let accessToken = ctx.request.headers.authorization;
         if (!accessToken) {
@@ -61,7 +60,7 @@ class AuthService extends Service {
                 code: 7001
             };
         }
-        if (stoCode !== codes[1]) {
+        if (stoCode.toUpperCase() !== codes[1].toUpperCase()) {
             throw {
                 message: "图形验证码错误",
                 code: 7002
@@ -86,7 +85,7 @@ class AuthService extends Service {
         let { username, password, imageCode } = params;
         await this.valiImageCode(imageCode);
         let user = await this.getUser({ username });
-        if (user.password !== CryptoJS.MD5(password + user.salt).toString().toUpperCase()) {
+        if (user.password !== await app.utils.tools.MD5(password, user.salt)) {
             throw {
                 message: "密码错误",
                 code: 7003
@@ -104,6 +103,18 @@ class AuthService extends Service {
             expires_in,
             refresh_token
         }
+    }
+
+    async offToken(accessToken) {
+        const { ctx, app } = this;
+        accessToken = accessToken || ctx.request.headers.authorization;
+        if (!accessToken) {
+            throw "token令牌不存在或已失效";
+        }
+        //删除key
+        await ctx.service.redis.del(accessToken);
+
+        return true;
     }
 }
 

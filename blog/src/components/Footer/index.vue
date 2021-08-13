@@ -1,14 +1,14 @@
 <template>
-  <div class="footer flex" v-if="data">
+  <div class="footer flex" v-if="profile">
     <div
       class="footer-item flex"
-      v-for="item in (data?.profile?.list || [])"
+      v-for="item in profile?.list || []"
       :key="item.title"
     >
       <div class="title">{{ item.title }}</div>
       <div
         class="definite flex"
-        v-for="link in (item?.content || [])"
+        v-for="link in item?.content || []"
         :key="link.icon"
       >
         <Smage prefix class="icon" :src="link.icon"></Smage>
@@ -17,30 +17,16 @@
     </div>
   </div>
   <div class="copyright">
-    {{ data?.profile?.signature || "Copyright © JiuWuSan" }}
+    {{ profile?.signature }}
   </div>
 </template>
 
 <script>
-import { configApi } from "@/api";
 export default {
   name: "Footer",
-  components: {},
-  data() {
-    return {
-      data: null,
-    };
-  },
-  mounted() {
-    this.getConfig();
-  },
-  methods: {
-    async getConfig() {
-      let result = await configApi.findById({
-        uid: "fb57a600-eace-11eb-96b5-e73f4408ddb6",
-      });
-      result.profile && (result.profile = JSON.parse(result.profile));
-      this.data = result;
+  computed: {
+    profile() {
+      return this.$store.state.profile.footer;
     },
   },
 };

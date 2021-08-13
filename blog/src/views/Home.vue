@@ -1,14 +1,14 @@
 <template>
   <div class="home flex">
     <div class="section flex" v-if="screen">
-      <Smage prefix class="banner" :src="screen.profile.cover"></Smage>
+      <Smage prefix class="banner" :src="screen.cover"></Smage>
       <div class="motto flex">
-        <div class="title zoomIn">{{ screen.profile.title }}</div>
+        <div class="title zoomIn">{{ screen.title }}</div>
         <div class="intro zoomIn">
-          {{ screen.profile.motto }}
+          {{ screen.motto }}
         </div>
         <div class="btn hover fadeInUpBig" @click="goArticle">
-          {{ screen.profile.button }}
+          {{ screen.button }}
         </div>
       </div>
     </div>
@@ -17,26 +17,20 @@
 </template>
 
 <script>
-import { configApi } from "@/api";
 export default {
   name: "Home",
   components: {},
   data() {
     return {
-      screen: null,
+      // screen: null,
     };
   },
-  mounted() {
-    this.getScreen();
+  computed: {
+    screen() {
+      return this.$store.state.profile.index;
+    },
   },
   methods: {
-    async getScreen() {
-      let result = await configApi.findById({
-        uid: "fb57a600-eace-11eb-96b5-e73f4408ddb5",
-      });
-      result.profile && (result.profile = JSON.parse(result.profile));
-      this.screen = result;
-    },
     goArticle() {
       this.$router.push("article");
     },

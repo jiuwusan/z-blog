@@ -1,6 +1,7 @@
 const validator = require('./validator');
 const fs = require('fs');
 const path = require('path');
+const CryptoJS = require('crypto-js');
 
 //验证工具类
 const tools = {
@@ -54,6 +55,7 @@ const tools = {
             }
         }
     },
+
     /**
      * 获取随机字符串
      * @param {*} num 
@@ -67,7 +69,23 @@ const tools = {
             result.push(String.fromCharCode(65 + ranNum));
         }
         return result.join('');
+    },
+
+    /**
+     * 加密
+     * @returns 
+     */
+    MD5(...strs) {
+        if (validator.isEmpty(strs)) {
+            throw "MD5加密数据不能为空";
+        }
+        let deStr = "";
+        for (let i = 0; i < strs.length; i++) {
+            deStr = deStr + strs[i];
+        }
+        return CryptoJS.MD5(deStr).toString().toUpperCase();
     }
+
 }
 
 module.exports = tools;

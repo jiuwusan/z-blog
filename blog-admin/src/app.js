@@ -1,8 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
+import useProfile from '@/hooks/useProfile';
 const Root = (props) => {
-    let { init } = useAuth();
+    const { init } = useAuth();
+    const [config, initProfile] = useProfile();
     useState(() => {
+        //获取配置文件
+        initProfile();
+        //初始化授权信息
         init();
     })
     return props.children;

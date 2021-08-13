@@ -13,7 +13,7 @@ function request(options = {}) {
     //进行加锁，防止数据多次提交
     let key = options.url + JSON.stringify(data);
     if (apiLocks[key]) {
-        return Promise.reject({ msg: '请不要重复操作' });
+        return Promise.reject({ msg: '请不要重复操作',detail:key });
     }
     apiLocks[key] = true;
 

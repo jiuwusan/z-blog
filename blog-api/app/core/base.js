@@ -10,7 +10,7 @@ class BaseController extends Controller {
      * @param {*} code 
      * @param {*} msg 
      */
-    result(data, code = 200, msg = "成功") {
+    result(data = {}, code = 200, msg = "成功") {
         const { ctx } = this;
         ctx.body = {
             code,

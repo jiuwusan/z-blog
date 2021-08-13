@@ -1,16 +1,11 @@
 <template>
-  <div class="link-box flex" v-if="config">
-    <Smage
-      v-if="config.profile.left"
-      prefix
-      :src="config.profile.left"
-      class="saodi"
-    ></Smage>
+  <div class="link-box flex" v-if="profile">
+    <Smage v-if="profile.left" prefix :src="profile.left" class="saodi"></Smage>
     <div class="content-box">
       <div class="content">
-        <div class="title">{{ config.profile.title }}</div>
+        <div class="title">{{ profile.title }}</div>
         <div class="askfor flex">
-          <block v-for="item in config.profile.rules" :key="item.icon">
+          <block v-for="item in profile.rules" :key="item.icon">
             <div class="item flex">
               <Smage prefix :src="item.icon" class="icon"></Smage>
               <div class="txt">{{ item.text }}</div>
@@ -18,10 +13,10 @@
           </block>
         </div>
         <div class="askcont">
-          {{ config.profile.declare }}
+          {{ profile.declare }}
         </div>
         <div class="warning">
-          {{ config.profile.warning }}
+          {{ profile.warning }}
         </div>
       </div>
       <div class="link-list flex" v-if="links">
@@ -42,26 +37,22 @@
 </template>
 
 <script>
-import { configApi, linkApi } from "@/api";
+import { linkApi } from "@/api";
 export default {
   data() {
     return {
-      config: null,
       links: null,
     };
   },
+  computed: {
+    profile() {
+      return this.$store.state.profile.link;
+    },
+  },
   mounted() {
-    this.getConfig();
     this.getLinks();
   },
   methods: {
-    async getConfig() {
-      let result = await configApi.findById({
-        uid: "fb57a600-eace-11eb-96b5-e73f4408ddb7",
-      });
-      result.profile && (result.profile = JSON.parse(result.profile));
-      this.config = result;
-    },
     async getLinks() {
       let result = await linkApi.query();
       this.links = result;
@@ -138,7 +129,7 @@ export default {
       margin-top: 20px;
       flex-wrap: wrap;
       .link-item {
-        text-decoration : none;
+        text-decoration: none;
         width: 258px;
         padding: 15px;
         margin: 15px 15px 0 0px;
