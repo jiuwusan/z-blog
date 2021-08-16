@@ -5,7 +5,9 @@ module.exports = app => {
     //管理端
     router.post('/admin/config/create', authenticate(), controller.admin.config.create);
     router.post('/admin/config/profile', authenticate(), controller.admin.config.profile);
-    router.get('/admin/config/findById', controller.admin.config.findById);
+    router.get('/admin/config/findById', authenticate(), controller.admin.config.findById);
+
+    router.get('/admin/profile/findById', controller.admin.config.findById);
     //客户端
     router.get('/custom/config/findById', controller.custom.config.findById);
 };

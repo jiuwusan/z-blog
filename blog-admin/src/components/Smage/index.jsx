@@ -10,7 +10,6 @@ export default (props) => {
     useEffect(() => {
         setFinalSrc((prefix || filePrefix) + src);
     }, [src]);
-    console.log("Smage=cover=", finalSrc)
     return (<>
         {(!cover) && <img src={finalSrc} className={styles.smage + " " + className} {...rest}></img>}
         {cover && <div className={styles.smageCover + " " + className} style={{ backgroundImage: `url(${finalSrc})` }}></div>}

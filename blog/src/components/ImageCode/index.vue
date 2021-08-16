@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { authApi } from "@/api";
+import { validApi } from "@/api";
 export default {
   props: {
     value: [String, Number],
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     async exchange() {
-      let codeData = await authApi.imageCode({ lastkey: this.codeData?.key });
+      let codeData = await validApi.imageCode({ lastkey: this.codeData?.key });
       this.codeData = codeData;
     },
     inputCode(e) {

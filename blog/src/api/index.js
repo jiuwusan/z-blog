@@ -41,6 +41,10 @@ export const authApi = apiv1.genApi({
     imageCode: "GET /auth/imageCode"
 });
 
+export const validApi = apiv1.genApi({
+    imageCode: "GET /valid/imageCode"
+});
+
 export const articleApi = apiv1.genApi({
     pageQuery: "post /custom/article/pageQuery",
     findById: "post /custom/article/findById",

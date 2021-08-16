@@ -4,6 +4,7 @@ import { notification } from 'antd';
 import { history } from 'umi';
 //缓存数据
 let apiState = {};
+let lastNotice = {};
 export const updateApiState = (newState = {}) => {
     apiState = {
         ...apiState,
@@ -28,10 +29,13 @@ const genApi = new ApiGenerator(config.apiPrefix, {
                 history.replace("/login");
                 break;
         }
-        notification.error({
-            message: "系统提示",
-            description: res.msg
-        });
+        if (lastNotice !== res.msg) {
+            notification.error({
+                message: "系统提示",
+                description: res.msg
+            });
+        }
+        lastNotice = res.msg;
         throw res;
     },
     //拦截器
@@ -66,6 +70,10 @@ export const authApi = genApi({
     imageCode: 'GET /auth/imageCode'
 });
 
+export const validApi = genApi({
+    imageCode: "GET /valid/imageCode"
+});
+
 export const fileApi = genApi({
     upload: {
         url: "/upload/:folder",
@@ -76,7 +84,8 @@ export const fileApi = genApi({
 
 export const configApi = genApi({
     profile: "POST /admin/config/profile",
-    findById: "/admin/config/findById"
+    findById: "/admin/config/findById",
+    profileById: "/admin/profile/findById"
 });
 
 export const diaryApi = genApi({

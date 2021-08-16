@@ -1,7 +1,7 @@
 import styles from './style.less';
 import { Input } from 'antd';
 import { useState, useEffect } from 'react';
-import { authApi } from '@/api';
+import { validApi } from '@/api';
 export default (props) => {
 
     //排除value，不需要通过外部传入value
@@ -9,7 +9,7 @@ export default (props) => {
     const [code, setCode] = useState("");
 
     const genImageCode = async () => {
-        let result = await authApi.imageCode();
+        let result = await validApi.imageCode();
         setCode(result);
     }
 

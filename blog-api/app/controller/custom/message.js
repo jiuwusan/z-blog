@@ -15,7 +15,7 @@ class MessageController extends BaseController {
             contact: "缺少参数 contact",
             nickname: "缺少参数 nickname"
         });
-        await service.auth.valiImageCode(params.imageCode);
+        await service.imageCode.validate(params.imageCode);
         let saveData = this.genParams(params, ["content", "contact", "nickname"]);
         saveData.avatar = `/avatar/${parseInt(Math.random() * 8)}.svg`;
         let res = await ctx.model.Message.create(saveData);

@@ -45,37 +45,11 @@ class AuthService extends Service {
     }
 
     /**
-     * 验证图形验证码
-     */
-    async valiImageCode(codeStr) {
-        const { ctx, app } = this;
-        let codes = codeStr.split("_");
-        if (!codes[1]) {
-            throw "图形验证码为必填项"
-        }
-        let stoCode = await ctx.service.redis.get(codes[0]);
-        if (app.utils.validator.isEmpty(stoCode)) {
-            throw {
-                message: "图形验证码不存在或已过期",
-                code: 7001
-            };
-        }
-        if (stoCode.toUpperCase() !== codes[1].toUpperCase()) {
-            throw {
-                message: "图形验证码错误",
-                code: 7002
-            };
-        }
-        //删除key
-        await ctx.service.redis.del(codes[0])
-    }
-
-    /**
      * 密码登录
      * @param {*} params 
      */
     async password(params) {
-        const { app, ctx } = this;
+        const { app, ctx, service } = this;
         //验证必要参数
         app.utils.validator.validate({
             imageCode: "图形验证码为必填项",
@@ -83,7 +57,7 @@ class AuthService extends Service {
             password: "密码为必填项"
         }, params);
         let { username, password, imageCode } = params;
-        await this.valiImageCode(imageCode);
+        await service.imageCode.validate(imageCode);
         let user = await this.getUser({ username });
         if (user.password !== await app.utils.tools.MD5(password, user.salt)) {
             throw {

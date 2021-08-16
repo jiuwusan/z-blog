@@ -29,4 +29,5 @@ module.exports = app => {
   require('./router/message')(app);
   require('./router/label')(app);
   require('./router/article')(app);
+  require('./router/valid')(app);
 };
