@@ -65,4 +65,4 @@ const Notification = (options = {}) => {
     };
 });
 
-export default Notification
+export default Notification;

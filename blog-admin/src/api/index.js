@@ -4,7 +4,7 @@ import { notification } from 'antd';
 import { history } from 'umi';
 //缓存数据
 let apiState = {};
-let lastNotice = {};
+let lastNotice = { stamp: 0 };
 export const updateApiState = (newState = {}) => {
     apiState = {
         ...apiState,
@@ -29,13 +29,16 @@ const genApi = new ApiGenerator(config.apiPrefix, {
                 history.replace("/login");
                 break;
         }
-        if (lastNotice !== res.msg) {
+        if (lastNotice !== res.msg && (Date.now() - lastNotice.stamp) > 1500) {
             notification.error({
                 message: "系统提示",
                 description: res.msg
             });
         }
-        lastNotice = res.msg;
+        lastNotice = {
+            msg: res.msg,
+            stamp: Date.now()
+        };
         throw res;
     },
     //拦截器

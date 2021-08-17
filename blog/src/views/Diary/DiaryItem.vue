@@ -17,6 +17,7 @@
             :src="item"
             class="imageItem"
             v-for="item in fttData.imageArray"
+            preview
             :key="item"
           />
         </div>

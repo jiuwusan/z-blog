@@ -5,6 +5,7 @@ import {
     UploadOutlined, LoadingOutlined, PushpinOutlined, DeleteOutlined
 } from '@ant-design/icons'
 import { fileApi } from '@/api';
+import { filePrefix } from '@config';
 
 export default (props) => {
     const { value = null, noren, folder = "file", maxCount = 99, onChange, itemClass, preview = true, accept = "*", ...rest } = props || {};
@@ -98,6 +99,13 @@ export default (props) => {
         return pathname.substr(pos + 1);
     }
 
+    const download = (item) => {
+        let aLink = document.createElement('a');
+        aLink.href = filePrefix + item;//设置下载的图片链接
+        aLink.download = getFileName(item);//设置图片下载之后的名称
+        aLink.click();//触发点击事件
+    }
+
     return (<div className={styles.uploadBox} {...rest}>
         <input onChange={fileChange} ref={InputRef} type="file" multiple className={styles.fileInput} accept={accept}></input>
         {((valueList || []).length < maxCount) && <Button onClick={chooseFile} icon={loading ? <LoadingOutlined /> : <UploadOutlined />}>选择文件</Button>}
@@ -105,7 +113,7 @@ export default (props) => {
             {(valueList || []).map((item, index) => <div key={item} className={styles.imageItem + " " + itemClass}>
                 <div className={styles.nameBox}>
                     <PushpinOutlined className={styles.nameIcon} />
-                    <div className={styles.name}>{getFileName(item)}</div>
+                    <div className={styles.name} onClick={() => download(item)}>{getFileName(item)}</div>
                 </div>
                 <DeleteOutlined className={styles.delBtn} onClick={() => onRemove(index)} />
             </div>)}

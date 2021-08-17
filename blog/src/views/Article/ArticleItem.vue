@@ -1,6 +1,6 @@
 <template>
   <div class="item-box flex">
-    <div class="flag">置顶</div>
+    <div class="flag" v-show="fttData.top === '10'">置顶</div>
     <div class="header flex">
       <div class="title flex">
         <div class="tag">【{{ fttData.type_ftt }}】</div>
@@ -15,11 +15,13 @@
       </div>
     </div>
     <div class="intro flex">
-      <Smage prefix class="cover" :src="fttData.cover"></Smage>
+      <Smage preview prefix class="cover" :src="fttData.cover"></Smage>
       <div class="content">{{ fttData.simpleText }}</div>
     </div>
     <div class="read flex">
-      <div class="more" title="点击阅读全文内容" @click="goDetail">阅读全文</div>
+      <div class="more" title="点击阅读全文内容" @click="goDetail">
+        阅读全文
+      </div>
       <div class="line"></div>
     </div>
     <div class="brief flex">

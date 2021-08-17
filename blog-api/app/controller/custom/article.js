@@ -22,7 +22,7 @@ class ArticleController extends BaseController {
     async findById() {
         const { ctx, service } = this;
         let { uid } = this.validate({ uid: "uid不能为空" });
-        let querySql = `select t.uid,t.title,t.content,t.type,t.cover,t.adjunct,t.brief,
+        let querySql = `select t.uid,t.title,t.content,t.type,t.cover,t.adjunct,t.brief,t.top,
         (SELECT CONCAT('[',GROUP_CONCAT(JSON_OBJECT('uid',t3.uid,'name',t3.name,'cover',t3.cover)), ']')
         FROM article_to_class t2 
         LEFT JOIN classify t3 ON t3.uid=t2.class_id
@@ -53,7 +53,7 @@ class ArticleController extends BaseController {
             page: "page 为必要参数",
             pageSize: "pageSize 为必要参数"
         });
-        let querySql = `select t.uid,t.title,t.content,t.type,t.cover,t.adjunct,t.brief,
+        let querySql = `select t.uid,t.title,t.content,t.type,t.cover,t.adjunct,t.brief,t.top,
         (SELECT CONCAT('[',GROUP_CONCAT(JSON_OBJECT('uid',t3.uid,'name',t3.name,'cover',t3.cover)), ']')
         FROM article_to_class t2 
         LEFT JOIN classify t3 ON t3.uid=t2.class_id
@@ -65,7 +65,7 @@ class ArticleController extends BaseController {
         WHERE t4.art_id=t.uid
         ) AS labelStr,
         DATE_FORMAT(t.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from article t where t.deleted='00' and t.status='10'`;
-        let orderBy = `order by t.created_at desc`
+        let orderBy = `order by t.top asc,t.created_at desc`
         let replacements = {};
         if (title) {
             querySql = `${querySql} and t.title like :title`;

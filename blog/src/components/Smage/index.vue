@@ -1,9 +1,15 @@
 <template>
-  <img :src="fttSrc" class="fit-cover" />
+  <img
+    @click="onPreview"
+    :src="lastSrc"
+    v-if="lastSrc"
+    :class="['fit-cover', lastPreview ? 'pointer' : '']"
+  />
 </template>
 
 <script>
 import { filePrefix } from "@config";
+import { Zmage } from "@jws/components";
 export default {
   props: {
     src: {
@@ -14,19 +20,64 @@ export default {
       type: [String, Boolean],
       default: true,
     },
+    preview: {
+      type: [String, Boolean],
+      default: false,
+    },
   },
-  computed: {
-    fttSrc() {
+  data() {
+    return {
+      lastSrc: "",
+      lastPreview: false,
+    };
+  },
+  watch: {
+    src: {
+      immediate: true,
+      handler(newValue) {
+        this.lastSrc = this.fttSrc(newValue);
+      },
+    },
+    preview: {
+      immediate: true,
+      handler(newValue) {
+        this.lastPreview = this.fttPreview(newValue);
+      },
+    },
+  },
+  mounted() {
+    console.log("preview==", this.preview.length);
+  },
+  methods: {
+    fttPreview(preview) {
+      switch (Object.prototype.toString.call(preview)) {
+        case "[object String]":
+          return true;
+        case "[object Boolean]":
+          return preview;
+      }
+    },
+    fttSrc(src) {
+      src = src || this.src;
+      if (!src) {
+        return "";
+      }
       let prefix = this.prefix;
       switch (Object.prototype.toString.call(prefix)) {
         case "[object String]":
-          return (prefix || filePrefix) + this.src;
+          return (prefix || filePrefix) + src;
         case "[object Boolean]":
           if (prefix === true) {
-            return require("../../assets/image/" + this.src);
+            return require("../../assets/image/" + src);
           }
       }
-      return this.src;
+      return src;
+    },
+    onPreview() {
+      if (!this.lastPreview) {
+        return;
+      }
+      Zmage.show(this.lastSrc);
     },
   },
 };
@@ -35,5 +86,9 @@ export default {
 <style scoped>
 .fit-cover {
   object-fit: cover;
+}
+
+.pointer {
+  cursor: pointer;
 }
 </style>

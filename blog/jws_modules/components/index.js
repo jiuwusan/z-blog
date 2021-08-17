@@ -1,6 +1,7 @@
 import extendComponent from "./extendComponent";
 import Popup from "./Popup";
-import Notification from "./Notification/index";
+import Notification from "./Notification";
+import Zmage from "./Zmage";
 import RichEditor from "./RichEditor";
 import RichText from "./RichText";
 export {
@@ -8,7 +9,8 @@ export {
     Notification,
     RichEditor,
     extendComponent,
-    RichText
+    RichText,
+    Zmage
 }
 
 export default {
@@ -16,5 +18,6 @@ export default {
     Notification,
     RichEditor,
     extendComponent,
-    RichText
+    RichText,
+    Zmage
 }

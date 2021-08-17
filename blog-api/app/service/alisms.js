@@ -8,8 +8,8 @@ class SmsService extends Service {
     constructor(p) {
         super(p);
         this.aliSmsClient = new SmsCore({
-            accessKeyId: '',
-            accessKeySecret: '',
+            accessKeyId: 'LTAI5tLrvddDXUwrwHPVGeR9',
+            accessKeySecret: 'BTSbda0CTKeQgF1DP9PJe67VofEOQN',
             endpoint: 'https://dysmsapi.aliyuncs.com',
             apiVersion: '2017-05-25'
         });
