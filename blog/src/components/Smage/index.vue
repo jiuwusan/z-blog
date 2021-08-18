@@ -45,9 +45,7 @@ export default {
       },
     },
   },
-  mounted() {
-    console.log("preview==", this.preview.length);
-  },
+  mounted() {},
   methods: {
     fttPreview(preview) {
       switch (Object.prototype.toString.call(preview)) {

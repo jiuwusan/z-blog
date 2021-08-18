@@ -2,8 +2,8 @@
   <div class="classify flex slideInRight">
     <div class="search-box">
       <div class="search flex">
-        <input placeholder="输入关键字搜索" class="input" />
-        <div class="submit flex">
+        <input v-model="search" placeholder="输入关键字搜索" class="input" />
+        <div class="submit flex" @click="submit">
           <Icon name="search" class="icon"></Icon>
         </div>
       </div>
@@ -11,9 +11,10 @@
     <div class="class-list">
       <div class="class-ul">
         <div
-          :class="['class-li', active === item.uid ? 'active' : '']"
+          :class="['class-li', activefy === item.uid ? 'active' : '']"
           v-for="item in list"
           :key="item.uid"
+          @click="classChange(item.uid)"
         >
           <Smage
             v-if="item.cover"
@@ -34,10 +35,16 @@ export default {
   data() {
     return {
       list: [],
-      active: "",
+      activefy: "",
+      search: "",
+      label: "",
     };
   },
   mounted() {
+    let { search = "", classfiy = "99", label = "" } = this.$route.query || {};
+    this.search = search;
+    this.activefy = classfiy;
+    this.label = label;
     this.query();
   },
   methods: {
@@ -50,7 +57,17 @@ export default {
         cover: "",
       });
       this.list = result;
-      this.active = "99";
+    },
+    submit() {
+      this.$router.replace(
+        `/article?search=${this.search}&classfiy=${this.activefy}&label=${this.label}`
+      );
+    },
+    classChange(activefy) {
+      this.activefy = activefy;
+      this.$router.replace(
+        `/article?search=${this.search}&classfiy=${activefy}&label=${this.label}`
+      );
     },
   },
 };
@@ -104,6 +121,7 @@ export default {
         white-space: nowrap;
         word-break: break-all;
         padding: 6px;
+        cursor: pointer;
         .icon {
           font-size: 18px;
         }

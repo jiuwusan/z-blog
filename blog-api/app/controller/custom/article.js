@@ -49,7 +49,7 @@ class ArticleController extends BaseController {
      */
     async pageQuery() {
         const { ctx, service } = this;
-        let { page, pageSize, title, startTime, endTime } = this.validate({
+        let { page, pageSize, search, classfiy, label } = this.validate({
             page: "page 为必要参数",
             pageSize: "pageSize 为必要参数"
         });
@@ -67,10 +67,19 @@ class ArticleController extends BaseController {
         DATE_FORMAT(t.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from article t where t.deleted='00' and t.status='10'`;
         let orderBy = `order by t.top asc,t.created_at desc`
         let replacements = {};
-        if (title) {
-            querySql = `${querySql} and t.title like :title`;
-            replacements.title = `%${title}%`;
+        if (search) {
+            querySql = `${querySql} and (t.title like :search or t.content like :search or t.brief like :search)`;
+            replacements.search = `%${search}%`;
         }
+        if (classfiy) {
+            querySql = `${querySql} and t.uid in (select distinct t6.art_id from article_to_class t6 where t6.class_id =:classfiy ) `;
+            replacements.classfiy = classfiy;
+        }
+        if (label) {
+            querySql = `${querySql} and t.uid in (select distinct t7.art_id from article_to_label t7 where t7.label_id =:label ) `;
+            replacements.label = label;
+        }
+
         //拼接动态参数
         let result = await service.model.pageQuery(querySql, replacements, page, pageSize, orderBy);
         this.result(result);

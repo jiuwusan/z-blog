@@ -1,6 +1,9 @@
 <template>
   <div class="rank-box slideInRight">
-    <div class="title">热门文章</div>
+    <div class="title">
+      <Icon name="hot" class="icon"></Icon>
+      <div>热门文章</div>
+    </div>
     <div class="rank-list flex">
       <div
         class="rank-item"
@@ -68,6 +71,12 @@ export default {
     color: #383937;
     position: relative;
     font-size: 18px;
+    .flex();
+    align-items: center;
+    .icon {
+      font-size: 20px;
+      margin-right: 5px;
+    }
   }
   .rank-list {
     width: 100%;

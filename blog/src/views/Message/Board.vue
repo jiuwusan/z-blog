@@ -1,5 +1,5 @@
 <template>
-  <div class="board-item flex">
+  <div class="board-item flex" v-if="data">
     <BoardChild :data="data"></BoardChild>
     <div class="repeat-box" v-if="data.replys.length > 0">
       <BoardChild
@@ -17,7 +17,7 @@ export default {
   props: {
     data: {
       type: Object,
-      default: {},
+      default: null,
     },
   },
   components: {

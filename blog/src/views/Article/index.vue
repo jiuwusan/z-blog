@@ -12,6 +12,7 @@
     </div>
     <div class="classify-list flex">
       <Classify></Classify>
+      <Label class="mgt20"></Label>
       <Rank class="mgt20"></Rank>
     </div>
   </div>
@@ -20,6 +21,7 @@
 <script>
 import ArticleItem from "./ArticleItem";
 import Classify from "./Classify";
+import Label from "./Label";
 import Rank from "./Rank";
 import { articleApi } from "@/api";
 import { util } from "@jws";
@@ -33,29 +35,52 @@ export default {
       page: 1,
       pageSize: 10,
       totalSize: 0,
+      query: {},
     };
   },
   components: {
     ArticleItem,
     Classify,
     Rank,
+    Label,
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(newValue) {
+        let { search = "", classfiy = "99", label = "" } = newValue.query || {};
+        if (classfiy === "99") {
+          classfiy = "";
+        }
+        let query = {
+          search,
+          classfiy,
+          label,
+        };
+        this.query = query;
+        this.loadData(1, query);
+      },
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
-    this.loadData();
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.onScroll);
   },
   methods: {
-    async pageQuery(page) {
+    async pageQuery(page, query) {
       page = page || this.page || 1;
+      query = query || this.query || {};
+      if (page === 1) {
+        this.articles.splice(0, this.articles.length);
+      }
       if (this.totalSize > 0 && this.totalSize <= this.articles.length) {
         //数据已经全部加载
         return;
       }
 
-      let result = await articleApi.pageQuery({ page, pageSize: 10 });
+      let result = await articleApi.pageQuery({ page, pageSize: 10, ...query });
       Array.prototype.push.apply(this.articles, result?.datalist || []);
       this.totalSize = result?.totalSize;
       this.page = result?.page + 1;
@@ -71,8 +96,8 @@ export default {
         this.loadData();
       }
     },
-    loadData: util.debounce(function () {
-      this.pageQuery();
+    loadData: util.debounce(function (page, query) {
+      this.pageQuery(page, query);
     }, 500),
   },
 };
