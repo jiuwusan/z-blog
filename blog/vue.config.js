@@ -33,7 +33,7 @@ module.exports = {
         const svgRule = _config.module.rule('svg');
         svgRule.exclude.add(path.join(__dirname, 'node_modules', '@ckeditor'));
         _config.plugin('html').tap(args => {
-            args[0].title = 'ZY-Blog'
+            args[0].title = 'Z-Blog'
             return args
         });
         _config.module
