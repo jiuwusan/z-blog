@@ -19,11 +19,11 @@ const MenuDeep = (data) => {
     if (data && data.length > 0) {
         return data.map((item) => {
             if (item.children && item.children.length > 0) {
-                return (<Menu.SubMenu key={item.route} title={item.name}>
+                return (<Menu.SubMenu icon={item.icon} key={item.route} title={item.name}>
                     {MenuDeep(item.children)}
                 </Menu.SubMenu>)
             } else {
-                return (<Menu.Item key={item.route}>{item.name}</Menu.Item>)
+                return (<Menu.Item icon={item.icon} key={item.route}>{item.name}</Menu.Item>)
             }
         })
     }
