@@ -1,0 +1,163 @@
+/*!
+ * 核心代码参考
+ * animate.css - https://animate.style/
+ * https://github.com/animate-css
+ * Version - 4.1.1
+ * Thanks for animate
+ * 
+ * animate-vue was modified twice by Jiuwusan
+ */
+
+/* Attention seekers  */
+@import './animate/attention_seekers/bounce.css';
+@import './animate/attention_seekers/flash.css';
+@import './animate/attention_seekers/pulse.css';
+@import './animate/attention_seekers/rubberBand.css';
+@import './animate/attention_seekers/shakeX.css';
+@import './animate/attention_seekers/shakeY.css';
+@import './animate/attention_seekers/headShake.css';
+@import './animate/attention_seekers/swing.css';
+@import './animate/attention_seekers/tada.css';
+@import './animate/attention_seekers/wobble.css';
+@import './animate/attention_seekers/jello.css';
+@import './animate/attention_seekers/heartBeat.css';
+
+/* Back entrances */
+@import './animate/back_entrances/backInDown.css';
+@import './animate/back_entrances/backInLeft.css';
+@import './animate/back_entrances/backInRight.css';
+@import './animate/back_entrances/backInUp.css';
+
+/* Back exits */
+@import './animate/back_exits/backOutDown.css';
+@import './animate/back_exits/backOutLeft.css';
+@import './animate/back_exits/backOutRight.css';
+@import './animate/back_exits/backOutUp.css';
+
+/* Bouncing entrances  */
+@import './animate/bouncing_entrances/bounceIn.css';
+@import './animate/bouncing_entrances/bounceInDown.css';
+@import './animate/bouncing_entrances/bounceInLeft.css';
+@import './animate/bouncing_entrances/bounceInRight.css';
+@import './animate/bouncing_entrances/bounceInUp.css';
+
+/* Bouncing exits  */
+@import './animate/bouncing_exits/bounceOut.css';
+@import './animate/bouncing_exits/bounceOutDown.css';
+@import './animate/bouncing_exits/bounceOutLeft.css';
+@import './animate/bouncing_exits/bounceOutRight.css';
+@import './animate/bouncing_exits/bounceOutUp.css';
+
+/* Fading entrances  */
+@import './animate/fading_entrances/fadeIn.css';
+@import './animate/fading_entrances/fadeInDown.css';
+@import './animate/fading_entrances/fadeInDownBig.css';
+@import './animate/fading_entrances/fadeInLeft.css';
+@import './animate/fading_entrances/fadeInLeftBig.css';
+@import './animate/fading_entrances/fadeInRight.css';
+@import './animate/fading_entrances/fadeInRightBig.css';
+@import './animate/fading_entrances/fadeInUp.css';
+@import './animate/fading_entrances/fadeInUpBig.css';
+@import './animate/fading_entrances/fadeInTopLeft.css';
+@import './animate/fading_entrances/fadeInTopRight.css';
+@import './animate/fading_entrances/fadeInBottomLeft.css';
+@import './animate/fading_entrances/fadeInBottomRight.css';
+
+/* Fading exits */
+@import './animate/fading_exits/fadeOut.css';
+@import './animate/fading_exits/fadeOutDown.css';
+@import './animate/fading_exits/fadeOutDownBig.css';
+@import './animate/fading_exits/fadeOutLeft.css';
+@import './animate/fading_exits/fadeOutLeftBig.css';
+@import './animate/fading_exits/fadeOutRight.css';
+@import './animate/fading_exits/fadeOutRightBig.css';
+@import './animate/fading_exits/fadeOutUp.css';
+@import './animate/fading_exits/fadeOutUpBig.css';
+@import './animate/fading_exits/fadeOutTopLeft.css';
+@import './animate/fading_exits/fadeOutTopRight.css';
+@import './animate/fading_exits/fadeOutBottomRight.css';
+@import './animate/fading_exits/fadeOutBottomLeft.css';
+
+/* Flippers */
+@import './animate/flippers/flip.css';
+@import './animate/flippers/flipInX.css';
+@import './animate/flippers/flipInY.css';
+@import './animate/flippers/flipOutX.css';
+@import './animate/flippers/flipOutY.css';
+
+/* Lightspeed */
+@import './animate/lightspeed/lightSpeedInRight.css';
+@import './animate/lightspeed/lightSpeedInLeft.css';
+@import './animate/lightspeed/lightSpeedOutRight.css';
+@import './animate/lightspeed/lightSpeedOutLeft.css';
+
+/* Rotating entrances */
+@import './animate/rotating_entrances/rotateIn.css';
+@import './animate/rotating_entrances/rotateInDownLeft.css';
+@import './animate/rotating_entrances/rotateInDownRight.css';
+@import './animate/rotating_entrances/rotateInUpLeft.css';
+@import './animate/rotating_entrances/rotateInUpRight.css';
+
+/* Rotating exits */
+@import './animate/rotating_exits/rotateOut.css';
+@import './animate/rotating_exits/rotateOutDownLeft.css';
+@import './animate/rotating_exits/rotateOutDownRight.css';
+@import './animate/rotating_exits/rotateOutUpLeft.css';
+@import './animate/rotating_exits/rotateOutUpRight.css';
+
+/* Specials */
+@import './animate/specials/hinge.css';
+@import './animate/specials/jackInTheBox.css';
+@import './animate/specials/rollIn.css';
+@import './animate/specials/rollOut.css';
+
+/* Zooming entrances */
+@import './animate/zooming_entrances/zoomIn.css';
+@import './animate/zooming_entrances/zoomInDown.css';
+@import './animate/zooming_entrances/zoomInLeft.css';
+@import './animate/zooming_entrances/zoomInRight.css';
+@import './animate/zooming_entrances/zoomInUp.css';
+
+/* Zooming exits */
+@import './animate/zooming_exits/zoomOut.css';
+@import './animate/zooming_exits/zoomOutDown.css';
+@import './animate/zooming_exits/zoomOutLeft.css';
+@import './animate/zooming_exits/zoomOutRight.css';
+@import './animate/zooming_exits/zoomOutUp.css';
+
+/* Sliding entrances */
+@import './animate/sliding_entrances/slideInDown.css';
+@import './animate/sliding_entrances/slideInLeft.css';
+@import './animate/sliding_entrances/slideInRight.css';
+@import './animate/sliding_entrances/slideInUp.css';
+
+/* Sliding exits */
+@import './animate/sliding_exits/slideOutDown.css';
+@import './animate/sliding_exits/slideOutLeft.css';
+@import './animate/sliding_exits/slideOutRight.css';
+@import './animate/sliding_exits/slideOutUp.css';
+
+:root {
+  --duration: calc(1s*0.8);
+}
+
+.faster{
+  animation-duration: calc(1s /3);
+}
+
+.fast{
+  animation-duration: calc(1s/2);
+}
+
+.normal{
+  animation-duration: calc(1s*0.8);
+}
+
+.slow{
+  animation-duration: calc(1s*1.6);
+}
+
+.slower{
+  animation-duration: calc(1s*2.4);
+}
+
