@@ -47,6 +47,9 @@ export default {
       let { uid } = this.$route.params || {};
       let result = await articleApi.findById({ uid });
       this.detailData = result;
+      if (result?.title) {
+        document.title = result.title;
+      }
     },
     goBack() {
       this.$router.back();

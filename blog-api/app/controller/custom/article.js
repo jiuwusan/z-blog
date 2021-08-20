@@ -20,8 +20,9 @@ class ArticleController extends BaseController {
      * 查询单个
      */
     async findById() {
-        const { ctx, service } = this;
+        const { service } = this;
         let { uid } = this.validate({ uid: "uid不能为空" });
+        service.article.log(uid);
         let querySql = `select t.uid,t.title,t.content,t.type,t.cover,t.adjunct,t.brief,t.top,
         (SELECT CONCAT('[',GROUP_CONCAT(JSON_OBJECT('uid',t3.uid,'name',t3.name,'cover',t3.cover)), ']')
         FROM article_to_class t2 
@@ -64,6 +65,9 @@ class ArticleController extends BaseController {
         LEFT JOIN label t5 ON t5.uid=t4.label_id
         WHERE t4.art_id=t.uid
         ) AS labelStr,
+        (SELECT count(*)
+        FROM article_log t8 WHERE t8.art_id=t.uid
+        ) AS readCount,
         DATE_FORMAT(t.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from article t where t.deleted='00' and t.status='10'`;
         let orderBy = `order by t.top asc,t.created_at desc`
         let replacements = {};

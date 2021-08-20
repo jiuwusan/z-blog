@@ -83,6 +83,11 @@ module.exports = appInfo => {
     appSecret: "e608e8e40f5b1034f905cc05fa5ec7b4"
   }
 
+  /*注意，开启此模式后，应用就默认自己处于反向代理之后，
+    会支持通过解析约定的请求头来获取用户真实的 IP，协议和域名。
+    如果你的服务未部署在反向代理之后，请不要开启此配置，以防被恶意用户伪造请求 IP 等信息。*/
+  config.proxy = true;
+
   return {
     ...config,
     ...userConfig,

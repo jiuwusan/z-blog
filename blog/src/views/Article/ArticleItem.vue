@@ -42,12 +42,12 @@
       <div class="tags-box flex">
         <div class="tag-item flex" title="阅读量">
           <Icon name="liulan" class="icon"></Icon>
-          <div class="txt">99</div>
+          <div class="txt">{{ fttData.readCount || 0 }}</div>
         </div>
-        <div class="tag-item flex" title="评论量">
+        <!-- <div class="tag-item flex" title="评论量">
           <Icon name="pinglun" class="icon"></Icon>
           <div class="txt">19</div>
-        </div>
+        </div> -->
       </div>
     </div>
     <slot></slot>

@@ -3,7 +3,7 @@ const prod = require('./prod.env');
 const test = require('./test.env');
 const defaultConfig = require('./default.env');
 
-const env = (process.env.CJ_ENV || process.env.NODE_ENV).trim();
+const env = (process.env.BLOG_ENV || process.env.NODE_ENV).trim();
 
 const configMap = {
     development: dev,
