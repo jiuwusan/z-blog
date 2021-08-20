@@ -79,8 +79,9 @@ module.exports = appInfo => {
   }
 
   config.wechat = {
-    appId: "wx3da7ad15540aa97d",
-    appSecret: "e608e8e40f5b1034f905cc05fa5ec7b4"
+    appId: "wxa20f5e6a26f5893d",
+    appSecret: "1f0b3bfa268ce5a392c9ddc4f3515c75",
+    token:"JIUWUSANZHOUKAIDONG953520497"
   }
 
   /*注意，开启此模式后，应用就默认自己处于反向代理之后，
