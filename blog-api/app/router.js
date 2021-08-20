@@ -30,4 +30,5 @@ module.exports = app => {
   require('./router/label')(app);
   require('./router/article')(app);
   require('./router/valid')(app);
+  require('./router/wechat')(app);
 };

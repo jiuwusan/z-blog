@@ -84,6 +84,21 @@ const tools = {
             deStr = deStr + strs[i];
         }
         return CryptoJS.MD5(deStr).toString().toUpperCase();
+    },
+
+    /**
+     * 加密
+     * @returns 
+     */
+    SHA1(...strs) {
+        if (validator.isEmpty(strs)) {
+            throw "SHA1加密数据不能为空";
+        }
+        let deStr = "";
+        for (let i = 0; i < strs.length; i++) {
+            deStr = deStr + strs[i];
+        }
+        return CryptoJS.SHA1(deStr).toString();
     }
 
 }
