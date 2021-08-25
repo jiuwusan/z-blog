@@ -1,5 +1,5 @@
 <template>
-  <div class="label-box">
+  <div class="label-box slideInRight">
     <div class="title">
       <Icon name="label" class="icon"></Icon>
       <div>文章标签</div>
@@ -111,5 +111,10 @@ export default {
       }
     }
   }
+}
+
+.slideInRight {
+  animation-name: fadeInUpBig;
+  animation-duration: 500ms;
 }
 </style>

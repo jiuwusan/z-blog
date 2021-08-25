@@ -34,6 +34,9 @@ class ArticleController extends BaseController {
         LEFT JOIN label t5 ON t5.uid=t4.label_id
         WHERE t4.art_id=t.uid
         ) AS labelStr,
+        (SELECT count(*)
+        FROM article_log t6 WHERE t6.art_id=t.uid
+        ) AS readCount,
         DATE_FORMAT(t.created_at,'%Y-%m-%d %H:%i') as created_at_ftt from article t where t.uid=:uid and t.deleted='00'`;
 
         let replacements = { uid };

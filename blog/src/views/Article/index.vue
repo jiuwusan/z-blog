@@ -10,11 +10,11 @@
       ></ArticleItem>
       <!-- </transition-group> -->
     </div>
-    <div class="classify-list flex">
+    <RightBox>
       <Classify></Classify>
       <Label class="mgt20"></Label>
       <Rank class="mgt20"></Rank>
-    </div>
+    </RightBox>
   </div>
 </template>
 
@@ -23,6 +23,7 @@ import ArticleItem from "./ArticleItem";
 import Classify from "./Classify";
 import Label from "./Label";
 import Rank from "./Rank";
+import RightBox from "./RightBox";
 import { articleApi } from "@/api";
 import { util } from "@jws";
 export default {
@@ -43,6 +44,7 @@ export default {
     Classify,
     Rank,
     Label,
+    RightBox,
   },
   watch: {
     $route: {
@@ -113,23 +115,24 @@ export default {
 
 .article-box {
   min-height: 90vh;
-  width: 100%;
+  // width: 100%;
   margin: 0 auto;
   justify-content: center;
   margin-top: 20px;
+  position: relative;
   .article-list {
     width: 960px;
     flex-direction: column;
-  }
-  .classify-list {
-    margin-left: 20px;
-    flex-direction: column;
-    width: 260px;
   }
 }
 
 .rotateInDownLeft {
   animation-name: rotateInUpLeft;
+  animation-duration: 500ms;
+}
+
+.slideInRight {
+  animation-name: fadeInUpBig;
   animation-duration: 500ms;
 }
 </style>
