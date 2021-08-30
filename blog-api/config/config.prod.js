@@ -9,6 +9,7 @@ module.exports = appInfo => {
      **/
     const config = exports = {};
 
+    config.resourceDir = "/usr/local/workspace/resource";
     config.uploadDir = "/usr/local/workspace/resource/upload";
 
     //数据库连接配置
