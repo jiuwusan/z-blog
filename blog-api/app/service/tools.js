@@ -34,6 +34,16 @@ class ToolsService extends Service {
             }
         }
     }
+
+    /**
+     * 获取完整路径
+     * @param {*} filePath 
+     */
+    getLastDir(filePath) {
+        const { config } = this;
+        const fullDir = path.join(config.resourceDir, filePath);
+        return fullDir;
+    }
 }
 
 module.exports = ToolsService;

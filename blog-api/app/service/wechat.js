@@ -1,9 +1,10 @@
 const Service = require('egg').Service;
+const fs = require('fs');
 
 class WechatService extends Service {
 
     /**
-     * 发送短信验证码
+     * 获取accessToken
      * @param {*} appid 
      * @param {*} secret 
      */
@@ -31,6 +32,51 @@ class WechatService extends Service {
         throw rs.data.errmsg || "系统错误";
     }
 
+    /**
+     * 新增永久素材
+     * @param {*} media 
+     * @param {*} type 
+     */
+    async addMaterial(filePath, type = "thumb") {
+        const { service, app } = this;
+        let access_token = await this.getAccessToken();
+        let lastPath = service.tools.getLastDir(filePath);
+        let url = `https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=${access_token}&type=${type}`;
+        // let url = `https://jiuwusan.cn/blog-api/upload/wechat_test`;
+        let result = await app.utils.tools.post({
+            url,
+            formData: {
+                media: fs.createReadStream(lastPath)
+            },
+            dataType: "json"
+        });
+
+        return result;
+    }
+
+    /**
+     * 发布文章
+     * @param {*} articles 
+     */
+    async addNews(article) {
+        const { ctx } = this;
+        let access_token = await this.getAccessToken();
+        let url = `https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=${access_token}`;
+        const rs = await ctx.curl(url, {
+            method: 'POST', // 设置请求方式 默认是GET
+            dataType: 'json',
+            contentType: 'json',
+            data: {
+                "articles": [article]
+            }
+        });
+
+        if (rs && rs.data && rs.data.media_id) {
+            return rs.data;
+        }
+
+        throw rs.data.errmsg || "系统错误";
+    }
 
 }
 
