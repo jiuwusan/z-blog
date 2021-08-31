@@ -4,4 +4,6 @@ module.exports = app => {
 
     //文件
     router.post('/upload/:folder', controller.upload.save);
+
+    router.get('/readfile/common/:folder/:suffix', controller.file.common);
 };
