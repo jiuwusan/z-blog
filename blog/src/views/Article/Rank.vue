@@ -21,19 +21,14 @@
 import { articleApi } from "@/api";
 export default {
   data() {
-    return {
-      list: [],
-    };
+    return {};
   },
-  mounted() {
-    this.query();
+  computed: {
+    list() {
+      return this.$store.state.archives.rank;
+    },
   },
   methods: {
-    //获取数据
-    async query() {
-      let result = (await articleApi.topQuery()) || [];
-      this.list = result;
-    },
     goDetail(uid) {
       if ((this.$route?.path || "").indexOf("/article/detail") > -1) {
         this.$router.replace(`/article/detail/${uid}`);

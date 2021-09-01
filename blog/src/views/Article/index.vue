@@ -27,7 +27,6 @@ import { util } from "@jws";
 export default {
   data() {
     return {
-      articles: [],
       scrollshow: "rotateInDownLeft",
       animatefy: "bounceIn01",
       animateRank: "bounceIn02",
@@ -48,43 +47,40 @@ export default {
     $route: {
       immediate: true,
       handler(newValue) {
-        let { search = "", classfiy = "99", label = "" } = newValue.query || {};
-        if (classfiy === "99") {
-          classfiy = "";
+        console.log("$route----", newValue);
+        if (newValue.path === "/article") {
+          let {
+            search = "",
+            classfiy = "99",
+            label = "",
+          } = newValue.query || {};
+          if (classfiy === "99") {
+            classfiy = "";
+          }
+          let query = {
+            search,
+            classfiy,
+            label,
+          };
+
+          this.$store.dispatch("article/setQuery", query);
         }
-        let query = {
-          search,
-          classfiy,
-          label,
-        };
-        this.query = query;
-        this.loadData(1, query);
       },
     },
   },
+  computed: {
+    articles() {
+      return this.$store.state.article.datalist;
+    },
+  },
   mounted() {
+    this.$store.dispatch("archives/init");
     window.addEventListener("scroll", this.onScroll);
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.onScroll);
   },
   methods: {
-    async pageQuery(page, query) {
-      page = page || this.page || 1;
-      query = query || this.query || {};
-      if (page === 1) {
-        this.articles.splice(0, this.articles.length);
-      }
-      if (this.totalSize > 0 && this.totalSize <= this.articles.length) {
-        //数据已经全部加载
-        return;
-      }
-
-      let result = await articleApi.pageQuery({ page, pageSize: 10, ...query });
-      Array.prototype.push.apply(this.articles, result?.datalist || []);
-      this.totalSize = result?.totalSize;
-      this.page = result?.page + 1;
-    },
     onScroll() {
       let innerHeight = document.querySelector("#app").clientHeight;
       let outerHeight = document.documentElement.clientHeight;
@@ -97,7 +93,7 @@ export default {
       }
     },
     loadData: util.debounce(function (page, query) {
-      this.pageQuery(page, query);
+      this.$store.dispatch("article/pageQuery");
     }, 500),
   },
 };

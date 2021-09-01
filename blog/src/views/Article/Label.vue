@@ -24,25 +24,23 @@ import { labelApi } from "@/api";
 export default {
   data() {
     return {
-      list: [],
       activeLabel: "",
       search: "",
       label: "",
     };
+  },
+  computed: {
+    list() {
+      return this.$store.state.archives.label;
+    }
   },
   mounted() {
     let { search = "", classfiy = "99", label = "" } = this.$route.query || {};
     this.search = search;
     this.activefy = classfiy;
     this.label = label;
-    this.query();
   },
   methods: {
-    //获取数据
-    async query() {
-      let result = (await labelApi.query()) || [];
-      this.list = result;
-    },
     onChange(label) {
       if (this.activeLabel === label) {
         label = "";

@@ -34,30 +34,23 @@ import { classifyApi } from "@/api";
 export default {
   data() {
     return {
-      list: [],
       activefy: "",
       search: "",
       label: "",
     };
+  },
+  computed: {
+    list() {
+      return this.$store.state.archives.classify;
+    },
   },
   mounted() {
     let { search = "", classfiy = "99", label = "" } = this.$route.query || {};
     this.search = search;
     this.activefy = classfiy;
     this.label = label;
-    this.query();
   },
   methods: {
-    //获取数据
-    async query() {
-      let result = (await classifyApi.query()) || [];
-      result.unshift({
-        uid: "99",
-        name: "全部文章",
-        cover: "",
-      });
-      this.list = result;
-    },
     submit() {
       this.$router.replace(
         `/article?search=${this.search}&classfiy=${this.activefy}&label=${this.label}`

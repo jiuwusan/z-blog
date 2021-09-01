@@ -50,6 +50,9 @@ export default {
       },
     },
   },
+  mounted() {
+    this.$store.dispatch("archives/init");
+  },
   methods: {
     async findById() {
       let { uid } = this.$route.params || {};
