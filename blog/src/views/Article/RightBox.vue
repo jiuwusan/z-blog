@@ -1,6 +1,6 @@
 <template>
   <div class="right-fill"></div>
-  <div class="right-box flex" :style="rightStyle">
+  <div class="right-box flex" :style="rightStyle" ref="rightBox">
     <slot></slot>
     <div v-if="back" class="slideInRight backpage mgt20" @click="goBack">
       <Icon class="icon" name="backpage"></Icon>
@@ -34,11 +34,16 @@ export default {
       this.$router.back();
     },
     handleScroll: util.debounce(function () {
+      let parentHeight = this.$refs.rightBox.parentNode.offsetHeight;
+      let curHeight = this.$refs.rightBox.offsetHeight;
       //获取滚动时的高度
       let scrollTop =
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop;
+      if (scrollTop + curHeight > parentHeight) {
+        scrollTop = parentHeight - curHeight;
+      }
       this.rightStyle = `top:${scrollTop}px;`;
     }, 150),
   },

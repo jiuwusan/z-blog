@@ -115,6 +115,11 @@ export default {
   margin-bottom: 20px;
   background-color: #fff;
   flex-direction: column;
+  
+  &:last-child {
+    margin-bottom: 0px;
+  }
+
   .flag {
     position: absolute;
     height: 20px;

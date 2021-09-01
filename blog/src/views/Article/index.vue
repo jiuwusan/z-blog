@@ -1,14 +1,12 @@
 <template>
   <div class="article-box flex">
     <div class="article-list flex">
-      <!-- <transition-group name="slideRight" tag="div"> -->
       <ArticleItem
         v-scrollshow="scrollshow"
         v-for="item in articles"
         :key="item.uid"
         :data="item"
       ></ArticleItem>
-      <!-- </transition-group> -->
     </div>
     <RightBox>
       <Classify></Classify>
@@ -116,10 +114,11 @@ export default {
 .article-box {
   min-height: 90vh;
   // width: 100%;
-  margin: 0 auto;
+  margin: 20px auto 60px auto;
   justify-content: center;
-  margin-top: 20px;
   position: relative;
+  // padding: 0px 0px 40px 0px;
+  box-sizing: border-box;
   .article-list {
     width: 960px;
     flex-direction: column;

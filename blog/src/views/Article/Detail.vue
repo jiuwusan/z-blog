@@ -73,10 +73,9 @@ export default {
 
 .article-detail-box {
   min-height: 90vh;
-  // width: 100%;
-  margin: 0 auto;
+  margin: 20px auto 60px auto;
   justify-content: center;
-  margin-top: 20px;
+  // padding: 0px 0px 40px 0px;
   position: relative;
   .content-box {
     background-color: #fff;
@@ -110,9 +109,8 @@ export default {
     }
     .content {
       width: 100%;
-      padding:  0 1.2cm 1.2cm 1cm;
+      padding: 0 1.2cm 1.2cm 1cm;
     }
-    margin-bottom: 50px;
   }
 }
 
