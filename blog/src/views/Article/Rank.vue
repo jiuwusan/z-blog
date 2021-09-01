@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { articleApi } from "@/api";
 export default {
   data() {
     return {};

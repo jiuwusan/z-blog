@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { labelApi } from "@/api";
 export default {
   data() {
     return {

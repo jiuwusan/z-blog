@@ -22,7 +22,6 @@ import Classify from "./Classify";
 import Label from "./Label";
 import Rank from "./Rank";
 import RightBox from "./RightBox";
-import { articleApi } from "@/api";
 import { util } from "@jws";
 export default {
   data() {
@@ -47,7 +46,6 @@ export default {
     $route: {
       immediate: true,
       handler(newValue) {
-        console.log("$route----", newValue);
         if (newValue.path === "/article") {
           let {
             search = "",
@@ -92,7 +90,7 @@ export default {
         this.loadData();
       }
     },
-    loadData: util.debounce(function (page, query) {
+    loadData: util.debounce(function () {
       this.$store.dispatch("article/pageQuery");
     }, 500),
   },
