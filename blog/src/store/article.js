@@ -1,6 +1,8 @@
 
 import { articleApi } from "@/api";
 
+let backScrollYTimer = null;
+
 const archives = {
     namespaced: true,
     state: () => ({
@@ -45,10 +47,34 @@ const archives = {
                 }
             }
             if (flag) {
+                dispatch("backScrollY");
                 return;
             }
             commit('update', { page: 1, totalSize: 0, query: newQuery, datalist: [] });
             dispatch("pageQuery", {});
+        },
+        async setScrollY({ commit }) {
+            let recruitScrollY = document.body.scrollTop
+                ? document.body.scrollTop
+                : document.documentElement.scrollTop;
+            commit('update', { recruitScrollY });
+        },
+        async backScrollY({ state }) {
+            if (backScrollYTimer) {
+                clearTimeout(backScrollYTimer);
+                backScrollYTimer = null;
+            }
+            backScrollYTimer = setTimeout(() => {
+                let { recruitScrollY } = state;
+                // chrome
+                document.body.scrollTop = recruitScrollY;
+                // firefox
+                document.documentElement.scrollTop = recruitScrollY;
+                // safari
+                window.pageYOffset = recruitScrollY;
+                clearTimeout(backScrollYTimer);
+                backScrollYTimer = null;
+            }, 200)
         }
     },
 }

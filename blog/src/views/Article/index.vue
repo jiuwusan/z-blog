@@ -78,8 +78,12 @@ export default {
   beforeUnmount() {
     window.removeEventListener("scroll", this.onScroll);
   },
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch("article/setScrollY");
+    next();
+  },
   methods: {
-    onScroll() {
+    onScroll: util.debounce(function () {
       let innerHeight = document.querySelector("#app").clientHeight;
       let outerHeight = document.documentElement.clientHeight;
       let scrollTop = document.body.scrollTop
@@ -87,12 +91,9 @@ export default {
         : document.documentElement.scrollTop;
       // 页面高度 = 屏幕高度 + 滑动高度
       if (innerHeight < outerHeight + scrollTop + 300) {
-        this.loadData();
+        this.$store.dispatch("article/pageQuery");
       }
-    },
-    loadData: util.debounce(function () {
-      this.$store.dispatch("article/pageQuery");
-    }, 500),
+    }, 200),
   },
 };
 </script>

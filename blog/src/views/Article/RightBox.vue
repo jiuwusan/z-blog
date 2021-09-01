@@ -37,13 +37,13 @@ export default {
       let parentHeight = this.$refs.rightBox.parentNode.offsetHeight;
       let curHeight = this.$refs.rightBox.offsetHeight;
       //获取滚动时的高度
-      let scrollTop =
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop;
+      let scrollTop = document.body.scrollTop
+        ? document.body.scrollTop
+        : document.documentElement.scrollTop;
       if (scrollTop + curHeight > parentHeight) {
         scrollTop = parentHeight - curHeight;
       }
+
       this.rightStyle = `top:${scrollTop}px;`;
     }, 150),
   },
