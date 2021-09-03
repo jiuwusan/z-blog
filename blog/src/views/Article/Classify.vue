@@ -2,7 +2,7 @@
   <div class="classify flex slideInRight">
     <div class="search-box">
       <div class="search flex">
-        <input v-model="search" placeholder="输入关键字搜索" class="input" />
+        <input v-model="search" placeholder="输入关键字搜索" class="input" @keyup.enter="submit" />
         <div class="submit flex" @click="submit">
           <Icon name="search" class="icon"></Icon>
         </div>
