@@ -2,7 +2,7 @@
   <div class="classify flex slideInRight">
     <div class="search-box">
       <div class="search flex">
-        <input v-model="search" placeholder="输入关键字搜索" class="input" />
+        <input v-model="search" placeholder="输入关键字搜索" class="input" @keyup.enter="submit" />
         <div class="submit flex" @click="submit">
           <Icon name="search" class="icon"></Icon>
         </div>
@@ -30,34 +30,26 @@
 </template>
 
 <script>
-import { classifyApi } from "@/api";
 export default {
   data() {
     return {
-      list: [],
       activefy: "",
       search: "",
       label: "",
     };
+  },
+  computed: {
+    list() {
+      return this.$store.state.archives.classify;
+    },
   },
   mounted() {
     let { search = "", classfiy = "99", label = "" } = this.$route.query || {};
     this.search = search;
     this.activefy = classfiy;
     this.label = label;
-    this.query();
   },
   methods: {
-    //获取数据
-    async query() {
-      let result = (await classifyApi.query()) || [];
-      result.unshift({
-        uid: "99",
-        name: "全部文章",
-        cover: "",
-      });
-      this.list = result;
-    },
     submit() {
       this.$router.replace(
         `/article?search=${this.search}&classfiy=${this.activefy}&label=${this.label}`

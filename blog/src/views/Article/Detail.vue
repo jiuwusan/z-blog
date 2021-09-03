@@ -1,25 +1,32 @@
 <template>
   <div class="article-detail-box flex">
-    <div class="article-content">
-      <RichText :content="detailData.content"></RichText>
-    </div>
-    <div class="classify-list flex">
-      <Classify></Classify>
-      <Rank class="mgt20"></Rank>
-      <div class="slideInRight backpage mgt20" @click="goBack">
-        <Icon class="icon" name="backpage"></Icon>
-        <div class="text">返回列表</div>
+    <div class="content-box">
+      <div class="header">
+        <div class="title">{{ detailData.title }}</div>
+        <div class="info">
+          <div class="time">发布时间：{{ detailData.created_at_ftt }}</div>
+          <div class="count">阅读量：{{ detailData.readCount }}</div>
+        </div>
+      </div>
+      <div class="content">
+        <RichText :content="detailData.content"></RichText>
       </div>
     </div>
+    <RightBox :back="true">
+      <Classify></Classify>
+      <Label class="mgt20"></Label>
+      <Rank class="mgt20"></Rank>
+    </RightBox>
   </div>
 </template>
 
 <script>
 import Classify from "./Classify";
 import Rank from "./Rank";
+import RightBox from "./RightBox";
 import { articleApi } from "@/api";
 import { RichText } from "@jws/components";
-// import { util } from "@jws";
+import Label from "./Label";
 export default {
   data() {
     return {
@@ -30,6 +37,8 @@ export default {
     Classify,
     RichText,
     Rank,
+    RightBox,
+    Label,
   },
   watch: {
     $route: {
@@ -41,7 +50,9 @@ export default {
       },
     },
   },
-  mounted() {},
+  mounted() {
+    this.$store.dispatch("archives/init");
+  },
   methods: {
     async findById() {
       let { uid } = this.$route.params || {};
@@ -50,9 +61,6 @@ export default {
       if (result?.title) {
         document.title = result.title;
       }
-    },
-    goBack() {
-      this.$router.back();
     },
   },
 };
@@ -68,38 +76,43 @@ export default {
 
 .article-detail-box {
   min-height: 90vh;
-  width: 100%;
-  margin: 0 auto;
+  margin: 20px auto 60px auto;
   justify-content: center;
-  margin-top: 20px;
-  .article-content {
-    width: calc(21cm + 2px);
-    padding: 1cm 1.2cm;
+  // padding: 0px 0px 40px 0px;
+  position: relative;
+  .content-box {
     background-color: #fff;
-    margin-bottom: 50px;
-  }
-  .classify-list {
-    margin-left: 20px;
-    flex-direction: column;
-    width: 260px;
-    .backpage {
-      .flex();
-      align-items: center;
-      border-radius: 8px;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-      .icon {
-        font-size: 26px;
-      }
-      .text {
+    width: calc(21cm + 2px);
+    .header {
+      padding: 20px 1.2cm 10px 1.2cm;
+      .title {
+        font-weight: 600;
+        vertical-align: bottom;
+        line-height: 30px;
         font-size: 22px;
-        margin-left: 10px;
-        color: #787977;
-        &:hover {
-          color: #52c01a;
+      }
+      .info {
+        .flex();
+        align-items: center;
+        margin: 15px 0 0 0;
+        .time {
+          font-size: 14px;
+          color: #999aaa;
+        }
+
+        .count {
+          margin-left: 10px;
+          .icon {
+            font-size: 14px;
+          }
+          font-size: 14px;
+          color: #999aaa;
         }
       }
+    }
+    .content {
+      width: 100%;
+      padding: 0 1.2cm 1.2cm 1cm;
     }
   }
 }

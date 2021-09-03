@@ -9,9 +9,8 @@ module.exports = appInfo => {
      * @type {Egg.EggAppConfig}
      **/
     const config = exports = {};
-    const resourceDir = "I:/code/z-blog/resource";
-    config.uploadDir = `${resourceDir}/upload`;
-
+    config.resourceDir = "I:/code/z-blog/resource";
+    config.uploadDir = `${config.resourceDir}/upload`;
     //数据库连接配置
     config.sequelize = {
         dialect: 'mysql', // l类型
@@ -27,7 +26,7 @@ module.exports = appInfo => {
 
     config.static = {
         dir: [
-            { prefix: '/fetchfile/', dir: resourceDir }
+            { prefix: '/fetchfile/', dir: config.resourceDir }
         ]
     }
 

@@ -29,7 +29,6 @@ export default (props) => {
      */
     const modalSubmit = (values, reset) => {
         values.content = fttData.content;
-        console.log("modalSubmit=", values);
         onSubmit && onSubmit(values, () => {
             reset();
             editForm.resetFields();
@@ -40,7 +39,6 @@ export default (props) => {
 
     //监听uid的变化
     useEffect(() => {
-        console.log("变化了--",value);
         if (mounting.current) {
             mounting.current = false;
         } else {
@@ -54,6 +52,7 @@ export default (props) => {
         onClose={onClose}
         visible={visible}
         width={1100}
+        bodyStyle={{ scrollbarWidth: "0px" }}
         footer={
             <div className={styles.editFooter}>
                 <Button onClick={formSubmit} type="primary" style={{ marginRight: 8 }}>确定</Button>
@@ -63,7 +62,7 @@ export default (props) => {
     >
         <Form size="small" validateMessages={{ required: "${label} 是必填字段" }} form={editForm} layout="vertical">
             <Form.Item rules={[{ required: true }]} name='content'>
-                <CKEditor></CKEditor>
+                <CKEditor className={styles.editorBox}></CKEditor>
             </Form.Item>
         </Form>
         <Modal value={value} visible={modalVisible} onSubmit={modalSubmit} onCancel={() => setModalVisible(false)}></Modal>

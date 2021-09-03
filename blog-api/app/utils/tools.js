@@ -2,6 +2,8 @@ const validator = require('./validator');
 const fs = require('fs');
 const path = require('path');
 const CryptoJS = require('crypto-js');
+const request = require('request');
+const urllib = require('urllib');
 
 //验证工具类
 const tools = {
@@ -99,8 +101,20 @@ const tools = {
             deStr = deStr + strs[i];
         }
         return CryptoJS.SHA1(deStr).toString();
-    }
+    },
 
+    post(option) {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+        return new Promise((resolve, reject) => {
+            request.post(option, (error, response, body) => {
+                if (!error && response.statusCode === 200) {
+                    resolve(JSON.parse(body));
+                } else {
+                    reject(error);
+                }
+            });
+        });
+    }
 }
 
 module.exports = tools;

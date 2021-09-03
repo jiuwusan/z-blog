@@ -17,6 +17,7 @@
     "egg-sequelize": "^6.0.0",
     "egg-validate": "^2.0.2",
     "mysql2": "^2.2.5",
+    "request": "^2.88.2",
     "svg-captcha": "^1.4.0",
     "uuid": "^8.3.2"
   },
