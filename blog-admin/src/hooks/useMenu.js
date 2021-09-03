@@ -38,10 +38,6 @@ const menusDefault = [{
     name: "留言管理",
     route: "/message",
     icon: <CommentOutlined />
-}, {
-    name: "个人简历",
-    route: "/resume",
-    icon: <CommentOutlined />
 }];
 
 export default () => {
