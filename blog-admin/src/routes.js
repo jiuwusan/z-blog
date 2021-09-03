@@ -42,6 +42,10 @@ export default [
                 path: '/editor',
                 component: '@/pages/Main',
             },
+            {
+                path: '/resume',
+                component: '@/pages/Resume',
+            },
         ],
     },
 ];

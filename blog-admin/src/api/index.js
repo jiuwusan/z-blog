@@ -138,3 +138,10 @@ export const articleApi = genApi({
     canceltop: "POST /admin/article/canceltop",
     top: "POST /admin/article/top",
 });
+
+export const resumeApi = genApi({
+    recordSave: "POST /admin/resume/record/save",
+    recordFindById: "/admin/resume/record/findById",
+    recordPageQuery: "POST /admin/resume/record/pageQuery",
+    recordDelById: "POST /admin/resume/record/delById",
+});
