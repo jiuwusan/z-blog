@@ -94,10 +94,7 @@ export default (props) => {
         <div>
             <KdTable rowKey="uid"
                 reloadKey={reloadKey}
-                toolBar={<Space size="small"><Button type="primary" onClick={() => {
-                    setEditData(null);
-                    setEditVisible(true);
-                }}>生成授权码</Button>
+                toolBar={<Space size="small"><Button type="primary" onClick={() => setGenVisible(true)}>生成授权码</Button>
                     <Button type="primary" onClick={() => {
                         setEditData(null);
                         setEditVisible(true);
