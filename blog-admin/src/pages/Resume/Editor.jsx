@@ -2,7 +2,7 @@ import styles from "./style.less";
 import { useRef, useEffect } from 'react';
 import { Drawer, Button, Form, Input, Row, Col, Descriptions, Radio, DatePicker } from 'antd';
 import UploadImage from '@/components/UploadImage';
-import UploadFile from '@/components/UploadFile';
+import Work from './Work';
 
 //自定义
 const FormItem = (props) => {
@@ -132,7 +132,11 @@ export default (props) => {
                         </Col>
                     </Row>
                 </Descriptions.Item>
-
+                <Descriptions.Item label="工作经历">
+                    <FormItem rules={[{ required: true }]} name='works'>
+                        <Work />
+                    </FormItem>
+                </Descriptions.Item>
             </Descriptions>
 
         </Form>
