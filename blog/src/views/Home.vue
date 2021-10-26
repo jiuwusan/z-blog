@@ -12,7 +12,9 @@
         </div>
       </div>
     </div>
-    <Menu></Menu>
+    <div class="home-menu">
+      <Menu></Menu>
+    </div>
   </div>
 </template>
 
@@ -41,58 +43,136 @@ export default {
 <style lang="less" scoped>
 @import "~@jws/css/animate.css";
 @import "~@/global.less";
+@media screen and (min-width: 751px) {
+  .home-menu {
+    z-index: 999;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+  }
 
-.home {
-  width: 100%;
-  flex-grow: 1;
-  flex-direction: column;
-  .section {
+  .home {
     width: 100%;
-    height: 100vh;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    .banner {
+    flex-grow: 1;
+    flex-direction: column;
+    .section {
       width: 100%;
       height: 100vh;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 9;
-    }
-    .motto {
-      z-index: 19;
       position: relative;
-      flex-direction: column;
       align-items: center;
-      .title {
-        font-size: 28px;
-        color: #fff;
-        text-align: center;
+      justify-content: center;
+      .banner {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9;
       }
+      .motto {
+        z-index: 19;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        .title {
+          font-size: 28px;
+          color: #fff;
+          text-align: center;
+        }
 
-      .intro {
-        font-size: 14px;
-        color: #fff;
-        text-align: center;
-        letter-spacing: 10px;
-        margin: 20px 0;
+        .intro {
+          font-size: 14px;
+          color: #fff;
+          text-align: center;
+          letter-spacing: 10px;
+          margin: 20px 0;
+        }
+
+        .btn {
+          margin-top: 20px;
+          display: inline-block;
+          height: 38px;
+          line-height: 38px;
+          padding: 0 18px;
+          background-color: #1e9fff;
+          color: #fff;
+          white-space: nowrap;
+          text-align: center;
+          font-size: 14px;
+          border: none;
+          border-radius: 2px;
+          cursor: pointer;
+        }
       }
+    }
+  }
+}
 
-      .btn {
-        margin-top: 20px;
-        display: inline-block;
-        height: 38px;
-        line-height: 38px;
-        padding: 0 18px;
-        background-color: #1e9fff;
-        color: #fff;
-        white-space: nowrap;
-        text-align: center;
-        font-size: 14px;
-        border: none;
-        border-radius: 2px;
-        cursor: pointer;
+//宽度0-750px
+@media screen and (max-width: 750px) {
+  .home-menu {
+    z-index: 999;
+    position: fixed;
+    top: 25px;
+    right: 25px;
+  }
+
+  .home {
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    .section {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      .banner {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9;
+      }
+      .motto {
+        z-index: 19;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        .title {
+          font-size: 28px;
+          color: #fff;
+          text-align: center;
+          line-height: 36px;
+          padding: 0 35px;
+        }
+
+        .intro {
+          font-size: 12px;
+          color: #fff;
+          text-align: center;
+          letter-spacing: 6px;
+          margin: 20px 0;
+          padding: 0 15px;
+          line-height: 24px;
+        }
+
+        .btn {
+          margin-top: 20px;
+          display: inline-block;
+          height: 38px;
+          line-height: 38px;
+          padding: 0 18px;
+          background-color: #1e9fff;
+          color: #fff;
+          white-space: nowrap;
+          text-align: center;
+          font-size: 14px;
+          border: none;
+          border-radius: 2px;
+          cursor: pointer;
+        }
       }
     }
   }

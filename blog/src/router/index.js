@@ -7,11 +7,13 @@ import Message from '@/views/Message'
 import Diary from '@/views/Diary'
 import Link from '@/views/Link'
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'Home',
+    menuName: '首页',
     component: Home,
+    visible: true,
     meta: {
       title: '首页'
     }
@@ -27,7 +29,9 @@ const routes = [
   {
     path: '/article',
     name: 'Article',
+    menuName: '博客',
     component: Article,
+    visible: true,
     meta: {
       title: '文章列表'
     }
@@ -43,7 +47,9 @@ const routes = [
   {
     path: '/message',
     name: 'Message',
+    menuName: '留言',
     component: Message,
+    visible: true,
     meta: {
       title: '留言板'
     }
@@ -51,7 +57,9 @@ const routes = [
   {
     path: '/diary',
     name: 'Diary',
+    menuName: '日记',
     component: Diary,
+    visible: true,
     meta: {
       title: '日记'
     }
@@ -59,7 +67,9 @@ const routes = [
   {
     path: '/link',
     name: 'Link',
+    menuName: '友链',
     component: Link,
+    visible: true,
     meta: {
       title: '友链'
     }
@@ -78,3 +88,4 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router;
+

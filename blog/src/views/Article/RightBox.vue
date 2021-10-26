@@ -53,43 +53,89 @@ export default {
 <style lang="less" scoped>
 @import "~@jws/css/animate.css";
 @import "~@/global.less";
+@media screen and (min-width: 751px) {
+  .mgt20 {
+    margin-top: 20px;
+  }
 
-.mgt20 {
-  margin-top: 20px;
-}
+  .right-fill {
+    width: 280px;
+    content: "";
+  }
 
-.right-fill {
-  width: 280px;
-  content: "";
-}
-
-.right-box {
-  right: 0px;
-  flex-direction: column;
-  width: 260px;
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  transition: top 0.6s;
-  -moz-transition: top 0.6s; /* Firefox 4 */
-  -webkit-transition: top 0.6s; /* Safari 和 Chrome */
-  -o-transition: top 0.6s; /* Opera */
-  .backpage {
-    .flex();
-    align-items: center;
-    border-radius: 8px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    .icon {
-      font-size: 26px;
+  .right-box {
+    right: 0px;
+    flex-direction: column;
+    width: 260px;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    transition: top 0.6s;
+    -moz-transition: top 0.6s; /* Firefox 4 */
+    -webkit-transition: top 0.6s; /* Safari 和 Chrome */
+    -o-transition: top 0.6s; /* Opera */
+    .backpage {
+      .flex();
+      align-items: center;
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      .icon {
+        font-size: 26px;
+      }
+      .text {
+        font-size: 22px;
+        margin-left: 10px;
+        color: #787977;
+        &:hover {
+          color: #52c01a;
+        }
+      }
     }
-    .text {
-      font-size: 22px;
-      margin-left: 10px;
-      color: #787977;
-      &:hover {
-        color: #52c01a;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .mgt20 {
+    margin-top: 20px;
+  }
+
+  .right-fill {
+    width: 280px;
+    content: "";
+    display: none !important;
+  }
+
+  .right-box {
+    display: none !important;
+    right: 0px;
+    flex-direction: column;
+    width: 260px;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    transition: top 0.6s;
+    -moz-transition: top 0.6s; /* Firefox 4 */
+    -webkit-transition: top 0.6s; /* Safari 和 Chrome */
+    -o-transition: top 0.6s; /* Opera */
+    .backpage {
+      .flex();
+      align-items: center;
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      .icon {
+        font-size: 26px;
+      }
+      .text {
+        font-size: 22px;
+        margin-left: 10px;
+        color: #787977;
+        &:hover {
+          color: #52c01a;
+        }
       }
     }
   }

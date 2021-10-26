@@ -102,21 +102,44 @@ export default {
 @import "~@jws/css/animate.css";
 @import "~@/global.less";
 
-.mgt20 {
-  margin-top: 20px;
+@media screen and (min-width: 751px) {
+  .mgt20 {
+    margin-top: 20px;
+  }
+
+  .article-box {
+    min-height: 90vh;
+    // width: 100%;
+    margin: 20px auto 60px auto;
+    justify-content: center;
+    position: relative;
+    // padding: 0px 0px 40px 0px;
+    box-sizing: border-box;
+    .article-list {
+      width: 960px;
+      flex-direction: column;
+    }
+  }
 }
 
-.article-box {
-  min-height: 90vh;
-  // width: 100%;
-  margin: 20px auto 60px auto;
-  justify-content: center;
-  position: relative;
-  // padding: 0px 0px 40px 0px;
-  box-sizing: border-box;
-  .article-list {
-    width: 960px;
-    flex-direction: column;
+@media screen and (max-width: 750px) {
+  .mgt20 {
+    margin-top: 20px;
+  }
+
+  .article-box {
+    .box();
+    min-height: 90vh;
+    width: 100%;
+    margin: 20px auto 60px auto;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    .article-list {
+      .box();
+      padding: 0 15px;
+      flex-direction: column;
+    }
   }
 }
 

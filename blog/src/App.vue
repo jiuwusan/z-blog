@@ -32,7 +32,7 @@ export default {
     $route: {
       immediate: true,
       handler(to, from) {
-        this.valiMobile();
+        // this.valiMobile();
         if (to?.path !== from?.path) {
           this.animationName = "zoom";
         }
@@ -72,6 +72,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
+  overflow-x: hidden;
   .page-content {
     width: 100%;
     flex-direction: column;
