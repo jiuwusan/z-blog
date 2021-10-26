@@ -37,8 +37,13 @@ export default {
   --ck-inline-image-style-spacing: calc(var(--ck-image-style-spacing) / 2);
   --ck-todo-list-checkmark-size: 16px;
 }
-.jws-ck-content{
-    text-align: justify;
+.jws-ck-content {
+  text-align: justify;
+  @media screen and (max-width: 750px) {
+    img {
+      width: 100% !important;
+    }
+  }
 }
 /* ckeditor5-image/theme/imagestyle.css */
 .ck-content .image-style-block-align-left,
