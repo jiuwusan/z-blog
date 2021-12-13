@@ -73,28 +73,55 @@ export default {
 <style lang="less" scoped>
 @import "~@jws/css/animate.css";
 @import "~@/global.less";
+@media screen and (min-width: 751px) {
+  .message-box {
+    width: @defaultWidth;
+    min-height: 90vh;
+    position: relative;
+    flex-direction: column;
+    margin: 15px auto;
+  }
+  .board-box {
+    width: 100%;
+    margin-top: 20px;
+    flex-direction: column;
+    // background: #fff;
+  }
 
-.message-box {
-  width: @defaultWidth;
-  min-height: 90vh;
-  position: relative;
-  flex-direction: column;
-  margin: 15px auto;
-}
-.board-box {
-  width: 100%;
-  margin-top: 20px;
-  flex-direction: column;
-  // background: #fff;
+  .bounceInUp {
+    animation-name: bounceInUp;
+    animation-duration: 800ms;
+  }
+
+  .fadeInUpBig {
+    animation-name: fadeInUpBig;
+    animation-duration: 800ms;
+  }
 }
 
-.bounceInUp {
-  animation-name: bounceInUp;
-  animation-duration: 800ms;
-}
+@media screen and (max-width: 750px) {
+  .message-box {
+    width: 95vw;
+    // min-height: 90vh;
+    position: relative;
+    flex-direction: column;
+    margin: 12px auto;
+  }
+  .board-box {
+    width: 100%;
+    margin-top: 12px;
+    flex-direction: column;
+    // background: #fff;
+  }
 
-.fadeInUpBig {
-  animation-name: fadeInUpBig;
-  animation-duration: 800ms;
+  .bounceInUp {
+    animation-name: bounceInUp;
+    animation-duration: 800ms;
+  }
+
+  .fadeInUpBig {
+    animation-name: fadeInUpBig;
+    animation-duration: 800ms;
+  }
 }
 </style>

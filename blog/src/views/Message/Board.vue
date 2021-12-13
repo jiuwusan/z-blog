@@ -28,19 +28,40 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/global.less";
-.board-item {
-  width: 100%;
-  padding: 15px;
-  border-bottom: 1px dotted #515250;
-  flex-direction: column;
-  background: rgba(255, 255, 255, 0.8);
-  &:last-child {
-    border-bottom: 0px dotted #515250;
+
+@media screen and (min-width: 751px) {
+  .board-item {
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px dotted #515250;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.8);
+    &:last-child {
+      border-bottom: 0px dotted #515250;
+    }
+    .repeat-box {
+      border-top: 0.5px solid rgba(81, 82, 80, 0.2);
+      margin: 10px 0px 0px 50px;
+      padding: 10px;
+    }
   }
-  .repeat-box {
-    border-top: 0.5px solid rgba(81, 82, 80, 0.2);
-    margin: 10px 0px 0px 50px;
-    padding: 10px;
+}
+
+@media screen and (max-width: 750px) {
+  .board-item {
+    width: 100%;
+    padding: 15px;
+    border-bottom: 1px dotted #515250;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.8);
+    &:last-child {
+      border-bottom: 0px dotted #515250;
+    }
+    .repeat-box {
+      border-top: 0.5px solid rgba(81, 82, 80, 0.2);
+      margin: 10px 0px 0px 20px;
+      padding: 10px;
+    }
   }
 }
 </style>

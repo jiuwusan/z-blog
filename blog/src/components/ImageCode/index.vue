@@ -59,32 +59,69 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/global.less";
-.image-code-box {
-  .flex();
-  .input {
-    padding: 0 5px;
-    width: 200px;
-    border: 1px solid #c4c4c4;
-    height: 40px;
-    &:focus {
-      //获取焦点
-      outline: 0.5px solid hsl(208, 79%, 51%); //边框不用border，用outline
-      //   background: rgba(3, 16, 28, 0); //背景色
+@media screen and (min-width: 751px) {
+  .image-code-box {
+    .flex();
+    .input {
+      padding: 0 5px;
+      width: 200px;
+      border: 1px solid #c4c4c4;
+      height: 40px;
+      &:focus {
+        //获取焦点
+        outline: 0.5px solid hsl(208, 79%, 51%); //边框不用border，用outline
+        //   background: rgba(3, 16, 28, 0); //背景色
+      }
+    }
+    .exchange {
+      .flex();
+      align-items: center;
+      cursor: pointer;
+      margin-left: 10px;
+      .code {
+        width: 80px;
+        height: 40px;
+      }
+      .warning {
+        color: #6bc30d;
+        padding-left: 5px;
+        font-size: 12px;
+      }
     }
   }
-  .exchange {
+}
+
+@media screen and (max-width: 750px) {
+  .image-code-box {
     .flex();
-    align-items: center;
-    cursor: pointer;
-    margin-left: 10px;
-    .code {
-      width: 80px;
+    flex-direction: column;
+    width: 100%;
+    .input {
+      padding: 0 5px;
+      width: 100%;
+      border: 1px solid #c4c4c4;
       height: 40px;
+      box-sizing: border-box;
+      &:focus {
+        //获取焦点
+        outline: 0.5px solid hsl(208, 79%, 51%); //边框不用border，用outline
+        //   background: rgba(3, 16, 28, 0); //背景色
+      }
     }
-    .warning {
-      color: #6bc30d;
-      padding-left: 5px;
-      font-size: 12px;
+    .exchange {
+      .flex();
+      align-items: center;
+      cursor: pointer;
+      margin: 10px;
+      .code {
+        width: 80px;
+        height: 40px;
+      }
+      .warning {
+        color: #6bc30d;
+        padding-left: 5px;
+        font-size: 12px;
+      }
     }
   }
 }
