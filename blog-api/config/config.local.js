@@ -19,6 +19,7 @@ module.exports = appInfo => {
     const config = exports = {};
     config.resourceDir = `${getRootDir(appInfo.baseDir)}/resource`;
     config.uploadDir = `${config.resourceDir}/upload`;
+
     //数据库连接配置
     config.sequelize = {
         dialect: 'mysql', // l类型
@@ -31,6 +32,16 @@ module.exports = appInfo => {
         // 是否自动进行下划线转换（这里是因为DB默认的命名规则是下划线方式，而我们使用的大多数是驼峰方式）
         underscored: true
     };
+
+    //redis
+    config.redis = {
+        client: {
+            port: 6379, // Redis port
+            host: '101.43.111.57', // Redis host
+            password: 'ZkD707396',
+            db: 1,
+        }
+    }
 
     config.static = {
         dir: [
