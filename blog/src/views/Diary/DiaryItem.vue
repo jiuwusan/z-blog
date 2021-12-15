@@ -10,7 +10,7 @@
         <div class="icon zoomIn"></div>
       </div>
       <div class="right fadeInRight">
-        <div>{{ fttData.overview }}士大夫胜多负少是否是否是士大夫石帆胜丰放松放松放松是否是否是十分士大夫首发式</div>
+        <div>{{ fttData.overview }}</div>
         <div class="imageBox" v-if="fttData.imageArray.length > 0">
           <Smage
             prefix
