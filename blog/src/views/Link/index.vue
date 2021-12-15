@@ -167,10 +167,10 @@ export default {
 
 @media screen and (max-width: 750px) {
   .link-box {
-    width: 355px;
+    // width: 355px;
     // min-height: 90vh;
     position: relative;
-    margin: 15px auto 5px auto;
+    margin: 15px 10px 5px 10px;
     .saodi {
       width: 185px;
     }

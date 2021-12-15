@@ -132,8 +132,8 @@ export default {
   }
 
   .diary-box {
-    margin: 15px auto;
-    width: 355px;
+    margin: 15px 10px;
+    // width: 355px;
     background: #fff;
     padding: 10px;
     min-height: 90vh;
