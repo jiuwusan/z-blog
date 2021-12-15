@@ -52,6 +52,9 @@ export default {
     },
   },
   methods: {
+    goPath(route) {
+      route?.path && this.$router.push(route?.path);
+    },
     setPath(route) {
       this.currentPath = route?.path;
       this.visible = this.currentPath != "" && this.currentPath != "/";
