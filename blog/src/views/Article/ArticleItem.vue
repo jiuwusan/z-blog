@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="intro flex">
-      <Smage preview prefix class="cover" :src="fttData.cover"></Smage>
+      <Smage prefix class="cover" :src="fttData.cover"></Smage>
       <div class="content">{{ fttData.simpleText }}</div>
     </div>
     <div class="read flex">

@@ -57,63 +57,127 @@ export default {
   display: flex;
 }
 
-.zmage-box {
-  position: fixed;
-  z-index: 99999999999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  .flex();
-  align-items: center;
-  justify-content: center;
-  .image-item {
-    // width: 80%;
-    max-height: 80%;
+@media screen and (min-width: 751px) {
+  .zmage-box {
+    position: fixed;
+    z-index: 99999999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    .flex();
+    align-items: center;
+    justify-content: center;
+    .image-item {
+      // width: 80%;
+      max-height: 80%;
+    }
+    .close {
+      position: absolute;
+      z-index: 9;
+      width: 50px;
+      height: 50px;
+      top: calc(10% - 70px);
+      right: calc(10% - 70px);
+      cursor: pointer;
+    }
   }
-  .close {
-    position: absolute;
-    z-index: 9;
-    width: 50px;
-    height: 50px;
-    top: calc(10% - 70px);
-    right: calc(10% - 70px);
-    cursor: pointer;
+
+  @keyframes ZoomIn {
+    from {
+      opacity: 0;
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes ZoomOut {
+    from {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  .zoom-enter-active {
+    animation: ZoomIn 0.5s;
+  }
+
+  .zoom-leave-active {
+    animation: ZoomOut 0.5s;
   }
 }
 
-@keyframes ZoomIn {
-  from {
-    opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
+@media screen and (max-width: 750px) {
+  .zmage-box {
+    position: fixed;
+    z-index: 99999999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    .flex();
+    align-items: center;
+    justify-content: center;
+    .image-item {
+      // width: 80%;
+      max-height: 80%;
+    }
+    .close {
+      position: absolute;
+      z-index: 9;
+      width: 50px;
+      height: 50px;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
   }
 
-  50% {
-    opacity: 1;
-  }
-}
+  @keyframes ZoomIn {
+    from {
+      opacity: 0;
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
 
-@keyframes ZoomOut {
-  from {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
+    50% {
+      opacity: 1;
+    }
   }
 
-  to {
-    opacity: 0;
+  @keyframes ZoomOut {
+    from {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    to {
+      opacity: 0;
+    }
   }
-}
 
-.zoom-enter-active {
-  animation: ZoomIn 0.5s;
-}
+  .zoom-enter-active {
+    animation: ZoomIn 0.5s;
+  }
 
-.zoom-leave-active {
-  animation: ZoomOut 0.5s;
+  .zoom-leave-active {
+    animation: ZoomOut 0.5s;
+  }
 }
 </style>
