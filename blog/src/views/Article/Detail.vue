@@ -126,7 +126,7 @@ export default {
 
   .article-detail-box {
     .box();
-    width: calc(100vw - 20px);
+    width: calc(100vw - 15px);
     min-height: 90vh;
     margin: 20px auto 40px auto;
     justify-content: center;
@@ -135,11 +135,9 @@ export default {
     overflow-x: auto;
     .content-box {
       background-color: #fff;
-      // width: calc(21cm + 2px);
-      padding: 15px 0;
+      width: 100%;
+      padding: 15px 10px;
       .header {
-          .box();
-        padding: 0 15px;
         .title {
           font-weight: 600;
           vertical-align: bottom;
@@ -168,7 +166,6 @@ export default {
       }
       .content {
         width: 100%;
-        padding: 0 15px;
         font-size: 12px;
       }
     }
