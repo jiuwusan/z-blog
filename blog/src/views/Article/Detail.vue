@@ -126,12 +126,13 @@ export default {
 
   .article-detail-box {
     .box();
-    // width: calc(100vw - 20px);
+    width: calc(100vw - 20px);
     min-height: 90vh;
-    margin: 20px 10px 40px 10px;
+    margin: 20px auto 40px auto;
     justify-content: center;
     // padding: 0px 0px 40px 0px;
     position: relative;
+    overflow-x: hidden;
     .content-box {
       background-color: #fff;
       // width: calc(21cm + 2px);
