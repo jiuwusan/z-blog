@@ -35,7 +35,7 @@
               </div>
             </div>
             <div class="logo" @click="stop">
-              <logo></logo>
+              <logo @success="visible = false"></logo>
             </div>
           </div>
         </transition>

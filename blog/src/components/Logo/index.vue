@@ -18,6 +18,7 @@ export default {
   },
   methods: {
     goIndex() {
+      this.$emit("success", {});
       this.$router.push("/");
     },
   },
