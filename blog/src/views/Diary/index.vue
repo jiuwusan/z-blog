@@ -41,7 +41,7 @@ export default {
     async query() {
       let result = await diaryApi.query();
       this.diarys = result;
-    }
+    },
   },
 };
 </script>
@@ -49,77 +49,157 @@ export default {
 <style lang="less" scoped>
 @import "~@/global.less";
 
-.relativeTop(@idx) {
-  z-index: @idx;
-  position: relative;
-}
-
-.diary-box {
-  margin: 15px auto;
-  width: @defaultWidth;
-  background: #fff;
-  padding: 15px;
-  min-height: 90vh;
-  position: relative;
-
-  .diary-content {
+@media screen and (min-width: 751px) {
+  .relativeTop(@idx) {
+    z-index: @idx;
     position: relative;
-    width: 100%;
-    flex-direction: column;
-    .timeline {
-      position: absolute;
-      left: 25%;
-      top: 0;
-      height: 100%;
-      width: 2px;
-      background: #009688;
-      z-index: 0;
-    }
+  }
 
-    .label {
-      .relativeTop(1);
-      background: #fff;
+  .diary-box {
+    margin: 15px auto;
+    width: @defaultWidth;
+    background: #fff;
+    padding: 15px;
+    min-height: 90vh;
+    position: relative;
+
+    .diary-content {
+      position: relative;
       width: 100%;
-      padding: 10px 10px 10px calc(25% - 17px);
-      align-items: center;
-      .icon {
-        font-size: 36px;
-        width: 36px;
+      flex-direction: column;
+      .timeline {
+        position: absolute;
+        left: 25%;
+        top: 0;
+        height: 100%;
+        width: 2px;
+        background: #009688;
+        z-index: 0;
       }
-      .txt {
-        font-size: 34px;
-        color: #009688;
-        margin-left: 5px;
+
+      .label {
+        .relativeTop(1);
+        background: #fff;
+        width: 100%;
+        padding: 10px 10px 10px calc(25% - 17px);
+        align-items: center;
+        .icon {
+          font-size: 36px;
+          width: 36px;
+        }
+        .txt {
+          font-size: 34px;
+          color: #009688;
+          margin-left: 5px;
+        }
+      }
+      .mgt40 {
+        margin: 40px 0;
       }
     }
-    .mgt40 {
-      margin: 40px 0;
+  }
+
+  @keyframes timelineIn {
+    from {
+      height: 0%;
+    }
+
+    to {
+      height: 100%;
     }
   }
-}
 
-@keyframes timelineIn {
-  from {
-    height: 0%;
+  .timelineIn {
+    animation-name: timelineIn;
+    animation-duration: 2s;
   }
 
-  to {
-    height: 100%;
+  .fadeInUp {
+    animation-name: fadeInUp;
+    animation-duration: 800ms;
+  }
+
+  .fadeInDown {
+    animation-name: fadeInDown;
+    animation-duration: 800ms;
   }
 }
 
-.timelineIn {
-  animation-name: timelineIn;
-  animation-duration: 2s;
+@media screen and (max-width: 750px) {
+  .relativeTop(@idx) {
+    z-index: @idx;
+    position: relative;
+  }
+
+  .diary-box {
+    margin: 15px auto;
+    width: 355px;
+    background: #fff;
+    padding: 10px;
+    min-height: 90vh;
+    position: relative;
+
+    .diary-content {
+      position: relative;
+      width: 100%;
+      flex-direction: column;
+      .timeline {
+        position: absolute;
+        left: 20%;
+        top: 0;
+        height: 100%;
+        width: 2px;
+        background: #009688;
+        z-index: 0;
+      }
+
+      .label {
+        .relativeTop(1);
+        background: #fff;
+        width: 100%;
+        padding: 10px 10px 10px calc(20% - 17px);
+        align-items: center;
+        .icon {
+          font-size: 36px;
+          width: 36px;
+        }
+        .txt {
+          font-size: 34px;
+          color: #009688;
+          margin-left: 5px;
+        }
+      }
+      .mgt40 {
+        margin: 40px 0;
+      }
+    }
+  }
+
+  @keyframes timelineIn {
+    from {
+      height: 0%;
+    }
+
+    to {
+      height: 100%;
+    }
+  }
+
+  .timelineIn {
+    animation-name: timelineIn;
+    animation-duration: 2s;
+  }
+
+  .fadeInUp {
+    animation-name: fadeInUp;
+    animation-duration: 800ms;
+  }
+
+  .fadeInDown {
+    animation-name: fadeInDown;
+    animation-duration: 800ms;
+  }
 }
 
-.fadeInUp {
-  animation-name: fadeInUp;
-  animation-duration: 800ms;
-}
 
-.fadeInDown {
-  animation-name: fadeInDown;
-  animation-duration: 800ms;
-}
 </style>

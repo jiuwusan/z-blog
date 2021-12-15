@@ -65,101 +65,204 @@ export default {
 <style lang="less" scoped>
 @import "~@/global.less";
 
-.link-box {
-  width: @defaultWidth;
-  // min-height: 90vh;
-  position: relative;
-  margin: 25px auto 15px auto;
-  .saodi {
-    width: 185px;
-  }
-  .content-box {
-    flex-grow: 1;
-    margin-left: 15px;
-    .content {
-      width: 100%;
-      background: #fff;
-      padding: 15px;
-      .title {
-        margin-bottom: 25px;
-        padding-left: 14px;
-        border-left: 4px solid #6bc30d;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 20px;
-      }
-      .askfor {
-        color: #515250;
-        font-size: 14px;
-        flex-wrap: wrap;
-        padding-left: 16px;
-        .item {
-          margin-right: 8px;
-          align-items: center;
-          font-size: 16px;
-          .icon {
-            width: 14px;
-            height: 14px;
-          }
-          .txt {
-            margin-left: 4px;
-          }
-        }
-      }
-      .askcont {
-        white-space: pre-line;
-        padding-left: 16px;
-        color: #515250;
-        font-size: 14px;
-        line-height: 22px;
-        margin: 20px 0;
-        .row {
-          margin-top: 4px;
-        }
-      }
-      .warning {
-        padding-left: 16px;
-        color: red;
-        font-size: 14px;
-        opacity: 0.7;
-      }
+@media screen and (min-width: 751px) {
+  .link-box {
+    width: @defaultWidth;
+    // min-height: 90vh;
+    position: relative;
+    margin: 25px auto 15px auto;
+    .saodi {
+      width: 185px;
     }
-
-    .link-list {
-      margin-top: 20px;
-      flex-wrap: wrap;
-      .link-item {
-        text-decoration: none;
-        width: 258px;
-        padding: 15px;
-        margin: 15px 15px 0 0px;
-        flex-direction: column;
+    .content-box {
+      flex-grow: 1;
+      margin-left: 15px;
+      .content {
+        width: 100%;
         background: #fff;
-        cursor: pointer;
-        &:nth-child(4n) {
-          margin: 15px 0px 0 0px;
+        padding: 15px;
+        .title {
+          margin-bottom: 25px;
+          padding-left: 14px;
+          border-left: 4px solid #6bc30d;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 20px;
         }
-        .row {
-          margin-top: 14px;
-          color: #333;
-          font-size: 13px;
-          align-items: center;
-          &:first-child {
-            margin-top: 0px;
+        .askfor {
+          color: #515250;
+          font-size: 14px;
+          flex-wrap: wrap;
+          padding-left: 16px;
+          .item {
+            margin-right: 8px;
+            align-items: center;
+            font-size: 16px;
+            .icon {
+              width: 14px;
+              height: 14px;
+            }
+            .txt {
+              margin-left: 4px;
+            }
           }
-          .logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 100%;
+        }
+        .askcont {
+          white-space: pre-line;
+          padding-left: 16px;
+          color: #515250;
+          font-size: 14px;
+          line-height: 22px;
+          margin: 20px 0;
+          .row {
+            margin-top: 4px;
           }
-          .name {
+        }
+        .warning {
+          padding-left: 16px;
+          color: red;
+          font-size: 14px;
+          opacity: 0.7;
+        }
+      }
+
+      .link-list {
+        margin-top: 20px;
+        flex-wrap: wrap;
+        .link-item {
+          text-decoration: none;
+          width: 258px;
+          padding: 15px;
+          margin: 15px 15px 0 0px;
+          flex-direction: column;
+          background: #fff;
+          cursor: pointer;
+          &:nth-child(4n) {
+            margin: 15px 0px 0 0px;
+          }
+          .row {
+            margin-top: 14px;
             color: #333;
-            font-size: 17px;
-            padding-left: 8px;
+            font-size: 13px;
+            align-items: center;
+            &:first-child {
+              margin-top: 0px;
+            }
+            .logo {
+              width: 40px;
+              height: 40px;
+              border-radius: 100%;
+            }
+            .name {
+              color: #333;
+              font-size: 17px;
+              padding-left: 8px;
+            }
           }
         }
       }
     }
   }
 }
+
+@media screen and (max-width: 750px) {
+  .link-box {
+    width: 355px;
+    // min-height: 90vh;
+    position: relative;
+    margin: 15px auto 5px auto;
+    .saodi {
+      width: 185px;
+    }
+    .content-box {
+      flex-grow: 1;
+      .content {
+        width: 100%;
+        background: #fff;
+        padding: 15px;
+        .title {
+          margin-bottom: 25px;
+          padding-left: 14px;
+          border-left: 4px solid #6bc30d;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 20px;
+        }
+        .askfor {
+          color: #515250;
+          font-size: 14px;
+          flex-wrap: wrap;
+          padding-left: 16px;
+          .item {
+            margin-right: 8px;
+            align-items: center;
+            font-size: 16px;
+            .icon {
+              width: 14px;
+              height: 14px;
+            }
+            .txt {
+              margin-left: 4px;
+            }
+          }
+        }
+        .askcont {
+          white-space: pre-line;
+          padding-left: 16px;
+          color: #515250;
+          font-size: 14px;
+          line-height: 22px;
+          margin: 20px 0;
+          .row {
+            margin-top: 4px;
+          }
+        }
+        .warning {
+          padding-left: 16px;
+          color: red;
+          font-size: 14px;
+          opacity: 0.7;
+        }
+      }
+
+      .link-list {
+        margin-top: 0px;
+        flex-direction: column;
+        .link-item {
+          box-sizing: border-box;
+          text-decoration: none;
+          width: 100%;
+          padding: 15px;
+          margin: 15px 15px 0 0px;
+          flex-direction: column;
+          background: #fff;
+          cursor: pointer;
+          &:nth-child(4n) {
+            margin: 15px 0px 0 0px;
+          }
+          .row {
+            margin-top: 14px;
+            color: #333;
+            font-size: 13px;
+            align-items: center;
+            &:first-child {
+              margin-top: 0px;
+            }
+            .logo {
+              width: 40px;
+              height: 40px;
+              border-radius: 100%;
+            }
+            .name {
+              color: #333;
+              font-size: 17px;
+              padding-left: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 </style>
