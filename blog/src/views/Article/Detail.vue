@@ -126,9 +126,9 @@ export default {
 
   .article-detail-box {
     .box();
-    width: calc(100vw - 20px);
+    // width: calc(100vw - 20px);
     min-height: 90vh;
-    margin: 20px auto 60px auto;
+    margin: 20px 10px 40px 10px;
     justify-content: center;
     // padding: 0px 0px 40px 0px;
     position: relative;
@@ -137,12 +137,13 @@ export default {
       // width: calc(21cm + 2px);
       padding: 15px 0;
       .header {
+          .box();
         padding: 0 15px;
         .title {
           font-weight: 600;
           vertical-align: bottom;
-          line-height: 30px;
-          font-size: 22px;
+          line-height: 24px;
+          font-size: 18px;
           text-align: justify
         }
         .info {
@@ -167,6 +168,7 @@ export default {
       .content {
         width: 100%;
         padding: 0 15px;
+        font-size: 12px;
       }
     }
   }
