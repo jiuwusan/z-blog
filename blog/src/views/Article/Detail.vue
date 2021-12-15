@@ -132,7 +132,7 @@ export default {
     justify-content: center;
     // padding: 0px 0px 40px 0px;
     position: relative;
-    overflow-x: hidden;
+    overflow-x: auto;
     .content-box {
       background-color: #fff;
       // width: calc(21cm + 2px);
