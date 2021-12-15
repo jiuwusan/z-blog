@@ -70,80 +70,163 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.flex() {
-  display: -moz-box;
-  /* Firefox */
-  display: -ms-flexbox;
-  /* IE10 */
-  display: -webkit-box;
-  /* Safari */
-  display: -webkit-flex;
-  /* Chrome, WebKit */
-  /* display: box; */
-  display: flexbox;
-  display: flex;
-}
-
-.notice-item {
-  margin-top: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 380px;
-  padding: 20px;
-  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
-    0 9px 28px 8px #0000000d;
-  .flex();
-  .icon {
-    content: "";
-    min-width: 30px;
-    height: 30px;
-    border-radius: 50%;
+@media screen and (min-width: 751px) {
+  .flex() {
+    display: -moz-box;
+    /* Firefox */
+    display: -ms-flexbox;
+    /* IE10 */
+    display: -webkit-box;
+    /* Safari */
+    display: -webkit-flex;
+    /* Chrome, WebKit */
+    /* display: box; */
+    display: flexbox;
+    display: flex;
   }
-  .content {
+
+  .notice-item {
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 380px;
+    padding: 20px;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+      0 9px 28px 8px #0000000d;
     .flex();
-    flex-direction: column;
-    margin-left: 5px;
-    .title {
-      font-size: 16px;
-      color: rgba(0, 0, 0, 0.9);
-      font-weight: 500;
+    .icon {
+      content: "";
+      min-width: 30px;
+      height: 30px;
+      border-radius: 50%;
     }
-    .massage {
-      margin-top: 5px;
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.62);
+    .content {
+      .flex();
+      flex-direction: column;
+      margin-left: 5px;
+      .title {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.9);
+        font-weight: 500;
+      }
+      .massage {
+        margin-top: 5px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.62);
+      }
     }
   }
-}
 
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
+  @keyframes fadeOutRight {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  .message-fade-enter-active {
+    animation: fadeInRight 0.5s;
+  }
+
+  .message-fade-leave-active {
+    animation: fadeOutRight 0.5s;
   }
 }
 
-@keyframes fadeOutRight {
-  from {
-    opacity: 1;
+
+@media screen and (max-width: 750px) {
+  .flex() {
+    display: -moz-box;
+    /* Firefox */
+    display: -ms-flexbox;
+    /* IE10 */
+    display: -webkit-box;
+    /* Safari */
+    display: -webkit-flex;
+    /* Chrome, WebKit */
+    /* display: box; */
+    display: flexbox;
+    display: flex;
   }
 
-  to {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
+  .notice-item {
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 5px;
+    width: 175px;
+    padding: 10px;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+      0 9px 28px 8px #0000000d;
+    .flex();
+    .icon {
+      content: "";
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    .content {
+      .flex();
+      flex-direction: column;
+      margin-left: 5px;
+      .title {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.9);
+        font-weight: 500;
+      }
+      .massage {
+        margin-top: 5px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.62);
+      }
+    }
+  }
+
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes fadeOutRight {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  .message-fade-enter-active {
+    animation: fadeInRight 0.5s;
+  }
+
+  .message-fade-leave-active {
+    animation: fadeOutRight 0.5s;
   }
 }
 
-.message-fade-enter-active {
-  animation: fadeInRight 0.5s;
-}
-
-.message-fade-leave-active {
-  animation: fadeOutRight 0.5s;
-}
 </style>

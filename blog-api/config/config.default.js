@@ -1,6 +1,5 @@
 'use strict';
 
-const redis = require('./config/redis');
 const path = require('path');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -43,9 +42,6 @@ module.exports = appInfo => {
     },
     fileExtensions: ['.docx', '.pdf', '.xlsx', '.rar']
   }
-
-  //redis连接配置
-  config.redis = redis;
 
   //安全配置
   config.security = {

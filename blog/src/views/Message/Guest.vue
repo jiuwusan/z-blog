@@ -72,77 +72,154 @@ export default {
 <style lang="less" scoped>
 @import "~@jws/css/animate.css";
 @import "~@/global.less";
+@media screen and (min-width: 751px) {
+  .guest-box {
+    width: 100%;
+    background: #fff;
+    padding: 15px;
+    flex-direction: column;
+    .title {
+      font-size: 28px;
+      color: #515250;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .warning {
+      padding: 14px;
+      font-size: 17px;
+      color: #515250;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .editor {
+      margin-top: 15px;
+    }
+    .form-item-box {
+      .flex();
+      align-items: center;
+      margin: 10px 0 0 0px;
+      .form-item {
+        margin: 10px 0 0 20px;
+        &:first-child {
+          margin: 10px 0 0 0px;
+        }
+        .label {
+          color: #515250;
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
 
-.guest-box {
-  width: 100%;
-  background: #fff;
-  padding: 15px;
-  flex-direction: column;
-  .title {
-    font-size: 28px;
-    color: #515250;
-    text-align: center;
-    line-height: 1.2;
-  }
-  .warning {
-    padding: 14px;
-    font-size: 17px;
-    color: #515250;
-    text-align: center;
-    line-height: 1.2;
-  }
-  .editor {
-    margin-top: 15px;
-  }
-  .form-item-box {
-    .flex();
-    align-items: center;
-    margin: 10px 0 0 0px;
-    .form-item {
-      margin: 10px 0 0 20px;
-      &:first-child {
-        margin: 10px 0 0 0px;
-      }
-      .label {
-        color: #515250;
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-
-      .my-input {
-        height: 40px;
-        padding: 0 5px;
-        width: 200px;
-        border: 1px solid #c4c4c4;
-        &:focus {
-          //获取焦点
-          outline: 0.5px solid hsl(208, 79%, 51%); //边框不用border，用outline
-          //   background: rgba(3, 16, 28, 0); //背景色
+        .my-input {
+          height: 40px;
+          padding: 0 5px;
+          width: 200px;
+          border: 1px solid #c4c4c4;
+          &:focus {
+            //获取焦点
+            outline: 0.5px solid hsl(208, 79%, 51%); //边框不用border，用outline
+            //   background: rgba(3, 16, 28, 0); //背景色
+          }
         }
       }
     }
-  }
-  .submit-box {
-    margin-top: 15px;
-    .submit {
-      width: 95px;
-      height: 38px;
-      line-height: 38px;
-      padding: 0 18px;
-      background-color: #009688;
-      color: #fff;
-      white-space: nowrap;
-      text-align: center;
-      font-size: 14px;
-      border: none;
-      border-radius: 2px;
-      cursor: pointer;
+    .submit-box {
+      margin-top: 15px;
+      .submit {
+        width: 95px;
+        height: 38px;
+        line-height: 38px;
+        padding: 0 18px;
+        background-color: #009688;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+      }
     }
+  }
+
+  .fadeInDownBig {
+    animation-name: fadeInDownBig;
+    animation-duration: 800ms;
   }
 }
 
-.fadeInDownBig {
-  animation-name: fadeInDownBig;
-  animation-duration: 800ms;
+@media screen and (max-width: 750px) {
+  .guest-box {
+    width: 100%;
+    background: #fff;
+    padding: 15px;
+    flex-direction: column;
+    .title {
+      font-size: 28px;
+      color: #515250;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .warning {
+      padding: 14px;
+      font-size: 17px;
+      color: #515250;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .editor {
+      margin-top: 15px;
+    }
+    .form-item-box {
+      .flex();
+      flex-direction: column;
+      margin: 10px 0 0 0px;
+      width: 100%;
+      .form-item {
+        margin: 10px 0 0 0;
+        .label {
+          color: #515250;
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+
+        .my-input {
+          height: 40px;
+          padding: 0 5px;
+          width: 100%;
+          border: 1px solid #c4c4c4;
+          box-sizing: border-box;
+          &:focus {
+            //获取焦点
+            outline: 0.5px solid hsl(208, 79%, 51%); //边框不用border，用outline
+            //   background: rgba(3, 16, 28, 0); //背景色
+          }
+        }
+      }
+    }
+    .submit-box {
+      margin-top: 15px;
+      .flex();
+      justify-content: center;
+      .submit {
+        width: 95%;
+        height: 38px;
+        line-height: 38px;
+        padding: 0 18px;
+        background-color: #009688;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .fadeInDownBig {
+    animation-name: fadeInDownBig;
+    animation-duration: 800ms;
+  }
 }
 </style>

@@ -5,7 +5,7 @@ import { validApi } from '@/api';
 export default (props) => {
 
     //排除value，不需要通过外部传入value
-    const { onChange, value, placeholder = "请输入图形验证码", ...rest } = props || {};
+    const { onChange, value, renderKey, placeholder = "请输入图形验证码", ...rest } = props || {};
     const [code, setCode] = useState("");
 
     const genImageCode = async () => {
@@ -15,7 +15,7 @@ export default (props) => {
 
     useEffect(() => {
         genImageCode();
-    }, [])
+    }, [renderKey])
 
     /**
      * 向外传递 value

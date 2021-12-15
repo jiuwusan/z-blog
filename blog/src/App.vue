@@ -1,17 +1,15 @@
 <template>
-  <div class="flex page-bg" v-show="!isMobile">
+  <div class="flex page-bg">
     <div class="page-content flex">
       <Header></Header>
       <router-view />
     </div>
     <Footer></Footer>
   </div>
-  <Mobile v-show="isMobile"></Mobile>
 </template>
 <script>
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Mobile from "@/views/Mobile";
 import { util } from "@jws";
 export default {
   data() {
@@ -22,8 +20,7 @@ export default {
   },
   components: {
     Footer,
-    Header,
-    Mobile,
+    Header
   },
   mounted() {
     this.$store.dispatch("profile/init");
@@ -32,7 +29,7 @@ export default {
     $route: {
       immediate: true,
       handler(to, from) {
-        this.valiMobile();
+        // this.valiMobile();
         if (to?.path !== from?.path) {
           this.animationName = "zoom";
         }
@@ -72,6 +69,7 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
+  overflow-x: hidden;
   .page-content {
     width: 100%;
     flex-direction: column;

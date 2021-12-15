@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import profile from './profile'
 import archives from './archives'
 import article from './article'
+import menu from './menu'
 export default createStore({
   state: {
   },
@@ -12,6 +13,7 @@ export default createStore({
   modules: {
     profile,
     archives,
-    article
+    article,
+    menu
   }
 })

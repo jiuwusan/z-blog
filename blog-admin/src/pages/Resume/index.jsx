@@ -2,15 +2,28 @@ import styles from "./style.less"
 import KdTable from "@/components/KdTable"
 import { Button, Space, DatePicker, Modal } from 'antd';
 import Code from './Code';
+import Editor from './Editor';
 import { useState } from 'react';
 import { resumeApi } from '@/api';
-import Smage from '@/components/Smage';
 export default (props) => {
     const [editVisible, setEditVisible] = useState(false);
+    const [genVisible, setGenVisible] = useState(false);
     const [editData, setEditData] = useState(null);
     const [reloadKey, setReloadKey] = useState(null);
     /**
-     * 保存数据
+     * 生成授权码
+     * @param {*} values 
+     * @param {*} reset 
+     */
+    const genCode = async (values, reset) => {
+        await resumeApi.recordSave(values);
+        reset();
+        setGenVisible(false);
+        setReloadKey(Date.now());
+    }
+
+    /**
+     * 保存简历
      * @param {*} values 
      * @param {*} reset 
      */
@@ -18,7 +31,6 @@ export default (props) => {
         await resumeApi.recordSave(values);
         reset();
         setEditVisible(false);
-        setReloadKey(Date.now());
     }
 
     const editOne = (rowData) => {
@@ -82,10 +94,7 @@ export default (props) => {
         <div>
             <KdTable rowKey="uid"
                 reloadKey={reloadKey}
-                toolBar={<Space size="small"><Button type="primary" onClick={() => {
-                    setEditData(null);
-                    setEditVisible(true);
-                }}>生成授权码</Button>
+                toolBar={<Space size="small"><Button type="primary" onClick={() => setGenVisible(true)}>生成授权码</Button>
                     <Button type="primary" onClick={() => {
                         setEditData(null);
                         setEditVisible(true);
@@ -93,6 +102,7 @@ export default (props) => {
                 </Space>}
                 columns={columns} loadData={loadData}></KdTable>
         </div>
-        <Code value={editData} visible={editVisible} onSubmit={saveData} onClose={() => setEditVisible(false)}></Code>
+        <Code visible={genVisible} onSubmit={genCode} onClose={() => setGenVisible(false)}></Code>
+        <Editor value={editData} visible={editVisible} onSubmit={saveData} onClose={() => setEditVisible(false)}></Editor>
     </div>
 }

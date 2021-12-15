@@ -20,7 +20,7 @@
     {{ profile?.signature }}
   </div>
 </template>
-
+ 
 <script>
 export default {
   name: "Footer",
@@ -34,43 +34,90 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/global.less";
-.footer {
-  width: 100%;
-  background: #232328;
-  padding: 60px 90px;
-  color: #fff;
-  // margin-top: 20px;
-  .footer-item {
-    flex-direction: column;
-    flex-grow: 1;
-    padding-left: 40px;
-    .title {
-      font-size: 18px;
-      white-space: nowrap;
-      margin-bottom: 20px;
-    }
-    .definite {
-      color: #eee;
-      font-size: 14px;
-      margin-bottom: 10px;
-      padding-left: 10px;
-      align-items: center;
-      .icon {
-        width: 16px;
-        height: 16px;
+
+@media screen and (min-width: 751px) {
+  .footer {
+    width: 100%;
+    background: #232328;
+    padding: 60px 90px;
+    color: #fff;
+    // margin-top: 20px;
+    .footer-item {
+      flex-direction: column;
+      flex-grow: 1;
+      padding-left: 40px;
+      .title {
+        font-size: 18px;
+        white-space: nowrap;
+        margin-bottom: 20px;
       }
-      .txt {
-        padding-left: 5px;
+      .definite {
+        color: #eee;
+        font-size: 14px;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        align-items: center;
+        .icon {
+          width: 16px;
+          height: 16px;
+        }
+        .txt {
+          padding-left: 5px;
+        }
       }
     }
   }
+
+  .copyright {
+    padding: 15px;
+    background: #1d1d21;
+    text-align: center;
+    color: #bbb;
+    font-size: 14px;
+  }
 }
 
-.copyright {
-  padding: 15px;
-  background: #1d1d21;
-  text-align: center;
-  color: #bbb;
-  font-size: 14px;
+@media screen and (max-width: 750px) {
+  .footer {
+    width: 100%;
+    background: #232328;
+    padding: 15px 25px;
+    color: #fff;
+    flex-direction: column;
+    .footer-item {
+      margin-bottom: 15px;
+      flex-direction: column;
+      align-items: center;
+      .title {
+        font-size: 16px;
+        white-space: nowrap;
+        margin-bottom: 20px;
+        width: 100%;
+        text-align: center;
+      }
+      .definite {
+        color: #eee;
+        font-size: 14px;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        align-items: center;
+        .icon {
+          width: 16px;
+          height: 16px;
+        }
+        .txt {
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  .copyright {
+    padding: 15px;
+    background: #1d1d21;
+    text-align: center;
+    color: #bbb;
+    font-size: 10px;
+  }
 }
 </style>
